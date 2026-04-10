@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AMECC – Dashboard Quản lý Dự án & Vật tư</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --sb-bg:#1c1b1a; --sb-hover:#2e2d2b; --sb-active:#363432;
+      --sb-accent:#f2c811; --sb-muted:#888;
+      --canvas:#e8e8e8; --card:#fff; --hdr:#fff;
+      --dark:#201f1e; --muted:#605e5c; --border:#edebe9;
+      --blue:#118dff; --teal:#01b8aa; --purple:#8163c2;
+      --orange:#d83b01; --amber:#f2c811; --green:#107c10; --red:#a4262c;
+      --gl:#dff6dd; --rl:#fde7e9; --al:#fff4ce; --bl:#dce7f5;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html,body{height:100vh;overflow:hidden;font-family:'Inter',sans-serif;}
+    body{display:flex;background:var(--canvas);color:var(--dark);}
+
+    /* ─── SIDEBAR ─── */
+    .sb{width:210px;flex-shrink:0;background:var(--sb-bg);display:flex;flex-direction:column;color:#fff;z-index:20;}
+    .sb-logo{height:50px;display:flex;align-items:center;gap:8px;padding:0 14px;border-bottom:1px solid #333;font-weight:700;font-size:.95rem;color:var(--sb-accent);}
+    .sb-logo .ico{font-size:1.2rem;}
+    .nav-sec{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--sb-muted);padding:16px 14px 5px;}
+    .nav-it{padding:9px 14px;font-size:.83rem;cursor:pointer;transition:background .15s;position:relative;display:flex;align-items:center;gap:7px;}
+    .nav-it:hover{background:var(--sb-hover);}
+    .nav-it.on{background:var(--sb-active);font-weight:600;}
+    .nav-it.on::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--sb-accent);}
+    .n-ico{width:15px;text-align:center;opacity:.7;font-size:.85rem;}
+    .sb-foot{margin-top:auto;padding:10px 14px;border-top:1px solid #333;font-size:.72rem;color:var(--sb-muted);}
+
+    /* ─── MAIN ─── */
+    .main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+    .topbar{height:50px;background:var(--hdr);display:flex;align-items:center;justify-content:space-between;padding:0 18px;box-shadow:0 1px 4px rgba(0,0,0,.08);flex-shrink:0;z-index:10;}
+    .pg-title{font-size:.95rem;font-weight:600;}
+    .filters{display:flex;align-items:center;gap:9px;}
+    .cutbadge{font-size:.72rem;background:var(--bl);color:var(--blue);padding:3px 9px;border-radius:12px;font-weight:600;}
+    select.slicer{border:1px solid var(--border);border-radius:2px;font-size:.78rem;padding:4px 8px;background:#fff;color:var(--dark);outline:none;cursor:pointer;}
+    .year-toggle{display:flex;gap:4px;}
+    .yr-btn{padding:3px 10px;font-size:.78rem;border-radius:3px;cursor:pointer;background:#f3f2f1;color:var(--muted);border:1px solid var(--border);font-weight:500;transition:all .15s;}
+    .yr-btn.active{background:var(--dark);color:#fff;border-color:var(--dark);}
+
+    /* ─── CANVAS ─── */
+    .canvas{flex:1;overflow-y:auto;padding:13px;}
+    .page{display:none;flex-direction:column;gap:13px;animation:fu .22s ease;}
+    .page.on{display:flex;}
+    @keyframes fu{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+    /* ─── GRID ─── */
+    .row{display:grid;gap:13px;}
+    .c5{grid-template-columns:repeat(5,1fr);}
+    .c4{grid-template-columns:repeat(4,1fr);}
+    .c3{grid-template-columns:repeat(3,1fr);}
+    .c2{grid-template-columns:1fr 1fr;}
+    .c3c{grid-template-columns:3fr 3fr 3fr;}
+    .c7-5{grid-template-columns:7fr 5fr;}
+    .c8-4{grid-template-columns:8fr 4fr;}
+    .c6-3-3{grid-template-columns:6fr 3fr 3fr;}
+    .c3-9{grid-template-columns:3fr 9fr;}
+    .c4-8{grid-template-columns:4fr 8fr;}
+
+    /* ─── CARD ─── */
+    .card{background:var(--card);border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.1),0 0 0 1px rgba(0,0,0,.04);display:flex;flex-direction:column;padding:13px;min-width:0;}
+    .ct{font-size:.81rem;font-weight:600;color:var(--dark);margin-bottom:9px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}
+    .badge{font-size:.68rem;font-weight:500;padding:2px 7px;border-radius:10px;}
+    .bb{background:var(--bl);color:var(--blue);}
+    .br{background:var(--rl);color:var(--red);}
+    .bg{background:var(--gl);color:var(--green);}
+    .ba{background:var(--al);color:#7a5a00;}
+    .cw{position:relative;min-height:210px;flex:1;}
+    .cw-sm{position:relative;min-height:160px;flex:1;}
+    .cw-lg{position:relative;min-height:260px;flex:1;}
+    .cw-xs{position:relative;min-height:120px;flex:1;}
+
+    /* ─── SECTION DIVIDER ─── */
+    .sec-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--blue);padding:4px 10px;background:var(--bl);border-radius:3px;display:inline-block;margin:2px 0 4px;}
+
+    /* ─── KPI ─── */
+    .kpi{justify-content:center;border-top:3px solid;min-height:85px;gap:3px;}
+    .kpi.b{border-top-color:var(--blue);}  .kpi.t{border-top-color:var(--teal);}
+    .kpi.g{border-top-color:var(--green);}  .kpi.o{border-top-color:var(--orange);}
+    .kpi.r{border-top-color:var(--red);}   .kpi.p{border-top-color:var(--purple);}
+    .kpi.a{border-top-color:var(--amber);}
+    .kl{font-size:.72rem;color:var(--muted);}
+    .kv{font-size:1.8rem;font-weight:700;line-height:1.1;}
+    .ks{font-size:.7rem;color:var(--muted);margin-top:2px;}
+    .up{color:var(--green);font-size:.71rem;font-weight:600;}
+    .dn{color:var(--red);font-size:.71rem;font-weight:600;}
+
+    /* ─── GAUGE ─── */
+    .gauge-wrap{position:relative;display:flex;justify-content:center;align-items:flex-end;}
+    .gauge-center{position:absolute;bottom:0;left:50%;transform:translateX(-50%);text-align:center;padding-bottom:4px;}
+    .gauge-pct{font-size:1.8rem;font-weight:700;color:var(--orange);line-height:1;}
+
+    /* ─── TABLE ─── */
+    .tw{overflow-x:auto;overflow-y:auto;max-height:300px;}
+    .tw-lg{overflow-x:auto;overflow-y:auto;max-height:360px;}
+    table{width:100%;border-collapse:collapse;font-size:.78rem;}
+    thead th{padding:6px 9px;text-align:left;font-weight:600;font-size:.7rem;color:var(--muted);border-bottom:2px solid var(--border);background:#faf9f8;position:sticky;top:0;z-index:1;white-space:nowrap;}
+    tbody td{padding:6px 9px;border-bottom:1px solid var(--border);color:var(--dark);white-space:nowrap;}
+    tbody tr:hover td{background:#f3f2f1;}
+    tbody tr.proj-row td{background:#f8f7f6;font-weight:600;}
+    tbody tr.proj-row:hover td{background:#f0efee;}
+    .tr{text-align:right;} .tc{text-align:center;} .fw{font-weight:600;}
+
+    /* ─── BULLET ─── */
+    .bl-row{display:flex;align-items:center;gap:7px;}
+    .bl-track{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden;min-width:38px;}
+    .bl-fill{height:100%;border-radius:3px;}
+    .fg{background:var(--green);} .fb{background:var(--blue);}
+    .fa{background:var(--amber);} .fr{background:var(--red);} .ft{background:var(--teal);}
+    .bp{font-size:.74rem;font-weight:600;width:34px;flex-shrink:0;}
+
+    /* ─── HEAT ─── */
+    .h{display:inline-block;padding:2px 7px;border-radius:3px;font-size:.71rem;font-weight:600;}
+    .hr{background:var(--rl);color:var(--red);}
+    .hy{background:var(--al);color:#7a5a00;}
+    .hg{background:var(--gl);color:var(--green);}
+    .hb{background:var(--bl);color:var(--blue);}
+    .hn{background:#f3f2f1;color:#888;}
+
+    /* ─── DOT ─── */
+    .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;flex-shrink:0;}
+    .dg{background:var(--green);} .da{background:var(--orange);}
+    .dr{background:var(--red);} .db{background:var(--blue);}
+
+    /* ─── MATRIX (Giai đoạn) ─── */
+    .mwrap{overflow-x:auto;overflow-y:auto;max-height:290px;}
+    .mtbl{border-collapse:collapse;font-size:.76rem;white-space:nowrap;width:100%;}
+    .mtbl th{padding:6px 9px;text-align:left;font-weight:600;font-size:.7rem;color:var(--muted);border-bottom:2px solid var(--border);background:#faf9f8;position:sticky;top:0;z-index:2;white-space:nowrap;}
+    .mtbl th.stc{text-align:center;border-left:1px solid var(--border);}
+    .mtbl td.rlbl{padding:6px 10px;background:#faf9f8;font-weight:600;font-size:.76rem;border-bottom:1px solid var(--border);position:sticky;left:0;z-index:1;min-width:160px;}
+    .mtbl td.rprj{padding:4px 10px;font-size:.68rem;color:var(--muted);background:#f2f1f0;border-bottom:1px solid var(--border);position:sticky;left:0;z-index:1;}
+    .mtbl td.cell{text-align:center;padding:5px 8px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);}
+    .mtbl tr:hover td{background:#f3f2f1;}
+    .mtbl tr:hover td.rlbl,.mtbl tr:hover td.rprj{background:#eeeceb;}
+    .sp{display:inline-block;padding:2px 7px;border-radius:3px;font-size:.7rem;font-weight:600;}
+    .sp-d{background:var(--gl);color:var(--green);} .sp-w{background:var(--bl);color:var(--blue);}
+    .sp-y{background:var(--al);color:#7a5a00;} .sp-r{background:var(--rl);color:var(--red);}
+    .sp-n{background:#f3f2f1;color:#bbb;font-weight:400;}
+
+    /* ─── CROSS TABLE ─── */
+    .cross-wrap{overflow-x:auto;overflow-y:auto;max-height:320px;}
+    .cross-tbl{border-collapse:collapse;font-size:.73rem;white-space:nowrap;}
+    .cross-tbl th{padding:5px 8px;text-align:center;font-weight:600;font-size:.68rem;color:var(--muted);border:1px solid var(--border);background:#faf9f8;position:sticky;top:0;z-index:2;}
+    .cross-tbl th.row-h{text-align:left;position:sticky;left:0;z-index:3;min-width:100px;}
+    .cross-tbl th.month-h{background:#f0efee;border-top:2px solid var(--blue);}
+    .cross-tbl td{padding:5px 8px;border:1px solid var(--border);color:var(--dark);text-align:right;}
+    .cross-tbl td.rlbl{text-align:left;font-weight:600;background:#faf9f8;position:sticky;left:0;z-index:1;}
+    .cross-tbl td.rsubl{text-align:left;padding-left:18px;font-size:.7rem;background:#fff;position:sticky;left:0;z-index:1;}
+    .cross-tbl tr.grp-proj td{background:#f0efee;font-weight:600;}
+    .cross-tbl tr.grp-proj td.rlbl{background:#f0efee;}
+    .cross-tbl td.pv{color:var(--blue);} .cross-tbl td.ps{color:var(--orange);}
+    .cross-tbl tfoot td{font-weight:700;background:#f0efee;border-top:2px solid var(--border);}
+
+    /* ─── LEGEND ─── */
+    .legend{display:flex;gap:12px;flex-wrap:wrap;font-size:.7rem;color:var(--muted);margin-top:7px;padding-top:7px;border-top:1px solid var(--border);}
+    .li{display:flex;align-items:center;gap:5px;}
+    .lb{width:11px;height:11px;border-radius:2px;flex-shrink:0;}
+    .lb-g{background:var(--gl);border:1px solid var(--green);}
+    .lb-b{background:var(--bl);border:1px solid var(--blue);}
+    .lb-y{background:var(--al);border:1px solid var(--amber);}
+    .lb-r{background:var(--rl);border:1px solid var(--red);}
+    .lb-n{background:#f3f2f1;border:1px solid #ccc;}
+
+    /* ─── STOCK ITEM ─── */
+    .stock-item{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-bottom:1px solid var(--border);font-size:.79rem;}
+    .stock-item:last-child{border-bottom:none;}
+    .stock-name{color:var(--dark);font-weight:500;}
+    .stock-val{font-weight:700;color:var(--teal);}
+
+    ::-webkit-scrollbar{width:5px;height:5px;}
+    ::-webkit-scrollbar-track{background:transparent;}
+    ::-webkit-scrollbar-thumb{background:#c8c6c4;border-radius:3px;}
+    ::-webkit-scrollbar-thumb:hover{background:#a19f9d;}
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ SIDEBAR ═══════════ -->
+<aside class="sb">
+  <div class="sb-logo"><span class="ico">📊</span> AMECC REPORT</div>
+  <div class="nav-sec">Quản lý Dự án</div>
+  <div class="nav-it on" onclick="go('p1','Trang 1 — Tiến độ & Khối lượng',this)">
+    <span class="n-ico">📈</span>Tiến độ & Khối lượng
+  </div>
+  <div class="nav-it" onclick="go('p2','Trang 2 — Nhân sự & Thời gian',this)">
+    <span class="n-ico">👷</span>Nhân sự & Thời gian
+  </div>
+  <div class="nav-sec">Quản lý Vật tư</div>
+  <div class="nav-it" onclick="go('p3','Trang 3 — Nhập kho',this)">
+    <span class="n-ico">📥</span>Nhập kho
+  </div>
+  <div class="nav-it" onclick="go('p4','Trang 4 — Xuất kho',this)">
+    <span class="n-ico">📤</span>Xuất kho
+  </div>
+  <div class="nav-it" onclick="go('p5','Trang 5 — Tồn kho & Đáp ứng',this)">
+    <span class="n-ico">🏭</span>Tồn kho & Đáp ứng
+  </div>
+  <div class="sb-foot">Cut-off: 05/04/2026 · W14</div>
+</aside>
+
+<!-- ═══════════ MAIN ═══════════ -->
+<div class="main">
+  <div class="topbar">
+    <div class="pg-title" id="pg-title">Trang 1 — Tiến độ & Khối lượng</div>
+    <div class="filters">
+      <span class="cutbadge">📅 05/04/2026 · W14</span>
+      <div class="year-toggle">
+        <button class="yr-btn" onclick="toggleYr(this)">2023</button>
+        <button class="yr-btn" onclick="toggleYr(this)">2024</button>
+        <button class="yr-btn" onclick="toggleYr(this)">2025</button>
+        <button class="yr-btn active" onclick="toggleYr(this)">2026</button>
+      </div>
+      <select class="slicer"><option>Tháng: Tất cả</option><option>T01</option><option>T02</option><option>T03</option></select>
+      <select class="slicer"><option>Mã dự án: Tất cả</option><option>M304</option><option>M291</option><option>A290</option></select>
+    </div>
+  </div>
+
+  <div class="canvas">
+
+  <!-- ══════════════════════════════════
+       P1 — TIẾN ĐỘ & KHỐI LƯỢNG
+  ══════════════════════════════════ -->
+  <div id="p1" class="page on">
+    <div class="row c5">
+      <div class="card kpi b"><div class="kl">Tổng KL Kế hoạch (Tấn)</div><div class="kv">52,138</div><div class="ks">Lũy kế từ đầu năm đến W14</div></div>
+      <div class="card kpi o"><div class="kl">KL Thực tế Hoàn thành (Tấn)</div><div class="kv" style="color:var(--orange)">32,661</div><div class="ks">Đến cut-off 05/04/2026</div></div>
+      <div class="card kpi g"><div class="kl">Tỷ lệ Hoàn thành Tổng thể</div><div class="kv" style="color:var(--green)">62.64%</div><div class="ks up">▲ +3.2% so với tháng trước</div></div>
+      <div class="card kpi p"><div class="kl">Số Dự án đang triển khai</div><div class="kv"><span style="color:var(--blue)">3</span><span style="font-size:1rem;color:var(--muted)"> / 12</span></div><div class="ks">3 DA đang TH trong kỳ này</div></div>
+      <div class="card kpi r"><div class="kl">Hạng mục chậm tiến độ</div><div class="kv" style="color:var(--red)">3</div><div class="ks">% Hoàn thành &lt; 70% vs KH</div></div>
+    </div>
+
+    <div class="row" style="grid-template-columns:2fr 5fr 3fr">
+      <div class="card" style="justify-content:center;align-items:center;">
+        <div class="ct" style="justify-content:center;">Tỷ lệ Hoàn thành</div>
+        <div class="gauge-wrap" style="width:100%;max-width:180px;">
+          <canvas id="c1-gauge" height="110"></canvas>
+          <div class="gauge-center">
+            <div style="font-size:.68rem;color:var(--muted)">52.14 nghìn T</div>
+            <div class="gauge-pct">63%</div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;width:100%;max-width:180px;font-size:.67rem;color:var(--muted);margin-top:3px;">
+          <span>0</span><span style="color:var(--orange);font-weight:600">Đang TH</span><span>KH</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ct">Khối lượng thực hiện theo Thời gian — KH vs Thực tế + % Tỷ lệ<span class="badge bb">T01→T08/2026</span></div>
+        <div class="cw"><canvas id="c1-monthly-combo"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="ct">Giai đoạn Thực hiện — KL Thực tế (T)</div>
+        <div class="cw"><canvas id="c1-stage-bar"></canvas></div>
+      </div>
+    </div>
+
+    <div class="row c4-8">
+      <div class="card">
+        <div class="ct">Tiến độ theo Dự án <span style="color:var(--blue);font-weight:700;font-size:1rem;">3 / 12</span></div>
+        <div class="cw-lg"><canvas id="c1-proj-rank"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="ct">Chi tiết Tiến độ — Hạng mục × Giai đoạn<span class="badge ba">32,660.80 T thực hiện</span></div>
+        <div class="tw" style="max-height:260px"><table><thead><tr><th>Dự án / Hạng mục</th><th>Giai đoạn</th><th class="tr">KL HM (PO)</th><th class="tr">KL DA</th><th>Tỷ lệ HT</th><th class="tr">KL Actual</th></tr></thead><tbody id="detail-tbody"></tbody></table></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="ct">Ma trận Trạng thái — Hạng mục × Giai đoạn Sản xuất<span class="badge bb">Màu = Trạng thái</span></div>
+      <div class="mwrap">
+        <table class="mtbl"><thead><tr>
+          <th style="min-width:160px;position:sticky;left:0;z-index:3;background:#faf9f8;">Dự án / Hạng mục</th>
+          <th class="stc">CP</th><th class="stc">CUT</th><th class="stc">BH</th><th class="stc">FAB</th>
+          <th class="stc">GCCKCX</th><th class="stc">BLT&PNT</th><th class="stc">GAL</th><th class="stc">INS</th>
+          <th class="stc">KH (T)</th><th class="stc">TT (T)</th><th class="stc">% HT</th>
+        </tr></thead><tbody id="matrix-body"></tbody></table>
+      </div>
+      <div class="legend">
+        <div class="li"><div class="lb lb-g"></div>✓ Hoàn thành ≥ 90%</div>
+        <div class="li"><div class="lb lb-b"></div>▶ Đang thực hiện</div>
+        <div class="li"><div class="lb lb-y"></div>⚠ Cần chú ý 70–89%</div>
+        <div class="li"><div class="lb lb-r"></div>✕ Chậm / Trễ &lt; 70%</div>
+        <div class="li"><div class="lb lb-n"></div>— Chưa bắt đầu</div>
+      </div>
+    </div>
+  </div><!-- /p1 -->
+
+
+  <!-- ══════════════════════════════════
+       P2 — NHÂN SỰ & THỜI GIAN
+  ══════════════════════════════════ -->
+  <div id="p2" class="page">
+    <div class="row c4">
+      <div class="card kpi b"><div class="kl">Tổng Giờ công Thực hiện</div><div class="kv">6,919</div><div class="ks">Phân việc + Phát sinh</div></div>
+      <div class="card kpi t"><div class="kl">Giờ công Phân việc</div><div class="kv" style="color:var(--teal)">5,418</div><div class="ks">78.3% trong tổng giờ</div></div>
+      <div class="card kpi o"><div class="kl">Giờ công Phát sinh</div><div class="kv" style="color:var(--orange)">1,501</div><div class="ks">21.7% — cần theo dõi</div></div>
+      <div class="card kpi g"><div class="kl">Tỷ lệ Item hoàn thành</div><div class="kv" style="color:var(--green)">11.3%</div><div class="ks">57 / 505 items · 448 đang TH</div></div>
+    </div>
+    <div class="row c3c">
+      <div class="card">
+        <div class="ct" style="justify-content:center;">Trạng thái thực hiện (Items)</div>
+        <div class="cw-sm"><canvas id="c2-status-donut"></canvas></div>
+        <div style="margin-top:8px;display:flex;flex-direction:column;gap:5px;">
+          <div class="bl-row"><span style="font-size:.72rem;width:90px;color:var(--green);font-weight:600">Done</span><div class="bl-track"><div class="bl-fill fg" style="width:11.3%"></div></div><span class="bp">57</span></div>
+          <div class="bl-row"><span style="font-size:.72rem;width:90px;color:var(--blue)">Đang TH</span><div class="bl-track"><div class="bl-fill fb" style="width:88.7%"></div></div><span class="bp">448</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ct">Giờ Thực hiện theo Thời gian (Phân việc + Phát sinh)<span class="badge bb">T11/25→T07/26</span></div>
+        <div class="cw-sm"><canvas id="c2-monthly-hours"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="ct">Giờ theo Bộ phận<span class="badge bb">Phân việc + Phát sinh</span></div>
+        <div class="cw-sm"><canvas id="c2-dept-hours"></canvas></div>
+      </div>
+    </div>
+    <div class="row c4-8">
+      <div class="card">
+        <div class="ct">Giờ theo Dự án (Phân việc / Phát sinh)</div>
+        <div class="cw-lg"><canvas id="c2-proj-hours"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="ct">Chi tiết — Bộ phận × Tháng (Phân việc / Phát sinh)<span class="badge ba">Đơn vị: Giờ</span></div>
+        <div class="cross-wrap">
+          <table class="cross-tbl">
+            <thead>
+              <tr><th class="row-h" rowspan="2">Bộ phận / Dự án</th>
+                <th class="month-h" colspan="2">T11/25</th><th class="month-h" colspan="2">T01/26</th>
+                <th class="month-h" colspan="2">T03/26</th><th class="month-h" colspan="2">T05/26</th>
+                <th class="month-h" colspan="2">T07/26</th></tr>
+              <tr><th>PV</th><th>PS</th><th>PV</th><th>PS</th><th>PV</th><th>PS</th><th>PV</th><th>PS</th><th>PV</th><th>PS</th></tr>
+            </thead>
+            <tbody id="cross-tbody"></tbody>
+            <tfoot><tr><td class="rlbl">Tổng</td><td class="pv">89.0</td><td class="ps">—</td><td class="pv">397.6</td><td class="ps">8.0</td><td class="pv">841.8</td><td class="ps">103.2</td><td class="pv">857.6</td><td class="ps">25.4</td><td class="pv">541.6</td><td class="ps">253.0</td></tr></tfoot>
+          </table>
+        </div>
+        <div style="margin-top:5px;font-size:.69rem;color:var(--muted);display:flex;gap:14px;">
+          <span><strong style="color:var(--blue)">PV</strong> = Phân việc</span>
+          <span><strong style="color:var(--orange)">PS</strong> = Phát sinh ngoài kế hoạch</span>
+        </div>
+      </div>
+    </div>
+  </div><!-- /p2 -->
+
+
+  <!-- ══════════════════════════════════
+       P3 — NHẬP KHO
+  ══════════════════════════════════ -->
+  <div id="p3" class="page">
+    <!-- KPIs -->
+    <div class="row c4">
+      <div class="card kpi b">
+        <div class="kl">Tổng KL Nhập kho lũy kế (Tấn)</div>
+        <div class="kv">13,680</div>
+        <div class="ks">Từ đầu năm đến W14/2026</div>
+      </div>
+      <div class="card kpi t">
+        <div class="kl">KL Nhập trong tháng 03/2026</div>
+        <div class="kv" style="color:var(--teal)">2,840</div>
+        <div class="ks up">▲ +12.4% so với T02</div>
+      </div>
+      <div class="card kpi g">
+        <div class="kl">Số lần nhập kho (Lô)</div>
+        <div class="kv" style="color:var(--green)">28</div>
+        <div class="ks">10 lô trong tháng 03/2026</div>
+      </div>
+      <div class="card kpi o">
+        <div class="kl">Lô hàng đang trên đường về</div>
+        <div class="kv" style="color:var(--orange)">6 lô</div>
+        <div class="ks">≈ 35,060 T dự kiến về T4-T5/2026</div>
+      </div>
+    </div>
+
+    <!-- Charts row: Monthly trend + By project + By type -->
+    <div class="row" style="grid-template-columns:6fr 4fr 2fr">
+      <div class="card">
+        <div class="ct">Khối lượng Nhập kho theo Tháng — Theo Loại Vật tư (Tấn)<span class="badge bb">Lũy kế 2026</span></div>
+        <div class="cw"><canvas id="c3-monthly"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="ct">KL Nhập theo Dự án (Tấn)</div>
+        <div class="cw"><canvas id="c3-proj-import"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="ct">Cơ cấu theo Loại VT</div>
+        <div class="cw-sm" style="max-height:160px"><canvas id="c3-type-donut"></canvas></div>
+        <div style="margin-top:6px;display:flex;flex-direction:column;gap:3px;font-size:.7rem;">
+          <div><span class="h hb">MMS</span> Vật tư chính (thép tấm, thép hình)</div>
+          <div><span class="h hg">ACS</span> Vật tư phụ (bulông, gasket)</div>
+          <div><span class="h hy">WDM</span> Vật tư hàn</div>
+          <div><span class="h hn">PFM</span> Sơn & xử lý bề mặt</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transaction log table -->
+    <div class="card">
+      <div class="ct">
+        Nhật ký Nhập kho — Chi tiết từng Lần nhập
+        <span class="badge bg">28 lần nhập lũy kế</span>
+      </div>
+      <div class="tw-lg">
+        <table>
+          <thead><tr>
+            <th>Ngày nhập</th><th>Mã lô</th><th>Dự án</th>
+            <th>Loại VT</th><th>Hạng mục / Chủng loại</th>
+            <th class="tr">KL (Tấn)</th><th>Nguồn cung cấp</th><th>Trạng thái kiểm nhận</th><th>Ghi chú</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>15/01/2026</td><td class="fw">NK-001</td><td>V314</td><td><span class="h hb">MMS</span></td><td>Tấm thép 20mm</td><td class="tr fw">320.5</td><td>JFE Japan</td><td><span class="h hg">✓ Đạt</span></td><td>Lô 1 V314</td></tr>
+            <tr><td>22/01/2026</td><td class="fw">NK-002</td><td>U285</td><td><span class="h hb">MMS</span></td><td>Thép hình HEA300</td><td class="tr fw">215.8</td><td>POSCO VINA</td><td><span class="h hg">✓ Đạt</span></td><td></td></tr>
+            <tr><td>05/02/2026</td><td class="fw">NK-003</td><td>E307</td><td><span class="h hn">PFM</span></td><td>Sơn epoxy primer</td><td class="tr fw">45.2</td><td>Supplier Local</td><td><span class="h hg">✓ Đạt</span></td><td>Lô sơn lót</td></tr>
+            <tr><td>12/02/2026</td><td class="fw">NK-004</td><td>V314</td><td><span class="h hg">ACS</span></td><td>Bulông M24 x 100</td><td class="tr fw">8.4</td><td>Fastener VN</td><td><span class="h hg">✓ Đạt</span></td><td></td></tr>
+            <tr><td>20/02/2026</td><td class="fw">NK-005</td><td>U308</td><td><span class="h hb">MMS</span></td><td>Thép tấm 16mm</td><td class="tr fw">180.6</td><td>POSCO VINA</td><td><span class="h hy">⚠ Kiểm tra lại</span></td><td>Cần kiểm tra quy cách</td></tr>
+            <tr><td>01/03/2026</td><td class="fw">NK-006</td><td>E307</td><td><span class="h hn">PFM</span></td><td>Sơn epoxy finish</td><td class="tr fw">68.4</td><td>Supplier Local</td><td><span class="h hg">✓ Đạt</span></td><td>Hoàn thành lô PFM E307</td></tr>
+            <tr><td>08/03/2026</td><td class="fw">NK-007</td><td>V261</td><td><span class="h hb">MMS</span></td><td>Thép tấm 25mm</td><td class="tr fw">420.1</td><td>Marubeni</td><td><span class="h hg">✓ Đạt</span></td><td>Lô chính V261</td></tr>
+            <tr><td>15/03/2026</td><td class="fw">NK-008</td><td>U285</td><td><span class="h hb">MMS</span></td><td>Thép hình IPE400</td><td class="tr fw">390.2</td><td>POSCO VINA</td><td><span class="h hg">✓ Đạt</span></td><td>POSCO — Lô 2</td></tr>
+            <tr><td>22/03/2026</td><td class="fw">NK-009</td><td>U308</td><td><span class="h hg">ACS</span></td><td>Bộ bu-lông M20</td><td class="tr fw">12.8</td><td>Fastener VN</td><td><span class="h hg">✓ Đạt</span></td><td></td></tr>
+            <tr><td>01/04/2026</td><td class="fw">NK-010</td><td>V261</td><td><span class="h hy">WDM</span></td><td>Dây hàn CO2 ER70S</td><td class="tr fw">18.5</td><td>Welding VN</td><td><span class="h hg">✓ Đạt</span></td><td>Bổ sung WDM V261</td></tr>
+            <tr style="background:#fdf9f0"><td colspan="9" style="font-size:.7rem;color:var(--muted);font-style:italic;padding:6px 9px;">⬇ 18 lô trước đó (năm 2025 & T1/2026) không hiển thị — dùng bộ lọc để xem</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Lô hàng dự kiến về -->
+    <div class="card">
+      <div class="ct">Lô Hàng đang trên đường — Dự kiến về kho theo Dự án<span class="badge ba">6 lô · ≈ 35,060 T</span></div>
+      <div class="tw">
+        <table>
+          <thead><tr>
+            <th>Mã lô</th><th>Dự án</th><th>Loại VT</th><th>Hạng mục</th>
+            <th class="tr">KL dự kiến (T)</th><th>Nhà cung cấp</th>
+            <th>Hình thức VT</th><th>ETA dự kiến</th><th>Trạng thái vận chuyển</th>
+          </tr></thead>
+          <tbody>
+            <tr><td class="fw">DK-001</td><td>V314</td><td><span class="h hb">MMS</span></td><td>Tấm thép mixed 12–25mm</td><td class="tr fw">1,131</td><td>Marubeni</td><td>Nhập khẩu / Tàu biển</td><td><strong>15/04/2026</strong></td><td><span class="dot da"></span>Đang vận chuyển</td></tr>
+            <tr><td class="fw">DK-002</td><td>V314</td><td><span class="h hb">MMS</span></td><td>Thép hình W-shape</td><td class="tr fw">53,922</td><td>JFE Japan</td><td>Nhập khẩu / Tàu biển</td><td><strong>20/04/2026</strong></td><td><span class="dot da"></span>Đang vận chuyển</td></tr>
+            <tr><td class="fw">DK-003</td><td>U285</td><td><span class="h hb">MMS</span></td><td>Thép hình IPE / HEA</td><td class="tr fw">31,125</td><td>POSCO VINA</td><td>Nội địa / Xe tải</td><td><strong>25/04/2026</strong></td><td><span class="dot dg"></span>Chuẩn bị xuất hàng</td></tr>
+            <tr><td class="fw">DK-004</td><td>U308</td><td><span class="h hb">MMS</span></td><td>Thép tấm 12mm</td><td class="tr fw">47.6</td><td>POSCO VINA</td><td>Nội địa / Xe tải</td><td><strong>30/04/2026</strong></td><td><span class="dot dg"></span>Đang vận chuyển</td></tr>
+            <tr><td class="fw">DK-005</td><td>V261</td><td><span class="h hb">MMS</span></td><td>Thép tấm 20mm bổ sung</td><td class="tr fw">30</td><td>Marubeni</td><td>Nhập khẩu / Tàu biển</td><td><strong>10/05/2026</strong></td><td><span class="dot db"></span>Chờ xuất cảng</td></tr>
+            <tr><td class="fw">DK-006</td><td>E307</td><td><span class="h hn">PFM</span></td><td>Sơn topcoat (lô cuối)</td><td class="tr fw">143</td><td>AkzoNobel</td><td>Nội địa</td><td><strong>12/04/2026</strong></td><td><span class="dot dg"></span>Đang giao hàng</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div><!-- /p3 -->
+
+
+  <!-- ══════════════════════════════════
+       P4 — XUẤT KHO
+  ══════════════════════════════════ -->
+  <div id="p4" class="page">
+    <!-- KPIs -->
+    <div class="row c4">
+      <div class="card kpi b">
+        <div class="kl">Tổng KL Xuất kho lũy kế (Tấn)</div>
+        <div class="kv">3,600</div>
+        <div class="ks">Từ đầu năm đến W14/2026</div>
+      </div>
+      <div class="card kpi t">
+        <div class="kl">KL Xuất kế hoạch Tháng 03</div>
+        <div class="kv" style="color:var(--teal)">1,250</div>
+        <div class="ks">Theo kế hoạch sản xuất tháng</div>
+      </div>
+      <div class="card kpi g">
+        <div class="kl">KL Xuất thực tế Tháng 03</div>
+        <div class="kv" style="color:var(--green)">1,150</div>
+        <div class="ks up">92% đạt kế hoạch · ▲ +3.4% vs T02</div>
+      </div>
+      <div class="card kpi o">
+        <div class="kl">Đợt xuất chưa hoàn thành (&lt; 80%)</div>
+        <div class="kv" style="color:var(--orange)">2 đợt</div>
+        <div class="ks">F0243 Pack3BA · B272 Lot2</div>
+      </div>
+    </div>
+
+    <!-- Charts row: Trend + By project horizontal + Donut -->
+    <div class="row" style="grid-template-columns:5fr 4fr 3fr">
+      <div class="card">
+        <div class="ct">Xu hướng Xuất kho — KH vs Thực tế + % Đạt (Tháng)</div>
+        <div class="cw"><canvas id="c4-trend"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="ct">KL Xuất theo Dự án (Tấn)</div>
+        <div class="cw"><canvas id="c4-proj-bar"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="ct">Cơ cấu Xuất theo Loại VT</div>
+        <div class="cw-sm" style="max-height:160px"><canvas id="c4-donut"></canvas></div>
+        <div style="margin-top:6px;display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:.7rem;">
+          <div><span class="h hb">MMS 68%</span></div><div><span class="h hg">ACS 11%</span></div>
+          <div><span class="h hy">WDM 6%</span></div><div><span class="h hn">PFM 5%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shipment progress bar + Transaction log -->
+    <div class="row c2">
+      <div class="card">
+        <div class="ct">% Hoàn thành từng Đợt Xuất (Shipment / Package)</div>
+        <div class="cw"><canvas id="c4-ship"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="ct">Tóm tắt KH vs TT — Chi tiết Đợt xuất</div>
+        <div class="tw">
+          <table>
+            <thead><tr><th>Đợt</th><th>Dự án</th><th>Hạng mục</th><th>Loại</th><th class="tr">KH (T)</th><th class="tr">Xuất (T)</th><th>% HT</th></tr></thead>
+            <tbody>
+              <tr><td>Lot#1 Shp2</td><td>F0243</td><td>Casing</td><td>MMS</td><td class="tr">148</td><td class="tr">148</td><td><div class="bl-row"><div class="bl-track"><div class="bl-fill fg" style="width:100%"></div></div><span class="bp">100%</span></div></td></tr>
+              <tr><td>Shp3 P2B</td><td>F0243</td><td>Stack</td><td>MMS</td><td class="tr">61</td><td class="tr">60</td><td><div class="bl-row"><div class="bl-track"><div class="bl-fill fg" style="width:98%"></div></div><span class="bp">98%</span></div></td></tr>
+              <tr><td>Lot#1</td><td>V314</td><td>Structure</td><td>MMS</td><td class="tr">320</td><td class="tr">288</td><td><div class="bl-row"><div class="bl-track"><div class="bl-fill fg" style="width:90%"></div></div><span class="bp">90%</span></div></td></tr>
+              <tr><td>Pack 3BA</td><td>F0243</td><td>Conveyor</td><td>MMS</td><td class="tr">286</td><td class="tr">200</td><td><div class="bl-row"><div class="bl-track"><div class="bl-fill fa" style="width:70%"></div></div><span class="bp" style="color:var(--orange)">70%</span></div></td></tr>
+              <tr><td>Lot#2</td><td>B272</td><td>Beam Pkg</td><td>MMS</td><td class="tr">150</td><td class="tr">90</td><td><div class="bl-row"><div class="bl-track"><div class="bl-fill fr" style="width:60%"></div></div><span class="bp" style="color:var(--red)">60%</span></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transaction log detail table -->
+    <div class="card">
+      <div class="ct">
+        Nhật ký Xuất kho — Chi tiết từng Lần xuất vật tư vào Sản xuất
+        <span class="badge bg">28 lần xuất lũy kế</span>
+      </div>
+      <div class="tw-lg">
+        <table>
+          <thead><tr>
+            <th>Ngày xuất</th><th>Mã đợt</th><th>Dự án</th>
+            <th>Hạng mục sản xuất</th><th>Loại VT</th><th>Giai đoạn SX</th>
+            <th class="tr">KL xuất (T)</th><th>Người phê duyệt</th><th>Tình trạng</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>18/01/2026</td><td class="fw">XK-001</td><td>V314</td><td>Main Frame — Section A</td><td><span class="h hb">MMS</span></td><td>CUT</td><td class="tr fw">185.4</td><td>Mr. Hùng</td><td><span class="h hg">Đã sử dụng</span></td></tr>
+            <tr><td>25/01/2026</td><td class="fw">XK-002</td><td>F0243</td><td>Casing Shp2 — Lot#1</td><td><span class="h hb">MMS</span></td><td>FAB</td><td class="tr fw">148.0</td><td>Mr. Tuấn</td><td><span class="h hg">Đã sử dụng</span></td></tr>
+            <tr><td>03/02/2026</td><td class="fw">XK-003</td><td>F0243</td><td>Stack Shp3 — Pack2B</td><td><span class="h hb">MMS</span></td><td>FAB</td><td class="tr fw">60.2</td><td>Mr. Tuấn</td><td><span class="h hg">Đã sử dụng</span></td></tr>
+            <tr><td>10/02/2026</td><td class="fw">XK-004</td><td>V314</td><td>Platform Extension</td><td><span class="h hb">MMS</span></td><td>FAB</td><td class="tr fw">102.6</td><td>Mr. Hùng</td><td><span class="h hg">Đã sử dụng</span></td></tr>
+            <tr><td>18/02/2026</td><td class="fw">XK-005</td><td>M304</td><td>Casing U#3 — bổ sung</td><td><span class="h hb">MMS</span></td><td>FAB</td><td class="tr fw">125.0</td><td>Mr. Nam</td><td><span class="h hg">Đã sử dụng</span></td></tr>
+            <tr><td>25/02/2026</td><td class="fw">XK-006</td><td>U308</td><td>Pipe Rack — Section 1</td><td><span class="h hb">MMS</span></td><td>CUT</td><td class="tr fw">80.5</td><td>Mr. Minh</td><td><span class="h hg">Đã sử dụng</span></td></tr>
+            <tr><td>05/03/2026</td><td class="fw">XK-007</td><td>F0243</td><td>Conveyor — Pack3BA</td><td><span class="h hb">MMS</span></td><td>CUT</td><td class="tr fw">200.0</td><td>Mr. Tuấn</td><td><span class="h hy">Đang sử dụng</span></td></tr>
+            <tr><td>12/03/2026</td><td class="fw">XK-008</td><td>V314</td><td>Conveyor Bridge</td><td><span class="h hb">MMS</span></td><td>BH</td><td class="tr fw">55.2</td><td>Mr. Hùng</td><td><span class="h hg">Đã sử dụng</span></td></tr>
+            <tr><td>20/03/2026</td><td class="fw">XK-009</td><td>B272</td><td>Beam Assembly — Lot2</td><td><span class="h hb">MMS</span></td><td>BH</td><td class="tr fw">90.0</td><td>Mr. Đức</td><td><span class="h hy">Đang sử dụng</span></td></tr>
+            <tr><td>28/03/2026</td><td class="fw">XK-010</td><td>U285</td><td>Main Frame — Pack1</td><td><span class="h hb">MMS</span></td><td>CUT</td><td class="tr fw">110.0</td><td>Mr. Minh</td><td><span class="h hy">Đang sử dụng</span></td></tr>
+            <tr style="background:#fdf9f0"><td colspan="9" style="font-size:.7rem;color:var(--muted);font-style:italic;padding:6px 9px;">⬇ 18 lần xuất trước đó không hiển thị — dùng bộ lọc để xem thêm</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div><!-- /p4 -->
+
+
+  <!-- ══════════════════════════════════
+       P5 — TỒN KHO & MỨC ĐÁP ỨNG
+  ══════════════════════════════════ -->
+  <div id="p5" class="page">
+
+    <!-- ─── PHẦN 1: HIỆN TRẠNG TỒN KHO ─────────────── -->
+    <div><span class="sec-label">📦 Phần 1 — Hiện trạng Tồn kho</span></div>
+
+    <!-- KPIs -->
+    <div class="row c4">
+      <div class="card kpi t">
+        <div class="kl">Tổng KL Tồn kho hiện tại (Tấn)</div>
+        <div class="kv" style="color:var(--teal)">9,755</div>
+        <div class="ks">Tính đến ngày 05/04/2026</div>
+      </div>
+      <div class="card kpi p">
+        <div class="kl">Giá trị Tồn kho ước tính</div>
+        <div class="kv" style="color:var(--purple)">$12.4M</div>
+        <div class="ks">Theo đơn giá nhập gần nhất</div>
+      </div>
+      <div class="card kpi b">
+        <div class="kl">Số loại Vật tư đang tồn</div>
+        <div class="kv">9 loại</div>
+        <div class="ks">6 dự án · 4 nhóm vật tư chính</div>
+      </div>
+      <div class="card kpi o">
+        <div class="kl">Vị trí (Bãi / Kho) đang sử dụng</div>
+        <div class="kv" style="color:var(--orange)">6 vị trí</div>
+        <div class="ks">Bãi A, B · Kho KV1, KV2 · Kho VT</div>
+      </div>
+    </div>
+
+    <!-- Current stock charts + table -->
+    <div class="row" style="grid-template-columns:4fr 3fr 5fr">
+      <div class="card">
+        <div class="ct">Tồn kho hiện tại theo Loại Vật tư (Tấn)</div>
+        <div class="cw"><canvas id="c5-stock-type"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="ct">Tồn kho theo Dự án (Tấn)</div>
+        <div class="cw"><canvas id="c5-stock-proj"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="ct">Chi tiết Tồn kho theo Dự án & Loại VT</div>
+        <div class="tw" style="max-height:240px">
+          <table>
+            <thead><tr><th>Dự án</th><th>Loại VT</th><th>Chủng loại</th><th class="tr">KL tồn (T)</th><th>Vị trí lưu kho</th></tr></thead>
+            <tbody>
+              <tr><td class="fw">V314</td><td><span class="h hb">MMS</span></td><td>Tấm thép mixed</td><td class="tr fw">29.6</td><td>Bãi A-1</td></tr>
+              <tr><td class="fw">V314</td><td><span class="h hg">ACS</span></td><td>Bulông M24 set</td><td class="tr fw">8.4</td><td>Kho KV1</td></tr>
+              <tr><td class="fw">U285</td><td><span class="h hb">MMS</span></td><td>Thép hình IPE</td><td class="tr fw">13.0</td><td>Bãi A-2</td></tr>
+              <tr><td class="fw">E307</td><td><span class="h hn">PFM</span></td><td>Sơn epoxy</td><td class="tr fw">5.1</td><td>Kho VT</td></tr>
+              <tr><td class="fw">U308</td><td><span class="h hb">MMS</span></td><td>Thép tấm 12–16mm</td><td class="tr fw">42.9</td><td>Bãi B-1</td></tr>
+              <tr><td class="fw">U308</td><td><span class="h hg">ACS</span></td><td>Bu-lông M20 set</td><td class="tr fw">8.8</td><td>Kho KV2</td></tr>
+              <tr><td class="fw">V261</td><td><span class="h hb">MMS</span></td><td>Thép tấm 25mm</td><td class="tr fw">30.0</td><td>Bãi B-2</td></tr>
+              <tr><td class="fw">V261</td><td><span class="h hy">WDM</span></td><td>Dây hàn CO2</td><td class="tr fw">18.5</td><td>Kho VT</td></tr>
+              <tr><td class="fw">M306</td><td><span class="h hb">MMS</span></td><td>Thép hình HEA</td><td class="tr fw">15.2</td><td>Bãi A-3</td></tr>
+              <tr style="font-weight:700;background:#f0efee"><td colspan="3">Tổng tồn kho</td><td class="tr">171.5</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── PHẦN 2: MỨC ĐÁP ỨNG XUẤT ──────────────── -->
+    <div><span class="sec-label">📊 Phần 2 — Đánh giá Mức độ Đáp ứng Kế hoạch Xuất</span></div>
+
+    <!-- Coverage KPIs -->
+    <div class="row c4">
+      <div class="card kpi t">
+        <div class="kl">Tồn hiện tại (A)</div>
+        <div class="kv" style="color:var(--teal)">171.5 T</div>
+        <div class="ks">Đang có trong kho thực tế</div>
+      </div>
+      <div class="card kpi b">
+        <div class="kl">Lô hàng dự kiến về (B)</div>
+        <div class="kv" style="color:var(--blue)">≈ 35,060 T</div>
+        <div class="ks">6 lô xác nhận · ETA T4–T5/2026</div>
+      </div>
+      <div class="card kpi o">
+        <div class="kl">KH Xuất còn lại phải thực hiện (C)</div>
+        <div class="kv" style="color:var(--orange)">51,890 T</div>
+        <div class="ks">Theo kế hoạch sản xuất còn lại</div>
+      </div>
+      <div class="card kpi r">
+        <div class="kl">Mức đáp ứng (A+B) / C</div>
+        <div class="kv" style="color:var(--red)">67.8%</div>
+        <div class="ks dn">▼ Thiếu ≈ 16,660 T — cần bổ sung nhập</div>
+      </div>
+    </div>
+
+    <!-- Coverage bar + Timeline projection -->
+    <div class="row c2">
+      <div class="card">
+        <div class="ct">
+          Mức đáp ứng theo Dự án — Tồn / (Tồn + Dự kiến về) vs KH Xuất còn lại
+          <span class="badge br">2 DA cực thiếu</span>
+        </div>
+        <div class="cw-lg"><canvas id="c5-cov-bar"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="ct">
+          Dự báo Tồn kho theo Thời gian — Nếu nhập & xuất đúng kế hoạch
+          <span class="badge ba">Mô phỏng T4→T8/2026</span>
+        </div>
+        <div class="cw-lg"><canvas id="c5-timeline"></canvas></div>
+        <div style="font-size:.69rem;color:var(--muted);margin-top:6px;">
+          Đường dưới 0 = thiếu vật tư → nguy cơ dừng sản xuất. Giả định nhập theo ETA đã xác nhận.
+        </div>
+      </div>
+    </div>
+
+    <!-- Coverage detail table by project -->
+    <div class="row c2">
+      <div class="card">
+        <div class="ct">Phân tích Đáp ứng chi tiết theo Dự án</div>
+        <div class="tw" style="max-height:none">
+          <table>
+            <thead><tr>
+              <th>Dự án</th>
+              <th class="tr">Tồn kho (T)</th><th class="tr">Dự kiến về (T)</th>
+              <th class="tr">Tổng sẵn có (T)</th><th class="tr">KH Xuất còn (T)</th>
+              <th>% Đáp ứng</th><th>Nhận định</th>
+            </tr></thead>
+            <tbody>
+              <tr><td class="fw">V314</td><td class="tr">38.0</td><td class="tr">55,053</td><td class="tr fw">55,091</td><td class="tr">3,200</td><td><div class="bl-row"><div class="bl-track"><div class="bl-fill fg" style="width:100%"></div></div><span class="bp" style="color:var(--green)">100%</span></div></td><td><span class="h hg">Đủ nếu về đúng hạn</span></td></tr>
+              <tr><td class="fw">U285</td><td class="tr">13.0</td><td class="tr">31,125</td><td class="tr fw">31,138</td><td class="tr">850</td><td><div class="bl-row"><div class="bl-track"><div class="bl-fill fg" style="width:100%"></div></div><span class="bp" style="color:var(--green)">100%</span></div></td><td><span class="h hg">Đủ nếu về đúng hạn</span></td></tr>
+              <tr><td class="fw">U308</td><td class="tr">51.7</td><td class="tr">47.6</td><td class="tr fw">99.3</td><td class="tr">520</td><td><div class="bl-row"><div class="bl-track"><div class="bl-fill fa" style="width:19%"></div></div><span class="bp" style="color:var(--red)">19%</span></div></td><td><span class="h hr">Cực thiếu — cần nhập thêm</span></td></tr>
+              <tr><td class="fw">E307</td><td class="tr">5.1</td><td class="tr">143</td><td class="tr fw">148.1</td><td class="tr">142</td><td><div class="bl-row"><div class="bl-track"><div class="bl-fill fg" style="width:100%"></div></div><span class="bp" style="color:var(--green)">104%</span></div></td><td><span class="h hg">Đủ</span></td></tr>
+              <tr><td class="fw">V261</td><td class="tr">48.5</td><td class="tr">30</td><td class="tr fw">78.5</td><td class="tr">55</td><td><div class="bl-row"><div class="bl-track"><div class="bl-fill fg" style="width:100%"></div></div><span class="bp" style="color:var(--green)">143%</span></div></td><td><span class="h hg">Dư · tốt</span></td></tr>
+              <tr><td class="fw">M306</td><td class="tr">15.2</td><td class="tr">0</td><td class="tr fw">15.2</td><td class="tr">12</td><td><div class="bl-row"><div class="bl-track"><div class="bl-fill fg" style="width:100%"></div></div><span class="bp" style="color:var(--green)">127%</span></div></td><td><span class="h hg">Đủ</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ct">Ma trận Mức đáp ứng — Loại VT × Dự án</div>
+        <div class="tw" style="max-height:none">
+          <table>
+            <thead><tr>
+              <th>Dự án</th>
+              <th class="tc">MMS</th><th class="tc">ACS</th><th class="tc">WDM</th><th class="tc">PFM</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="fw">V314</td><td class="tc"><span class="h hy">Đủ nếu về*</span></td><td class="tc"><span class="h hg">Đủ</span></td><td class="tc"><span class="h hg">Đủ</span></td><td class="tc"><span class="h hg">Đủ</span></td></tr>
+              <tr><td class="fw">U285</td><td class="tc"><span class="h hy">Đủ nếu về*</span></td><td class="tc"><span class="h hr">Thiếu</span></td><td class="tc"><span class="h hy">Gần đủ</span></td><td class="tc"><span class="h hg">Đủ</span></td></tr>
+              <tr><td class="fw">U308</td><td class="tc"><span class="h hr">Cực thiếu</span></td><td class="tc"><span class="h hy">Gần đủ</span></td><td class="tc"><span class="h hg">Đủ</span></td><td class="tc"><span class="h hg">Đủ</span></td></tr>
+              <tr><td class="fw">E307</td><td class="tc"><span class="h hg">Đủ</span></td><td class="tc"><span class="h hy">Gần đủ</span></td><td class="tc"><span class="h hg">Đủ</span></td><td class="tc"><span class="h hg">Đủ</span></td></tr>
+              <tr><td class="fw">V261</td><td class="tc"><span class="h hg">Dư</span></td><td class="tc"><span class="h hg">Đủ</span></td><td class="tc"><span class="h hg">Đủ</span></td><td class="tc"><span class="h hn">Không cần</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="font-size:.69rem;color:var(--muted);margin-top:7px;padding-top:7px;border-top:1px solid var(--border);">
+          * "Đủ nếu về" = Đủ nếu lô hàng đang vận chuyển về đúng ETA đã xác nhận
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /p5 -->
+
+  </div><!-- /canvas -->
+</div><!-- /main -->
+
+<script>
+// ═══════ DATA ═══════════════════════════════════════════
+
+const DETAIL_DATA = [
+  { proj:'A290', item:null,          stage:'Hoàn thiện tài liệu', po:17840, da:21171, actual:5808.60 },
+  { proj:'A290', item:'Tier 4',      stage:'Shop drawing',         po:5000,  da:21171, actual:null },
+  { proj:'A290', item:'Tier 2',      stage:'Hoàn thiện tài liệu', po:4600,  da:21171, actual:3492 },
+  { proj:'A290', item:'Tier 1',      stage:'Hoàn thiện tài liệu', po:4200,  da:21171, actual:2316.60 },
+  { proj:'A290', item:'Tier 3',      stage:'Shop drawing',         po:3800,  da:21171, actual:null },
+  { proj:'A290', item:'Elevator',    stage:'Shop drawing',         po:240,   da:21171, actual:null },
+  { proj:'M291', item:null,          stage:'Done Item',            po:6210,  da:6283,  actual:null },
+  { proj:'M291', item:'Casing',      stage:'Done Item',            po:2884,  da:6283,  actual:null },
+  { proj:'M291', item:'Structure',   stage:'Done Item',            po:1240,  da:6283,  actual:null },
+  { proj:'M291', item:'Main stack',  stage:'Done Item',            po:1096,  da:6283,  actual:null },
+  { proj:'M291', item:'Inlet Duct',  stage:'Done Item',            po:990,   da:6283,  actual:null },
+  { proj:'U302', item:null,          stage:'Hoàn thiện tài liệu', po:2490,  da:2528,  actual:1.70 },
+  { proj:'U302', item:'Steel Beam',  stage:'Shop drawing',         po:748.80,da:2528,  actual:null },
+];
+
+const STAGES = ['CP','CUT','BH','FAB','GCCKCX','BLT&PNT','GAL','INS'];
+const MATRIX_DATA = [
+  { proj:'M304', item:'Casing U#3',       kh:350, tt:329, c:['d','d','d','y',null,null,null,null] },
+  { proj:'M304', item:'Stack Foundation', kh:150, tt:138, c:['d','d','y',null,null,null,null,null] },
+  { proj:'M306', item:'Silo Structure',   kh:50,  tt:50,  c:['d','d','d','d',null,'d',null,null] },
+  { proj:'U276', item:'Cooling Tower',    kh:40,  tt:15,  c:['d','d',null,'w','r',null,null,null] },
+  { proj:'U276', item:'Duct System',      kh:80,  tt:52,  c:['d','y',null,null,null,null,null,null] },
+  { proj:'V314', item:'Main Platform',    kh:120, tt:115, c:['d','d','d','d','d',null,null,null] },
+  { proj:'V314', item:'Conveyor Bridge',  kh:200, tt:173, c:['d','d','d','w',null,null,null,null] },
+  { proj:'U285', item:'Pipe Rack',        kh:190, tt:99,  c:['d','d','r',null,null,null,null,null] },
+  { proj:'F0243',item:'Casing Pkg 1A',    kh:148, tt:148, c:['d','d','d','d',null,'d',null,null] },
+  { proj:'F0243',item:'Conveyor 3BA',     kh:286, tt:200, c:['d','y','w',null,null,null,null,null] },
+  { proj:'B272', item:'Beam Assembly T4', kh:150, tt:87,  c:['d','y','r',null,null,null,null,null] },
+];
+const ST_MAP = {
+  d:{cls:'sp-d',lbl:'✓ Xong'}, w:{cls:'sp-w',lbl:'▶ TH'},
+  y:{cls:'sp-y',lbl:'⚠ Chậm'}, r:{cls:'sp-r',lbl:'✕ Trễ'},
+  'null':{cls:'sp-n',lbl:'—'}
+};
+
+const CROSS_DATA = [
+  { dept:'KCT', rows:[] },
+  { dept:'KCTB', rows:[
+    { item:'A290', pv:[4.35,4.35,4.35,4.35,4.35], ps:[88,88,88,88,88] },
+    { item:'M291', pv:[0,0,0,0,0], ps:[0,8,0,0,0] },
+    { item:'M304', pv:[0,82.60,0,0,0], ps:[0,523.30,0,0,0] },
+    { item:'M306', pv:[0,0,0,0,7], ps:[0,0,0,0,0] },
+    { item:'U276', pv:[0,0,0,586.60,0], ps:[0,0,0,0,0] },
+    { item:'U284', pv:[0,0,0,14,397.60], ps:[0,0,0,0,397.60] },
+  ]},
+];
+
+// ═══════ NAVIGATION ═══════════════════════════════════
+const REG = {};
+function go(pgId, title, el) {
+  document.querySelectorAll('.nav-it').forEach(n=>n.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('pg-title').textContent = title;
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.getElementById(pgId).classList.add('on');
+  buildCharts(pgId);
+}
+function toggleYr(btn) {
+  document.querySelectorAll('.yr-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ═══════ CHART HELPERS ═══════════════════════════════
+const PBI = {
+  blue:'#118dff', teal:'#01b8aa', purple:'#8163c2',
+  orange:'#d83b01', amber:'#f2c811', green:'#107c10',
+  red:'#a4262c', grey:'#c8ced3'
+};
+
+function mc(id, type, data, extra={}) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (REG[id]) { REG[id].destroy(); delete REG[id]; }
+  const isCart = ['doughnut','pie','radar'].includes(type);
+  const base = {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{position:'top', labels:{usePointStyle:true,boxWidth:8,font:{family:'Inter',size:11}}} },
+    scales: isCart ? {} : {
+      x:{grid:{display:false}, ticks:{font:{family:'Inter',size:11}}},
+      y:{grid:{color:'#f0efee'}, ticks:{font:{family:'Inter',size:11}}, beginAtZero:true}
+    }
+  };
+  REG[id] = new Chart(el, { type, data, options: deepMerge(base, extra) });
+}
+
+function deepMerge(a, b) {
+  const r = {...a};
+  for (const k in b) {
+    if (b[k] && typeof b[k]==='object' && !Array.isArray(b[k])) r[k] = deepMerge(a[k]||{}, b[k]);
+    else r[k] = b[k];
+  }
+  return r;
+}
+
+function pctColor(p) { return p>=90?PBI.green:p>=70?PBI.orange:PBI.red; }
+function bfill(p) {
+  const cl = p>=90?'fg':p>=70?'fa':'fr';
+  return `<div class="bl-row"><div class="bl-track"><div class="bl-fill ${cl}" style="width:${p}%"></div></div><span class="bp" style="color:${pctColor(p)}">${p}%</span></div>`;
+}
+
+// ═══════ DOM BUILDERS ════════════════════════════════
+
+function buildDetailTable() {
+  const tbody = document.getElementById('detail-tbody');
+  if (!tbody) return;
+  let html = '';
+  DETAIL_DATA.forEach(r => {
+    const pct = Math.round(r.po/r.da*100);
+    if (!r.item) {
+      html += `<tr class="proj-row"><td>📂 ${r.proj}</td><td><span class="h ${r.stage.includes('Done')?'hg':'hb'}">${r.stage}</span></td><td class="tr fw">${r.po.toLocaleString('vi')}</td><td class="tr">${r.da.toLocaleString('vi')}</td><td>${bfill(pct)}</td><td class="tr fw" style="color:var(--teal)">${r.actual?r.actual.toLocaleString('vi'):'—'}</td></tr>`;
+    } else {
+      html += `<tr><td style="padding-left:18px;color:var(--muted)">↳ ${r.item}</td><td><span class="h hn">${r.stage}</span></td><td class="tr">${r.po.toLocaleString('vi')}</td><td class="tr">${r.da.toLocaleString('vi')}</td><td><div class="bl-row"><div class="bl-track"><div class="bl-fill fb" style="width:${pct}%"></div></div><span class="bp">${(r.po/r.da*100).toFixed(2)}%</span></div></td><td class="tr">${r.actual?r.actual.toLocaleString('vi'):'—'}</td></tr>`;
+    }
+  });
+  html += `<tr style="background:#f0efee;font-weight:700"><td>Tổng</td><td></td><td class="tr">32,660.80</td><td class="tr">52,138.00</td><td>${bfill(63)}</td><td class="tr" style="color:var(--teal)">6,919.90</td></tr>`;
+  tbody.innerHTML = html;
+}
+
+function buildMatrix() {
+  const tbody = document.getElementById('matrix-body');
+  if (!tbody) return;
+  let html = '', lastProj = '';
+  MATRIX_DATA.forEach(r => {
+    if (r.proj !== lastProj) {
+      lastProj = r.proj;
+      html += `<tr><td class="rprj" colspan="${STAGES.length+3}" style="background:#edecea;color:var(--dark);font-size:.7rem;border-bottom:1px solid #ddd;padding:4px 10px;font-weight:600;">📂 ${r.proj}</td></tr>`;
+    }
+    const pct = Math.round(r.tt/r.kh*100);
+    const cells = r.c.map(s=>{const sm=ST_MAP[s===null?'null':s]||ST_MAP['null'];return`<td class="cell"><span class="sp ${sm.cls}">${sm.lbl}</span></td>`;}).join('');
+    html += `<tr><td class="rlbl">  ${r.item}</td>${cells}<td class="cell tr">${r.kh}</td><td class="cell tr">${r.tt}</td><td class="cell">${bfill(pct)}</td></tr>`;
+  });
+  tbody.innerHTML = html;
+}
+
+function buildCrossTable() {
+  const tbody = document.getElementById('cross-tbody');
+  if (!tbody) return;
+  let html = '';
+  CROSS_DATA.forEach(d => {
+    html += `<tr class="grp-proj"><td class="rlbl" colspan="11">${d.dept}</td></tr>`;
+    (d.rows||[]).forEach(r => {
+      const cells = r.pv.map((pv,i)=>`<td class="pv">${pv||'—'}</td><td class="ps">${r.ps[i]||'—'}</td>`).join('');
+      html += `<tr><td class="rsubl">↳ ${r.item}</td>${cells}</tr>`;
+    });
+  });
+  tbody.innerHTML = html;
+}
+
+// ═══════ CHART BUILDERS ══════════════════════════════
+
+function buildCharts(pg) {
+  if (pg==='p1') buildP1();
+  else if (pg==='p2') buildP2();
+  else if (pg==='p3') buildP3();
+  else if (pg==='p4') buildP4();
+  else if (pg==='p5') buildP5();
+}
+
+// ── P1 ────────────────────────────────────────────────
+function buildP1() {
+  mc('c1-gauge','doughnut',{
+    datasets:[{data:[63,37],backgroundColor:['#d83b01','#edebe9'],borderWidth:0,circumference:180}]
+  },{plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{},rotation:-90,cutout:'72%'});
+
+  mc('c1-monthly-combo','bar',{
+    labels:['T01','T02','T03','T04','T05','T06','T07','T08'],
+    datasets:[
+      {label:'KL Kế hoạch (T)',data:[9500,9800,8200,7800,8500,8000,6500,1838],backgroundColor:'transparent',borderColor:PBI.orange,borderWidth:2,borderSkipped:false,type:'bar',order:3,barPercentage:.6},
+      {label:'KL Hoàn thành TT (T)',data:[9342,9680,1610,1726,1448,2298,1827,0],backgroundColor:PBI.blue,borderRadius:2,type:'bar',order:4,barPercentage:.6},
+      {label:'Tỷ lệ HT (%)',data:[98.50,98.84,19.64,22.16,17.03,28.72,28.00,0],type:'line',yAxisID:'y2',borderColor:'#252423',borderDash:[4,4],fill:false,tension:.1,pointRadius:4,pointBackgroundColor:'#fff',pointBorderColor:'#252423',pointBorderWidth:2,order:1},
+    ]
+  },{
+    plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>ctx.dataset.label?.includes('%')?`${ctx.parsed.y.toFixed(2)}%`:`${ctx.parsed.y.toLocaleString('vi')} T`}}},
+    scales:{y:{title:{display:true,text:'Tấn',font:{size:10}},grid:{color:'#f0efee'}},y2:{type:'linear',position:'right',min:0,max:120,grid:{display:false},ticks:{callback:v=>v+'%'},title:{display:true,text:'%',font:{size:10}}},x:{grid:{display:false}}}
+  });
+
+  mc('c1-stage-bar','bar',{
+    labels:['Shop drawing','Done 2D shop drw','Hoàn thiện TL','Done Item'],
+    datasets:[{label:'KL Thực hiện (T)',data:[32660.80,15973.80,9040.90,7565.10],backgroundColor:[PBI.blue,PBI.teal,PBI.amber,PBI.green],borderRadius:3}]
+  },{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.parsed.x.toLocaleString('vi')} T`}}},scales:{x:{grid:{color:'#f0efee'},ticks:{callback:v=>v>=1000?`${(v/1000).toFixed(0)}k`:v}},y:{grid:{display:false}}}});
+
+  mc('c1-proj-rank','bar',{
+    labels:['M306','A294','A303','M291','U302','A290','U284','U276','A286','M304'],
+    datasets:[{label:'% Hoàn thành',data:[200,100,100,98.84,98.50,84.27,43.55,30.04,16.87,16.55],backgroundColor:ctx=>{const v=ctx.raw;return v>=100?PBI.green:v>=70?PBI.amber:v>=30?PBI.orange:PBI.red;},borderRadius:3}]
+  },{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.parsed.x.toFixed(2)}%`}}},scales:{x:{min:0,max:210,grid:{color:'#f0efee'},ticks:{callback:v=>v+'%'}},y:{grid:{display:false}}}});
+}
+
+// ── P2 ────────────────────────────────────────────────
+function buildP2() {
+  mc('c2-status-donut','doughnut',{
+    labels:['Done','Đang thực hiện'],
+    datasets:[{data:[57,448],backgroundColor:[PBI.green,'#b0cce4'],borderWidth:0,hoverOffset:6}]
+  },{plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}},scales:{},cutout:'68%'});
+
+  mc('c2-monthly-hours','bar',{
+    labels:['T11/25','T01/26','T03/26','T05/26','T07/26'],
+    datasets:[
+      {label:'Phân việc',data:[89,397.6,841.8,857.6,541.6],backgroundColor:PBI.blue,stack:'s',borderRadius:0},
+      {label:'Phát sinh',data:[0,8,103.2,25.4,253],backgroundColor:PBI.orange,stack:'s'},
+    ]
+  },{scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:'#f0efee'}}}});
+
+  mc('c2-dept-hours','bar',{
+    labels:['KCTB','KCT','TKSX','(Trống)'],
+    datasets:[
+      {label:'Phân việc',data:[1921.3,1333.8,609.1,313],backgroundColor:PBI.blue,stack:'s'},
+      {label:'Phát sinh',data:[186,186,0,0],backgroundColor:PBI.orange,stack:'s'},
+    ]
+  },{indexAxis:'y',scales:{x:{stacked:true,grid:{color:'#f0efee'}},y:{stacked:true,grid:{display:false}}}});
+
+  mc('c2-proj-hours','bar',{
+    labels:['A285','M304','U276','U284'],
+    datasets:[
+      {label:'Tùy chỉnh',data:[239,94,0,388],backgroundColor:PBI.amber,stack:'s'},
+      {label:'Phát sinh',data:[0,0,721,0],backgroundColor:PBI.orange,stack:'s'},
+      {label:'Phân việc',data:[1463,705,733.60,411.60],backgroundColor:PBI.blue,stack:'s'},
+    ]
+  },{indexAxis:'y',scales:{x:{stacked:true,grid:{color:'#f0efee'},ticks:{callback:v=>v>=1000?`${(v/1000).toFixed(1)}k`:v}},y:{stacked:true,grid:{display:false}}}});
+}
+
+// ── P3 ────────────────────────────────────────────────
+function buildP3() {
+  // Monthly stacked by type
+  mc('c3-monthly','bar',{
+    labels:['T01','T02','T03','T04 (dự kiến)'],
+    datasets:[
+      {label:'MMS (Vật tư chính)',data:[536.3,226.0,810.3,0],backgroundColor:PBI.blue,stack:'s',borderRadius:0},
+      {label:'ACS (Phụ)',        data:[0,8.4,12.8,0],backgroundColor:PBI.teal,stack:'s'},
+      {label:'PFM (Sơn)',        data:[45.2,68.4,0,143],backgroundColor:PBI.amber,stack:'s'},
+      {label:'WDM (Hàn)',        data:[0,0,18.5,0],backgroundColor:PBI.grey,stack:'s'},
+      {label:'Lô dự kiến về',   data:[0,0,0,35060],backgroundColor:'rgba(17,141,255,.25)',stack:'s',borderRadius:2},
+    ]
+  },{scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:'#f0efee'},title:{display:true,text:'Tấn',font:{size:10}}}}});
+
+  mc('c3-proj-import','bar',{
+    labels:['V314','U285','U308','E307','V261','M306'],
+    datasets:[
+      {label:'T1+T2/2026',data:[328.9,215.8,180.6,113.6,0,0],backgroundColor:PBI.grey,stack:'s'},
+      {label:'T3/2026',   data:[0,390.2,12.8,0,438.6,0],backgroundColor:PBI.blue,stack:'s'},
+    ]
+  },{indexAxis:'y',scales:{x:{stacked:true,grid:{color:'#f0efee'}},y:{stacked:true,grid:{display:false}}}});
+
+  mc('c3-type-donut','doughnut',{
+    labels:['MMS','ACS','WDM','PFM'],
+    datasets:[{data:[1572.6,21.2,18.5,113.6],backgroundColor:[PBI.blue,PBI.teal,PBI.grey,PBI.amber],borderWidth:0,hoverOffset:6}]
+  },{plugins:{legend:{display:false}},scales:{},cutout:'60%'});
+}
+
+// ── P4 ────────────────────────────────────────────────
+function buildP4() {
+  mc('c4-trend','bar',{
+    labels:['T10/25','T11/25','T12/25','T01/26','T02/26','T03/26'],
+    datasets:[
+      {label:'KH Xuất (T)',      data:[900,1050,1100,1000,1180,1250],backgroundColor:'rgba(200,206,211,.6)',borderRadius:3,order:2},
+      {label:'Thực tế Xuất (T)',data:[850,1020,960,980,1120,1150],backgroundColor:PBI.blue,borderRadius:3,order:3},
+      {label:'% Đạt KH',        data:[94,97,87,98,95,92],type:'line',borderColor:PBI.amber,fill:false,tension:.4,pointRadius:4,yAxisID:'y2',order:1},
+    ]
+  },{
+    plugins:{legend:{position:'top'}},
+    scales:{y:{grid:{color:'#f0efee'},title:{display:true,text:'Tấn',font:{size:10}}},y2:{type:'linear',position:'right',min:50,max:120,grid:{display:false},ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}
+  });
+
+  mc('c4-proj-bar','bar',{
+    labels:['F0243','V314','M304','B272','U285','U308'],
+    datasets:[
+      {label:'KH (T)',data:[495,320,125,150,110,80.5],backgroundColor:PBI.grey,borderRadius:3},
+      {label:'Thực tế (T)',data:[408,288,125,90,110,80.5],backgroundColor:PBI.teal,borderRadius:3},
+    ]
+  },{indexAxis:'y',scales:{x:{grid:{color:'#f0efee'}},y:{grid:{display:false}}}});
+
+  mc('c4-donut','doughnut',{
+    labels:['MMS','ACS','WDM','PFM','Khác'],
+    datasets:[{data:[68,11,6,5,10],backgroundColor:[PBI.blue,PBI.teal,PBI.amber,PBI.orange,PBI.grey],borderWidth:0,hoverOffset:6}]
+  },{plugins:{legend:{display:false}},scales:{},cutout:'65%'});
+
+  mc('c4-ship','bar',{
+    labels:['F0243 Lot1 Shp2','F0243 Shp3 Pack2B','V314 Lot#1','F0243 Pack 3BA','B272 Lot#2','U285 Pack1'],
+    datasets:[{label:'% Hoàn thành',data:[100,98,90,70,60,55],backgroundColor:ctx=>{const v=ctx.raw;return v>=90?PBI.green:v>=70?PBI.blue:PBI.orange;},borderRadius:4}]
+  },{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{min:0,max:100,ticks:{callback:v=>v+'%'},grid:{color:'#f0efee'}},y:{grid:{display:false}}}});
+}
+
+// ── P5 ────────────────────────────────────────────────
+function buildP5() {
+  // Stock by type
+  mc('c5-stock-type','bar',{
+    labels:['MMS','ACS','WDM','PFM'],
+    datasets:[{
+      label:'Tồn kho (T)',
+      data:[130.7,17.2,18.5,5.1],
+      backgroundColor:[PBI.blue,PBI.teal,PBI.amber,PBI.orange],
+      borderRadius:4
+    }]
+  },{plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:'#f0efee'},title:{display:true,text:'Tấn',font:{size:10}}}}});
+
+  // Stock by project
+  mc('c5-stock-proj','bar',{
+    labels:['V314','U285','E307','U308','V261','M306'],
+    datasets:[{
+      label:'Tồn kho (T)',
+      data:[38.0,13.0,5.1,51.7,48.5,15.2],
+      backgroundColor:ctx=>{
+        const v=ctx.raw;
+        return v>=40?PBI.teal:v>=15?PBI.blue:PBI.amber;
+      },
+      borderRadius:4
+    }]
+  },{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{grid:{color:'#f0efee'},title:{display:true,text:'Tấn',font:{size:10}}},y:{grid:{display:false}}}});
+
+  // Coverage bar: demand vs supply breakdown
+  mc('c5-cov-bar','bar',{
+    labels:['V314','U285','U308','E307','V261','M306'],
+    datasets:[
+      {label:'KH Xuất còn lại (Nhu cầu)',   data:[3200,850,520,142,55,12],      backgroundColor:'rgba(200,206,211,.7)',borderRadius:3},
+      {label:'Tồn kho hiện tại',            data:[38,13,51.7,5.1,48.5,15.2],    backgroundColor:PBI.teal,borderRadius:0},
+      {label:'Lô hàng xác nhận đang về',    data:[55053,31125,47.6,143,30,0],   backgroundColor:PBI.blue,borderRadius:3},
+    ]
+  },{plugins:{legend:{position:'top'}},scales:{x:{grid:{display:false}},y:{grid:{color:'#f0efee'},title:{display:true,text:'Tấn',font:{size:10}}}}});
+
+  // Timeline projection: projected net stock (cumulative) over months
+  mc('c5-timeline','line',{
+    labels:['Hiện tại (5/4)','T4/2026','T5/2026','T6/2026','T7/2026','T8/2026'],
+    datasets:[
+      {label:'V314 Net stock',    data:[38,55091,-2800,-5600,-8200,-10500],  borderColor:PBI.blue, fill:false,tension:.4,pointRadius:4},
+      {label:'U285 Net stock',    data:[13,31138,30800,30100,29500,29000],   borderColor:PBI.teal, fill:false,tension:.4,pointRadius:4},
+      {label:'U308 Net stock',    data:[51.7,99.3,-130,-280,-400,-520],      borderColor:PBI.orange, fill:false,tension:.4,pointRadius:4,borderDash:[4,4]},
+      {label:'V261 Net stock',    data:[48.5,78.5,78.5,78.5,78.5,78.5],     borderColor:PBI.green, fill:false,tension:.2,pointRadius:4},
+      {label:'Ngưỡng 0 (Thiếu)', data:[0,0,0,0,0,0],                       borderColor:'#a4262c',borderDash:[6,3],pointRadius:0,fill:false,borderWidth:1.5},
+    ]
+  },{
+    plugins:{legend:{position:'top'}},
+    scales:{
+      x:{grid:{display:false}},
+      y:{grid:{color:'#f0efee'},title:{display:true,text:'Tấn (Tồn dự báo)',font:{size:10}},
+         ticks:{callback:v=>v>=1000?`${(v/1000).toFixed(0)}k`:v===0?'0 ⚠':v}}
+    }
+  });
+}
+
+// ═══════ INIT ════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  buildDetailTable();
+  buildMatrix();
+  buildCrossTable();
+  buildCharts('p1');
+});
+</script>
+</body>
+</html>
