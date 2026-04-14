@@ -988,24 +988,24 @@
   <aside class="sb">
     <div class="sb-logo"><span class="ico">📊</span> AMECC REPORT</div>
     <div class="nav-sec">Quản lý Dự án</div>
-    <div class="nav-it on" onclick="go('p1','Tiến độ & Khối lượng',this)">
+    <div class="nav-it on" onclick="go('p1','Trang 1 — Tiến độ & Khối lượng',this)">
       <span class="n-ico">📈</span>Tiến độ & Khối lượng
     </div>
-    <div class="nav-it" onclick="go('p2b','Dự án — Phòng Dự án',this)">
-      <span class="n-ico">📁</span>Nhân sự
+    <div class="nav-it" onclick="go('p2b','Trang 2a — Dự án (Phòng Dự án)',this)">
+      <span class="n-ico">📁</span>Dự án — Phòng Dự án
     </div>
-    
+   
     <div class="nav-sec">Quản lý Vật tư</div>
-    <div class="nav-it" onclick="go('p3_overview','Tổng quan Vật tư',this)">
+    <div class="nav-it" onclick="go('p3_overview','Trang 3a — Tổng quan Vật tư',this)">
       <span class="n-ico">📊</span>Tổng quan Vật tư
     </div>
-    <div class="nav-it" onclick="go('p3','Nhập kho',this)">
+    <div class="nav-it" onclick="go('p3','Trang 3 — Nhập kho',this)">
       <span class="n-ico">📥</span>Nhập kho
     </div>
-    <div class="nav-it" onclick="go('p4','Xuất kho',this)">
+    <div class="nav-it" onclick="go('p4','Trang 4 — Xuất kho',this)">
       <span class="n-ico">📤</span>Xuất kho
     </div>
-    <div class="nav-it" onclick="go('p5','Tồn kho & Đáp ứng',this)">
+    <div class="nav-it" onclick="go('p5','Trang 5 — Tồn kho & Đáp ứng',this)">
       <span class="n-ico">🏭</span>Tồn kho & Đáp ứng
     </div>
     <div class="sb-foot">Cut-off: 05/04/2026 · W14</div>
@@ -1014,7 +1014,7 @@
   <!-- ═══════════ MAIN ═══════════ -->
   <div class="main">
     <div class="topbar">
-      <div class="pg-title" id="pg-title">Tiến độ & Khối lượng</div>
+      <div class="pg-title" id="pg-title">Trang 1 — Tiến độ & Khối lượng</div>
       <div class="filters">
         <span class="cutbadge">📅 05/04/2026 · W14</span>
         <div class="year-toggle">
@@ -1190,44 +1190,59 @@
        P2a — NHÂN SỰ PHÒNG THIẾT KẾ
   ══════════════════════════════════ -->
       <div id="p2a" class="page">
-        <div class="row c4">
+
+        <!-- ── PHẦN 1 ─────────────────────────────── -->
+        <div><span class="sec-label">👥 Phần 1 — Tổng quan Nhân sự & Công việc</span></div>
+        <div class="row c5">
           <div class="card kpi b">
-            <div class="kl">Tổng Giờ công Thực hiện</div>
-            <div class="kv">6,919</div>
-            <div class="ks">Phân việc + Phát sinh</div>
+            <div class="kl">Tổng Nhân sự</div>
+            <div class="kv">18</div>
+            <div class="ks">Phòng Thiết kế</div>
           </div>
           <div class="card kpi t">
-            <div class="kl">Giờ công Phân việc</div>
-            <div class="kv" style="color:var(--teal)">5,418</div>
-            <div class="ks">78.3% trong tổng giờ</div>
+            <div class="kl">NS đang tham gia DA</div>
+            <div class="kv" style="color:var(--teal)">16</div>
+            <div class="ks">89% nhân sự hoạt động</div>
+          </div>
+          <div class="card kpi p">
+            <div class="kl">Tổng Items</div>
+            <div class="kv" style="color:var(--purple)">505</div>
+            <div class="ks">57 Done · 448 Đang TH</div>
+          </div>
+          <div class="card kpi r">
+            <div class="kl">Items Quá hạn</div>
+            <div class="kv" style="color:var(--red)">32</div>
+            <div class="ks dn">▼ Cần theo dõi</div>
           </div>
           <div class="card kpi o">
-            <div class="kl">Giờ công Phát sinh</div>
-            <div class="kv" style="color:var(--orange)">1,501</div>
-            <div class="ks">21.7% — cần theo dõi</div>
-          </div>
-          <div class="card kpi g">
-            <div class="kl">Tỷ lệ Item hoàn thành</div>
-            <div class="kv" style="color:var(--green)">11.3%</div>
-            <div class="ks">57 / 505 items · 448 đang TH</div>
+            <div class="kl">Tổng Giờ công (PV+PS)</div>
+            <div class="kv">6,919</div>
+            <div class="ks">PV: 5,418 · PS: 1,501</div>
           </div>
         </div>
-        <div class="row c3c">
+
+        <!-- ── PHẦN 2 ─────────────────────────────── -->
+        <div><span class="sec-label">🗂️ Phần 2 — Phân bổ Nhân sự & Items theo Dự án</span></div>
+        <div class="row" style="grid-template-columns:4fr 8fr;">
           <div class="card">
-            <div class="ct" style="justify-content:center;">Trạng thái thực hiện (Items)</div>
+            <div class="ct">NS tham gia từng Dự án</div>
+            <div class="cw-lg"><canvas id="c2-ns-alloc"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="ct">Phân bổ Items theo Dự án<span class="badge bb">Done · Đang TH · Quá hạn</span></div>
+            <div class="cw-lg"><canvas id="c2-items-da"></canvas></div>
+          </div>
+        </div>
+
+        <!-- ── PHẦN 3 ─────────────────────────────── -->
+        <div><span class="sec-label">📊 Phần 3 — Trạng thái Items & Xu hướng Giờ công</span></div>
+        <div class="row" style="grid-template-columns:3fr 9fr;">
+          <div class="card">
+            <div class="ct" style="justify-content:center;">Trạng thái Items</div>
             <div class="cw-sm"><canvas id="c2-status-donut"></canvas></div>
             <div style="margin-top:8px;display:flex;flex-direction:column;gap:5px;">
-              <div class="bl-row"><span
-                  style="font-size:.72rem;width:90px;color:var(--green);font-weight:600">Done</span>
-                <div class="bl-track">
-                  <div class="bl-fill fg" style="width:11.3%"></div>
-                </div><span class="bp">57</span>
-              </div>
-              <div class="bl-row"><span style="font-size:.72rem;width:90px;color:var(--blue)">Đang TH</span>
-                <div class="bl-track">
-                  <div class="bl-fill fb" style="width:88.7%"></div>
-                </div><span class="bp">448</span>
-              </div>
+              <div class="bl-row"><span style="font-size:.72rem;width:90px;color:var(--green);font-weight:600">Done</span><div class="bl-track"><div class="bl-fill fg" style="width:11.3%"></div></div><span class="bp">57</span></div>
+              <div class="bl-row"><span style="font-size:.72rem;width:90px;color:var(--blue)">Đang TH</span><div class="bl-track"><div class="bl-fill fb" style="width:88.7%"></div></div><span class="bp">448</span></div>
             </div>
           </div>
           <div class="card">
@@ -1240,78 +1255,44 @@
             </div>
             <div class="cw-sm"><canvas id="c2-monthly-hours"></canvas></div>
           </div>
-          <div class="card">
-            <div class="ct">Giờ theo Bộ phận<span class="badge bb">Phân việc + Phát sinh</span></div>
-            <div class="cw-sm"><canvas id="c2-dept-hours"></canvas></div>
-          </div>
         </div>
 
-        <div class="row">
+        <!-- ── PHẦN 4 ─────────────────────────────── -->
+        <div><span class="sec-label">⚠️ Phần 4 — Items Quá hạn & Nhân sự Liên quan</span></div>
+        <div class="row" style="grid-template-columns:5fr 7fr;">
           <div class="card">
-            <div class="ct">Chi tiết Giờ công Nhân viên Thiết kế</div>
-            <div class="tw" style="max-height:320px;">
+            <div class="ct">Items Quá hạn theo Dự án<span class="badge br">32 items</span></div>
+            <div class="cw"><canvas id="c2-overdue-da"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="ct">Nhân sự có Items Quá hạn</div>
+            <div class="tw-lg">
               <table>
-                <thead>
-                  <tr>
-                    <th>Nhân viên</th>
-                    <th>Chức danh</th>
-                    <th>Dự án</th>
-                    <th>Hạng mục</th>
-                    <th>Giai đoạn</th>
-                    <th>Ngày</th>
-                    <th class="tr">Giờ PV</th>
-                    <th class="tr">Giờ PS</th>
-                    <th>Ghi chú</th>
-                  </tr>
-                </thead>
+                <thead><tr>
+                  <th>Nhân viên</th><th>Chức danh</th><th>Dự án</th>
+                  <th class="tc">Items đang TH</th><th class="tc">Quá hạn</th>
+                  <th class="tr">Giờ PV</th><th class="tr">Giờ PS</th><th>Trạng thái</th>
+                </tr></thead>
                 <tbody>
-                  <tr>
-                    <td>Nguyễn Văn A</td>
-                    <td>Thiết kế 3D</td>
-                    <td>V314</td>
-                    <td>Main Frame</td>
-                    <td>Shop drawing</td>
-                    <td>01/04/2026</td>
-                    <td class="tr fw" style="color:var(--blue)">8.0</td>
-                    <td class="tr">—</td>
-                    <td>Hoàn thành</td>
-                  </tr>
-                  <tr>
-                    <td>Trần Thị B</td>
-                    <td>Bóc tách KL</td>
-                    <td>M304</td>
-                    <td>Casing U#3</td>
-                    <td>Hoàn thiện TL</td>
-                    <td>02/04/2026</td>
-                    <td class="tr fw" style="color:var(--blue)">4.5</td>
-                    <td class="tr fw" style="color:var(--orange)">2.0</td>
-                    <td>Thay đổi thiết kế từ CĐT</td>
-                  </tr>
-                  <tr>
-                    <td>Lê Minh C</td>
-                    <td>Thiết kế 2D</td>
-                    <td>U284</td>
-                    <td>Pipe Rack</td>
-                    <td>Done 2D shop drw</td>
-                    <td>03/04/2026</td>
-                    <td class="tr fw" style="color:var(--blue)">8.0</td>
-                    <td class="tr">—</td>
-                    <td></td>
-                  </tr>
+                  <tr><td class="fw">Nguyễn Văn A</td><td>Thiết kế 3D</td><td>V314</td><td class="tc">12</td><td class="tc fw" style="color:var(--red)">5</td><td class="tr">80.0</td><td class="tr" style="color:var(--orange)">12.0</td><td><span class="h hr">Cần hỗ trợ</span></td></tr>
+                  <tr><td class="fw">Trần Thị B</td><td>Bóc tách KL</td><td>M304</td><td class="tc">8</td><td class="tc fw" style="color:var(--red)">4</td><td class="tr">45.0</td><td class="tr" style="color:var(--orange)">18.0</td><td><span class="h hr">Quá tải</span></td></tr>
+                  <tr><td class="fw">Lê Minh C</td><td>Thiết kế 2D</td><td>U285</td><td class="tc">10</td><td class="tc fw" style="color:var(--orange)">3</td><td class="tr">72.0</td><td class="tr" style="color:var(--orange)">8.0</td><td><span class="h hy">Theo dõi</span></td></tr>
+                  <tr><td class="fw">Phạm Thị D</td><td>Thiết kế 3D</td><td>U284</td><td class="tc">9</td><td class="tc fw" style="color:var(--orange)">2</td><td class="tr">65.5</td><td class="tr">0</td><td><span class="h hy">Theo dõi</span></td></tr>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
 
-        <div class="row c4-8">
+        <!-- ── PHẦN 5 ─────────────────────────────── -->
+        <div><span class="sec-label">📈 Phần 5 — Hiệu suất Nhân sự (KL / Giờ Phân việc)</span></div>
+        <div class="row" style="grid-template-columns:4fr 8fr;">
           <div class="card">
-            <div class="ct">Giờ theo Dự án (Phân việc / Phát sinh)</div>
-            <div class="cw-lg"><canvas id="c2-proj-hours"></canvas></div>
+            <div class="ct">Hiệu suất NS (Items/Giờ PV)<span class="badge bb">So với TB nhóm</span></div>
+            <div class="cw-lg"><canvas id="c2-perf"></canvas></div>
           </div>
           <div class="card">
-            <div class="ct">Chi tiết — Bộ phận × Tháng (Phân việc / Phát sinh)<span class="badge ba">Đơn vị: Giờ</span>
-            </div>
+            <div class="ct">Chi tiết Giờ công — Bộ phận × Tháng (PV / PS)<span class="badge ba">Đơn vị: Giờ</span></div>
             <div class="cross-wrap">
               <table class="cross-tbl">
                 <thead>
@@ -1324,32 +1305,22 @@
                     <th class="month-h" colspan="2">T07/26</th>
                   </tr>
                   <tr>
-                    <th>PV</th>
-                    <th>PS</th>
-                    <th>PV</th>
-                    <th>PS</th>
-                    <th>PV</th>
-                    <th>PS</th>
-                    <th>PV</th>
-                    <th>PS</th>
-                    <th>PV</th>
-                    <th>PS</th>
+                    <th>PV</th><th>PS</th>
+                    <th>PV</th><th>PS</th>
+                    <th>PV</th><th>PS</th>
+                    <th>PV</th><th>PS</th>
+                    <th>PV</th><th>PS</th>
                   </tr>
                 </thead>
                 <tbody id="cross-tbody"></tbody>
                 <tfoot>
                   <tr>
                     <td class="rlbl">Tổng</td>
-                    <td class="pv">89.0</td>
-                    <td class="ps">—</td>
-                    <td class="pv">397.6</td>
-                    <td class="ps">8.0</td>
-                    <td class="pv">841.8</td>
-                    <td class="ps">103.2</td>
-                    <td class="pv">857.6</td>
-                    <td class="ps">25.4</td>
-                    <td class="pv">541.6</td>
-                    <td class="ps">253.0</td>
+                    <td class="pv">89.0</td><td class="ps">—</td>
+                    <td class="pv">397.6</td><td class="ps">8.0</td>
+                    <td class="pv">841.8</td><td class="ps">103.2</td>
+                    <td class="pv">857.6</td><td class="ps">25.4</td>
+                    <td class="pv">541.6</td><td class="ps">253.0</td>
                   </tr>
                 </tfoot>
               </table>
@@ -1360,215 +1331,171 @@
             </div>
           </div>
         </div>
+
+        <div class="row">
+          <div class="card">
+            <div class="ct">Chi tiết Giờ công Nhân viên Thiết kế</div>
+            <div class="tw" style="max-height:240px;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nhân viên</th><th>Chức danh</th><th>Dự án</th><th>Hạng mục</th><th>Giai đoạn</th><th>Ngày</th>
+                    <th class="tr">Giờ PV</th><th class="tr">Giờ PS</th><th>Ghi chú</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Nguyễn Văn A</td><td>Thiết kế 3D</td><td>V314</td><td>Main Frame</td><td>Shop drawing</td><td>01/04/2026</td><td class="tr fw" style="color:var(--blue)">8.0</td><td class="tr">—</td><td>Hoàn thành</td></tr>
+                  <tr><td>Trần Thị B</td><td>Bóc tách KL</td><td>M304</td><td>Casing U#3</td><td>Hoàn thiện TL</td><td>02/04/2026</td><td class="tr fw" style="color:var(--blue)">4.5</td><td class="tr fw" style="color:var(--orange)">2.0</td><td>Thay đổi thiết kế từ CĐT</td></tr>
+                  <tr><td>Lê Minh C</td><td>Thiết kế 2D</td><td>U284</td><td>Pipe Rack</td><td>Done 2D shop drw</td><td>03/04/2026</td><td class="tr fw" style="color:var(--blue)">8.0</td><td class="tr">—</td><td></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
       </div><!-- /p2a -->
 
       <!-- ══════════════════════════════════
        P2b — QUẢN LÝ DỰ ÁN
   ══════════════════════════════════ -->
       <div id="p2b" class="page">
+
+        <!-- ── PHẦN 1 ─────────────────────────────── -->
+        <div><span class="sec-label">👥 Phần 1 — Tổng quan Nhân sự & Dự án</span></div>
         <div class="row c5">
           <div class="card kpi b">
-            <div class="kl">TỔNG DỰ ÁN</div>
-            <div class="kv">12</div>
-            <div class="ks">Danh mục dự án năm 2026</div>
+            <div class="kl">Tổng Nhân sự</div>
+            <div class="kv">15</div>
+            <div class="ks">Phòng Dự án</div>
           </div>
           <div class="card kpi t">
-            <div class="kl">TỔNG TASKS</div>
-            <div class="kv">1,245</div>
-            <div class="ks">Toàn bộ các giai đoạn</div>
-          </div>
-          <div class="card kpi o">
-            <div class="kl">TỔNG KL KẾ HOẠCH (TẤN)</div>
-            <div class="kv">54,000</div>
-            <div class="ks">Khối lượng KH năm</div>
+            <div class="kl">NS đang tham gia DA</div>
+            <div class="kv" style="color:var(--teal)">12</div>
+            <div class="ks">80% nhân sự hoạt động</div>
           </div>
           <div class="card kpi p">
-            <div class="kl">TỔNG KL THỰC TẾ (TẤN)</div>
-            <div class="kv" style="color:var(--purple)">26,460</div>
-            <div class="ks">Khối lượng đã HT</div>
+            <div class="kl">Tổng Dự án</div>
+            <div class="kv" style="color:var(--purple)">12</div>
+            <div class="ks">Đang theo dõi 2026</div>
+          </div>
+          <div class="card kpi r">
+            <div class="kl">Tasks Quá hạn</div>
+            <div class="kv" style="color:var(--red)">28</div>
+            <div class="ks dn">▼ Cần xử lý ngay</div>
           </div>
           <div class="card kpi g">
-            <div class="kl">% HOÀN THÀNH TỔNG</div>
+            <div class="kl">% HT Tasks Tổng</div>
             <div class="kv" style="color:var(--green)">49.0%</div>
-            <div class="ks">Lũy kế toàn dự án</div>
+            <div class="ks">602 Done / 1,245 Tasks</div>
           </div>
         </div>
 
-        <div style="font-size:1.1rem;font-weight:700;color:var(--dark);margin-top:5px;margin-bottom:10px;">📊 1. Xu
-          hướng &amp; Thực hiện Khối lượng</div>
+        <!-- ── PHẦN 2 ─────────────────────────────── -->
+        <div><span class="sec-label">🗂️ Phần 2 — Phân bổ Nhân sự & Tiến độ Dự án</span></div>
+        <div class="row" style="grid-template-columns:4fr 8fr;">
+          <div class="card">
+            <div class="ct">NS tham gia từng Dự án</div>
+            <div class="cw-lg"><canvas id="p2b-ns-alloc"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="ct">Tiến độ Dự án — Tasks Done vs Còn lại + % HT<span class="badge bb">Tasks</span></div>
+            <div class="cw-lg"><canvas id="p2b-c3"></canvas></div>
+          </div>
+        </div>
+
+        <!-- ── PHẦN 3 ─────────────────────────────── -->
+        <div><span class="sec-label">📋 Phần 3 — Công việc & Tiến độ Thực hiện</span></div>
         <div class="row c2">
           <div class="card">
-            <div class="ct">Xu hướng Khối lượng theo Thời gian</div>
-            <div class="cw"><canvas id="p2b-c2"></canvas></div>
+            <div class="ct">Tasks theo Dự án<span class="badge bb">Done · On-track · Quá hạn</span></div>
+            <div class="cw"><canvas id="p2b-tasks-da"></canvas></div>
           </div>
           <div class="card">
-            <div class="ct">Workload Thực hiện theo Dự án &amp; % Hoàn thành</div>
-            <div class="cw"><canvas id="p2b-c3"></canvas></div>
+            <div class="ct">Tốc độ hoàn thành Tasks theo Tháng<span class="badge bb">Tasks/Tháng</span></div>
+            <div class="cw"><canvas id="p2b-c2"></canvas></div>
           </div>
         </div>
 
-        <div style="font-size:1.1rem;font-weight:700;color:var(--dark);margin-top:5px;margin-bottom:10px;">👥 2. Phân bổ
-          &amp; Hiệu suất Nhân sự</div>
-        <div class="row c4-8">
+        <!-- ── PHẦN 4 ─────────────────────────────── -->
+        <div><span class="sec-label">⚠️ Phần 4 — Tasks Quá hạn & Nhân sự Liên quan</span></div>
+        <div class="row" style="grid-template-columns:5fr 7fr;">
           <div class="card">
-            <div class="ct" style="justify-content:center;">Số công việc (Tasks) Quá hạn</div>
+            <div class="ct">Tasks Quá hạn theo Dự án<span class="badge br">28 tasks</span></div>
             <div class="cw"><canvas id="p2b-task-overdue"></canvas></div>
           </div>
           <div class="card">
-            <div class="ct">Workload theo Nhân sự so với Mức trung bình</div>
-            <div class="cw"><canvas id="p2b-c9"></canvas></div>
-          </div>
-        </div>
-
-        <div style="font-size:1.1rem;font-weight:700;color:var(--dark);margin-top:5px;margin-bottom:10px;">📋 3. Chi
-          tiết Hiệu suất Dự án &amp; Nhân sự</div>
-        <div class="row c12">
-          <div class="card">
-            <div class="ct">Ma trận Quản lý Khối lượng (Dự án &gt; Nhân sự)</div>
-            <div class="tw-lg" style="height:350px; overflow-y:auto; border-bottom:none;">
+            <div class="ct">Nhân sự có Tasks Quá hạn</div>
+            <div class="tw-lg">
               <table>
-                <thead style="position:sticky;top:0;background:#fff;z-index:2;">
-                  <tr>
-                    <th>#</th>
-                    <th>Tên Dự án / Nhân sự</th>
-                    <th class="tr">KL Kế Hoạch (T)</th>
-                    <th class="tr">KL Thực Tế (T)</th>
-                    <th>Tỷ lệ HT</th>
-                    <th>Trạng thái</th>
-                  </tr>
-                </thead>
+                <thead><tr>
+                  <th>Nhân sự</th><th>Chức vụ</th><th>Dự án</th>
+                  <th class="tc">Tasks đang TH</th><th class="tc">Tasks quá hạn</th>
+                  <th>Nguyên nhân</th><th>Trạng thái</th>
+                </tr></thead>
                 <tbody>
-                  <!-- M291 -->
-                  <tr class="sub-row expanded"
-                    onclick="var p=this.nextElementSibling;while(p&&p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
-                    <td>1</td>
-                    <td class="fw" style="cursor:pointer;color:var(--dark)">⊟ M291</td>
-                    <td class="tr fw">6,500.0</td>
-                    <td class="tr fw" style="color:var(--teal)">1,300.0</td>
-                    <td>
-                      <div class="bl-row">
-                        <div class="bl-track">
-                          <div class="bl-fill fr" style="width:20%"></div>
-                        </div><span class="bp" style="color:var(--red)">20%</span>
-                      </div>
-                    </td>
-                    <td><span class="h hr">Trễ nghiêm trọng</span></td>
-                  </tr>
-                  <tr class="stage-row">
-                    <td></td>
-                    <td style="padding-left:24px;">↳ Mr. Hoàng Long</td>
-                    <td class="tr">4,500.0</td>
-                    <td class="tr">1,000.0</td>
-                    <td>
-                      <div class="bl-row">
-                        <div class="bl-track">
-                          <div class="bl-fill fr" style="width:22.2%"></div>
-                        </div><span class="bp">22.2%</span>
-                      </div>
-                    </td>
-                    <td><span class="h hr">Chậm vật tư</span></td>
-                  </tr>
-                  <tr class="stage-row">
-                    <td></td>
-                    <td style="padding-left:24px;">↳ Mr. Quốc Bảo</td>
-                    <td class="tr">2,000.0</td>
-                    <td class="tr">300.0</td>
-                    <td>
-                      <div class="bl-row">
-                        <div class="bl-track">
-                          <div class="bl-fill fa" style="width:15%"></div>
-                        </div><span class="bp">15.0%</span>
-                      </div>
-                    </td>
-                    <td><span class="h hy">Cảnh báo</span></td>
-                  </tr>
-
-                  <!-- U285 -->
-                  <tr class="sub-row expanded"
-                    onclick="var p=this.nextElementSibling;while(p&&p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
-                    <td>2</td>
-                    <td class="fw" style="cursor:pointer;color:var(--dark)">⊟ U285</td>
-                    <td class="tr fw">13,000.0</td>
-                    <td class="tr fw" style="color:var(--teal)">5,850.0</td>
-                    <td>
-                      <div class="bl-row">
-                        <div class="bl-track">
-                          <div class="bl-fill fa" style="width:45%"></div>
-                        </div><span class="bp" style="color:var(--orange)">45%</span>
-                      </div>
-                    </td>
-                    <td><span class="h hy">Trễ gia công</span></td>
-                  </tr>
-                  <tr class="stage-row">
-                    <td></td>
-                    <td style="padding-left:24px;">↳ Mr. Tuấn Anh</td>
-                    <td class="tr">8,000.0</td>
-                    <td class="tr">4,200.0</td>
-                    <td>
-                      <div class="bl-row">
-                        <div class="bl-track">
-                          <div class="bl-fill fg" style="width:52.5%"></div>
-                        </div><span class="bp" style="color:var(--green)">52.5%</span>
-                      </div>
-                    </td>
-                    <td><span class="h hg">Kiểm soát tốt</span></td>
-                  </tr>
-                  <tr class="stage-row">
-                    <td></td>
-                    <td style="padding-left:24px;">↳ Mr. Hoàng Long</td>
-                    <td class="tr">5,000.0</td>
-                    <td class="tr">1,650.0</td>
-                    <td>
-                      <div class="bl-row">
-                        <div class="bl-track">
-                          <div class="bl-fill fr" style="width:33%"></div>
-                        </div><span class="bp">33.0%</span>
-                      </div>
-                    </td>
-                    <td><span class="h hr">Xưởng đình trệ</span></td>
-                  </tr>
-
-                  <!-- A290 -->
-                  <tr class="sub-row expanded"
-                    onclick="var p=this.nextElementSibling;while(p&&p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
-                    <td>3</td>
-                    <td class="fw" style="cursor:pointer;color:var(--dark)">⊟ A290</td>
-                    <td class="tr fw">4,500.0</td>
-                    <td class="tr fw" style="color:var(--teal)">3,375.0</td>
-                    <td>
-                      <div class="bl-row">
-                        <div class="bl-track">
-                          <div class="bl-fill fg" style="width:75%"></div>
-                        </div><span class="bp" style="color:var(--green)">75%</span>
-                      </div>
-                    </td>
-                    <td><span class="h hg">Theo tiến độ</span></td>
-                  </tr>
-                  <tr class="stage-row">
-                    <td></td>
-                    <td style="padding-left:24px;">↳ Ms. Bích Thủy</td>
-                    <td class="tr">4,500.0</td>
-                    <td class="tr">3,375.0</td>
-                    <td>
-                      <div class="bl-row">
-                        <div class="bl-track">
-                          <div class="bl-fill fg" style="width:75%"></div>
-                        </div><span class="bp">75.0%</span>
-                      </div>
-                    </td>
-                    <td><span class="h hg">Thực hiện tốt</span></td>
-                  </tr>
-
-                  <!-- TỔNG KẾT MẪU -->
-                  <tr style="background:#fdf9f0">
-                    <td colspan="6" style="font-size:.7rem;color:var(--muted);font-style:italic;padding:6px 9px;">⬇ Nhấn
-                      vào ⊟ để đóng mở các dự án khác...</td>
-                  </tr>
+                  <tr><td class="fw">Mr. Hoàng Long</td><td>PM</td><td>M291</td><td class="tc">8</td><td class="tc fw" style="color:var(--red)">5</td><td>Chậm vật tư — chờ nhập</td><td><span class="h hr">Nguy cơ cao</span></td></tr>
+                  <tr><td class="fw">Mr. Quốc Bảo</td><td>PM</td><td>M291</td><td class="tc">4</td><td class="tc fw" style="color:var(--red)">3</td><td>Thiếu nhân công xưởng</td><td><span class="h hr">Nguy cơ cao</span></td></tr>
+                  <tr><td class="fw">Mr. Hoàng Long</td><td>PM</td><td>U285</td><td class="tc">6</td><td class="tc fw" style="color:var(--orange)">2</td><td>Xưởng gia công đình trệ</td><td><span class="h hy">Cảnh báo</span></td></tr>
+                  <tr><td class="fw">Mr. Tuấn Anh</td><td>PM</td><td>U285</td><td class="tc">5</td><td class="tc fw" style="color:var(--orange)">2</td><td>Chờ bản vẽ từ PTK</td><td><span class="h hy">Cảnh báo</span></td></tr>
+                  <tr><td class="fw">Ms. Bích Thủy</td><td>PM</td><td>A290</td><td class="tc">5</td><td class="tc fw" style="color:var(--amber)">1</td><td>Đang xử lý</td><td><span class="h hy">Theo dõi</span></td></tr>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
+
+        <!-- ── PHẦN 5 ─────────────────────────────── -->
+        <div><span class="sec-label">📈 Phần 5 — Hiệu suất Nhân sự (Tasks / Ngày làm việc)</span></div>
+        <div class="row" style="grid-template-columns:4fr 8fr;">
+          <div class="card">
+            <div class="ct">Hiệu suất NS (Tasks/Ngày)<span class="badge bb">So với TB nhóm</span></div>
+            <div class="cw-lg"><canvas id="p2b-c9"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="ct">Ma trận Tasks theo Dự án › Nhân sự</div>
+            <div class="tw-lg" style="height:350px;overflow-y:auto;border-bottom:none;">
+              <table>
+                <thead style="position:sticky;top:0;background:#fff;z-index:2;">
+                  <tr>
+                    <th>#</th><th>Dự án / Nhân sự</th>
+                    <th class="tc">Tổng Tasks</th><th class="tc">Tasks Done</th>
+                    <th class="tc">Quá hạn</th><th>% HT</th><th>Trạng thái</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="sub-row expanded" onclick="var p=this.nextElementSibling;while(p&&p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
+                    <td>1</td><td class="fw" style="cursor:pointer;">⊟ M291</td>
+                    <td class="tc fw">173</td><td class="tc" style="color:var(--teal)">45</td>
+                    <td class="tc fw" style="color:var(--red)">8</td>
+                    <td><div class="bl-row"><div class="bl-track"><div class="bl-fill fr" style="width:20%"></div></div><span class="bp" style="color:var(--red)">20%</span></div></td>
+                    <td><span class="h hr">Trễ nghiêm trọng</span></td>
+                  </tr>
+                  <tr class="stage-row"><td></td><td style="padding-left:24px;">↳ Mr. Hoàng Long</td><td class="tc">110</td><td class="tc">24</td><td class="tc fw" style="color:var(--red)">5</td><td><div class="bl-row"><div class="bl-track"><div class="bl-fill fr" style="width:22.2%"></div></div><span class="bp">22%</span></div></td><td><span class="h hr">Chậm vật tư</span></td></tr>
+                  <tr class="stage-row"><td></td><td style="padding-left:24px;">↳ Mr. Quốc Bảo</td><td class="tc">63</td><td class="tc">21</td><td class="tc fw" style="color:var(--orange)">3</td><td><div class="bl-row"><div class="bl-track"><div class="bl-fill fa" style="width:15%"></div></div><span class="bp">15%</span></div></td><td><span class="h hy">Cảnh báo</span></td></tr>
+                  <tr class="sub-row expanded" onclick="var p=this.nextElementSibling;while(p&&p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
+                    <td>2</td><td class="fw" style="cursor:pointer;">⊟ U285</td>
+                    <td class="tc fw">394</td><td class="tc" style="color:var(--teal)">210</td>
+                    <td class="tc fw" style="color:var(--orange)">4</td>
+                    <td><div class="bl-row"><div class="bl-track"><div class="bl-fill fa" style="width:45%"></div></div><span class="bp" style="color:var(--orange)">45%</span></div></td>
+                    <td><span class="h hy">Trễ gia công</span></td>
+                  </tr>
+                  <tr class="stage-row"><td></td><td style="padding-left:24px;">↳ Mr. Tuấn Anh</td><td class="tc">243</td><td class="tc">128</td><td class="tc fw" style="color:var(--orange)">2</td><td><div class="bl-row"><div class="bl-track"><div class="bl-fill fg" style="width:52.5%"></div></div><span class="bp" style="color:var(--green)">53%</span></div></td><td><span class="h hg">Kiểm soát tốt</span></td></tr>
+                  <tr class="stage-row"><td></td><td style="padding-left:24px;">↳ Mr. Hoàng Long</td><td class="tc">151</td><td class="tc">82</td><td class="tc fw" style="color:var(--orange)">2</td><td><div class="bl-row"><div class="bl-track"><div class="bl-fill fr" style="width:33%"></div></div><span class="bp">33%</span></div></td><td><span class="h hr">Xưởng đình trệ</span></td></tr>
+                  <tr class="sub-row expanded" onclick="var p=this.nextElementSibling;while(p&&p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
+                    <td>3</td><td class="fw" style="cursor:pointer;">⊟ A290</td>
+                    <td class="tc fw">271</td><td class="tc" style="color:var(--teal)">180</td>
+                    <td class="tc fw" style="color:var(--amber)">1</td>
+                    <td><div class="bl-row"><div class="bl-track"><div class="bl-fill fg" style="width:75%"></div></div><span class="bp" style="color:var(--green)">75%</span></div></td>
+                    <td><span class="h hg">Theo tiến độ</span></td>
+                  </tr>
+                  <tr class="stage-row"><td></td><td style="padding-left:24px;">↳ Ms. Bích Thủy</td><td class="tc">271</td><td class="tc">180</td><td class="tc" style="color:var(--amber)">1</td><td><div class="bl-row"><div class="bl-track"><div class="bl-fill fg" style="width:75%"></div></div><span class="bp">75%</span></div></td><td><span class="h hg">Thực hiện tốt</span></td></tr>
+                  <tr style="background:#fdf9f0"><td colspan="7" style="font-size:.7rem;color:var(--muted);font-style:italic;padding:6px 9px;">⬇ Nhấn vào ⊟ để đóng mở các dự án khác...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
       </div><!-- /p2b -->
 
 
@@ -3641,8 +3568,8 @@
     // ═══════ CHART DATA & TOGGLE ══════════════════════════
     const chartData = {
       'c1-monthly-combo': {
-        value: { datasets: [[9500, 9800, 8200, 7800, 8500, 8000, 6500, 1838], [9342, 9680, 1610, 1726, 1448, 2298, 1827, 0], [98.50, 98.84, 19.64, 22.16, 17.03, 28.72, 28.00, 0]] },
-        cumul: { datasets: [[9500, 19300, 27500, 35300, 43800, 51800, 58300, 60138], [9342, 19022, 20632, 22358, 23806, 26104, 27931, 27931], [98.3, 98.5, 75.0, 63.3, 54.3, 50.3, 47.9, 46.4]] }
+        value: { datasets: [[9500, 9800, 8200, 7800, 8500, 8000, 6500, 1838], [9342, 9680, 1610, 1726, 1448, 2298, 1827, 0], [9700, 9900, 8500, 8000, 8700, 8200, 6800, 2000], [98.50, 98.84, 19.64, 22.16, 17.03, 28.72, 28.00, 0]] },
+        cumul: { datasets: [[9500, 19300, 27500, 35300, 43800, 51800, 58300, 60138], [9342, 19022, 20632, 22358, 23806, 26104, 27931, 27931], [9700, 19600, 28100, 36100, 44800, 53000, 59800, 61800], [98.3, 98.5, 75.0, 63.3, 54.3, 50.3, 47.9, 46.4]] }
       },
       'c2-monthly-hours': {
         value: { datasets: [[89, 397.6, 841.8, 857.6, 541.6], [0, 8, 103.2, 25.4, 253]] },
@@ -3737,7 +3664,8 @@
         datasets: [
           { label: 'KL Kế hoạch (T)', data: chartData['c1-monthly-combo'].cumul.datasets[0], backgroundColor: 'transparent', borderColor: PBI.orange, borderWidth: 2, borderSkipped: false, type: 'bar', order: 3, barPercentage: .6 },
           { label: 'KL Hoàn thành TT (T)', data: chartData['c1-monthly-combo'].cumul.datasets[1], backgroundColor: PBI.blue, borderRadius: 2, type: 'bar', order: 4, barPercentage: .6 },
-          { label: 'Tỷ lệ HT (%)', data: chartData['c1-monthly-combo'].cumul.datasets[2], type: 'line', yAxisID: 'y2', borderColor: '#252423', borderDash: [4, 4], fill: false, tension: .1, pointRadius: 4, pointBackgroundColor: '#fff', pointBorderColor: '#252423', pointBorderWidth: 2, order: 1 },
+          { label: 'KL Mong muốn (T)', data: chartData['c1-monthly-combo'].cumul.datasets[2], backgroundColor: '#e1dfdd', borderRadius: 2, type: 'bar', order: 5, barPercentage: .6 },
+          { label: 'Tỷ lệ HT (%)', data: chartData['c1-monthly-combo'].cumul.datasets[3], type: 'line', yAxisID: 'y2', borderColor: '#252423', borderDash: [4, 4], fill: false, tension: .1, pointRadius: 4, pointBackgroundColor: '#fff', pointBorderColor: '#252423', pointBorderWidth: 2, order: 1 },
         ]
       }, {
         plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: ctx => ctx.dataset.label?.includes('%') ? `${ctx.parsed.y.toFixed(2)}%` : `${ctx.parsed.y.toLocaleString('vi')} T` } } },
@@ -3757,72 +3685,106 @@
 
     // ── P2A / P2B ────────────────────────────────────────
     function buildP2A() {
+      // Phần 2: NS per DA
+      mc('c2-ns-alloc', 'bar', {
+        labels: ['A285', 'M304', 'U276', 'U284', 'V314', 'U285'],
+        datasets: [{ label: 'Số nhân sự', data: [3, 4, 2, 3, 2, 2], backgroundColor: PBI.blue, borderRadius: 4 }]
+      }, { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#f0efee' }, ticks: { precision: 0 }, title: { display: true, text: 'Người' } }, y: { grid: { display: false } } } });
+
+      // Phần 2: Items by DA stacked
+      mc('c2-items-da', 'bar', {
+        labels: ['A285', 'M304', 'U276', 'U284', 'V314', 'U285'],
+        datasets: [
+          { label: 'Done', data: [15, 8, 12, 10, 5, 7], backgroundColor: PBI.green, stack: 's', borderRadius: 0 },
+          { label: 'Đang TH', data: [85, 102, 78, 95, 45, 43], backgroundColor: PBI.blue, stack: 's' },
+          { label: 'Quá hạn', data: [8, 12, 3, 5, 2, 2], backgroundColor: PBI.red, stack: 's' }
+        ]
+      }, { plugins: { legend: { position: 'top' } }, scales: { x: { stacked: true, grid: { display: false } }, y: { stacked: true, grid: { color: '#f0efee' } } } });
+
+      // Phần 3: Status donut
       mc('c2-status-donut', 'doughnut', {
         labels: ['Done', 'Đang thực hiện'],
         datasets: [{ data: [57, 448], backgroundColor: [PBI.green, '#b0cce4'], borderWidth: 0, hoverOffset: 6 }]
       }, { plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 11 } } } }, scales: {}, cutout: '68%' });
 
+      // Phần 3: Monthly hours trend
       mc('c2-monthly-hours', 'bar', {
         labels: ['T11/25', 'T01/26', 'T03/26', 'T05/26', 'T07/26'],
         datasets: [
           { label: 'Phân việc', data: chartData['c2-monthly-hours'].cumul.datasets[0], backgroundColor: PBI.blue, stack: 's', borderRadius: 0 },
           { label: 'Phát sinh', data: chartData['c2-monthly-hours'].cumul.datasets[1], backgroundColor: PBI.orange, stack: 's' },
         ]
-      }, { scales: { x: { stacked: true, grid: { display: false } }, y: { stacked: true, grid: { color: '#f0efee' } } } });
+      }, { plugins: { legend: { position: 'top' } }, scales: { x: { stacked: true, grid: { display: false } }, y: { stacked: true, grid: { color: '#f0efee' }, title: { display: true, text: 'Giờ' } } } });
 
-      mc('c2-dept-hours', 'bar', {
-        labels: ['KCTB', 'KCT', 'TKSX', '(Trống)'],
-        datasets: [
-          { label: 'Phân việc', data: [1921.3, 1333.8, 609.1, 313], backgroundColor: PBI.blue, stack: 's' },
-          { label: 'Phát sinh', data: [186, 186, 0, 0], backgroundColor: PBI.orange, stack: 's' },
-        ]
-      }, { indexAxis: 'y', scales: { x: { stacked: true, grid: { color: '#f0efee' } }, y: { stacked: true, grid: { display: false } } } });
+      // Phần 4: Overdue items by DA
+      mc('c2-overdue-da', 'bar', {
+        labels: ['M304', 'A285', 'U284', 'U276', 'V314', 'U285'],
+        datasets: [{ label: 'Items quá hạn', data: [12, 8, 5, 3, 2, 2], backgroundColor: ctx => { const v = ctx.raw; return v >= 10 ? PBI.red : v >= 5 ? PBI.orange : PBI.amber; }, borderRadius: 4 }]
+      }, { indexAxis: 'y', plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `${ctx.parsed.x} items` } } }, scales: { x: { grid: { color: '#f0efee' }, ticks: { precision: 0 } }, y: { grid: { display: false } } } });
 
-      mc('c2-proj-hours', 'bar', {
-        labels: ['A285', 'M304', 'U276', 'U284'],
+      // Phần 5: Performance per NS (items/giờ PV)
+      mc('c2-perf', 'bar', {
+        labels: ['NV. A', 'NV. B', 'NV. C', 'NV. D', 'NV. E', 'NV. F'],
         datasets: [
-          { label: 'Tùy chỉnh', data: [239, 94, 0, 388], backgroundColor: PBI.amber, stack: 's' },
-          { label: 'Phát sinh', data: [0, 0, 721, 0], backgroundColor: PBI.orange, stack: 's' },
-          { label: 'Phân việc', data: [1463, 705, 733.60, 411.60], backgroundColor: PBI.blue, stack: 's' },
+          { label: 'TB nhóm (0.12 items/h)', data: [0.12, 0.12, 0.12, 0.12, 0.12, 0.12], type: 'line', borderColor: PBI.red, borderDash: [5, 5], pointRadius: 0, tension: 0, fill: false, order: 1 },
+          { label: 'Items/Giờ PV', data: [0.15, 0.09, 0.14, 0.11, 0.13, 0.10], backgroundColor: ctx => ctx.raw >= 0.12 ? PBI.green : PBI.orange, borderRadius: 4, order: 2 }
         ]
-      }, { indexAxis: 'y', scales: { x: { stacked: true, grid: { color: '#f0efee' }, ticks: { callback: v => v >= 1000 ? `${(v / 1000).toFixed(1)}k` : v } }, y: { stacked: true, grid: { display: false } } } });
+      }, { plugins: { legend: { position: 'top' } }, scales: { x: { grid: { display: false } }, y: { grid: { color: '#f0efee' }, title: { display: true, text: 'Items/Giờ' }, ticks: { callback: v => v.toFixed(2) } } } });
     }
 
     function buildP2B() {
-      // Chart 2: Xu hướng Khối lượng theo TG (Area/Line)
-      mc('p2b-c2', 'line', {
-        labels: ['T01', 'T02', 'T03', 'T04', 'T05', 'T06'],
-        datasets: [
-          { label: 'Khối lượng Kế hoạch', data: [4500, 5200, 6800, 9200, 11500, 13800], borderColor: PBI.orange, borderDash: [4, 4], fill: false, tension: 0.1, pointRadius: 4 },
-          { label: 'Khối lượng Thực tế', data: [4200, 5000, 6500, 8900, 10500, null], borderColor: PBI.blue, backgroundColor: 'rgba(0,120,212,0.1)', fill: true, tension: 0.1, pointRadius: 4 }
-        ]
-      }, { plugins: { legend: { position: 'top' } }, scales: { y: { grid: { color: '#f0efee' }, title: { display: true, text: 'Tấn' } }, x: { grid: { display: false } } } });
+      // Phần 2: NS per DA
+      mc('p2b-ns-alloc', 'bar', {
+        labels: ['M291', 'U285', 'A290', 'V314', 'M304', 'Others'],
+        datasets: [{ label: 'Số nhân sự', data: [2, 2, 1, 2, 1, 4], backgroundColor: PBI.blue, borderRadius: 4 }]
+      }, { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#f0efee' }, ticks: { precision: 0 }, title: { display: true, text: 'Người' } }, y: { grid: { display: false } } } });
 
-      // Chart 3 Combo for Workload Dự án
+      // Phần 2: Tasks Done vs Còn lại per DA + % HT
       mc('p2b-c3', 'bar', {
         labels: ['M291', 'U285', 'A290', 'V314', 'M304'],
         datasets: [
-          { label: '% Hoàn thành', data: [20, 45, 75, 65, 95], type: 'line', yAxisID: 'y2', borderColor: PBI.green, borderDash: [3, 3], tension: 0, pointRadius: 4, pointBackgroundColor: '#fff' },
-          { label: 'KL Kế hoạch (T)', data: [6500, 13000, 4500, 3813, 850], backgroundColor: '#e2e2e2', borderRadius: 3 },
-          { label: 'KL Thực tế (T)', data: [1300, 5850, 3375, 2413.5, 807.5], backgroundColor: PBI.blue, borderRadius: 3 }
+          { label: '% HT Tasks', data: [20, 45, 75, 65, 95], type: 'line', yAxisID: 'y2', borderColor: PBI.green, borderDash: [3, 3], tension: 0, pointRadius: 4, pointBackgroundColor: '#fff', order: 1 },
+          { label: 'Tasks Done', data: [45, 210, 180, 120, 95], backgroundColor: PBI.teal, borderRadius: 3, stack: 's', order: 2 },
+          { label: 'Tasks Còn lại', data: [128, 180, 90, 87, 5], backgroundColor: '#dce7f5', borderRadius: 3, stack: 's', order: 3 }
         ]
-      }, { plugins: { legend: { position: 'top' } }, scales: { y: { grid: { color: '#f0efee' }, title: { display: true, text: 'Tấn' } }, y2: { type: 'linear', position: 'right', min: 0, max: 110, grid: { display: false }, ticks: { callback: v => v + '%' } } } });
+      }, { plugins: { legend: { position: 'top' } }, scales: { x: { stacked: true, grid: { display: false } }, y: { stacked: true, grid: { color: '#f0efee' }, title: { display: true, text: 'Tasks' } }, y2: { type: 'linear', position: 'right', min: 0, max: 110, grid: { display: false }, ticks: { callback: v => v + '%' } } } });
 
-      // Chart Task Overdue
-      mc('p2b-task-overdue', 'doughnut', {
-        labels: ['Hoàng Long', 'Trần Phong', 'Bích Thủy', 'Tuấn Anh'],
-        datasets: [{ data: [12, 3, 8, 5], backgroundColor: [PBI.red, PBI.teal, PBI.orange, PBI.blue], borderWidth: 0 }]
-      }, { plugins: { legend: { position: 'right', labels: { boxWidth: 10, font: { size: 11 } } } }, cutout: '60%' });
+      // Phần 3: Tasks by DA stacked
+      mc('p2b-tasks-da', 'bar', {
+        labels: ['M291', 'U285', 'A290', 'V314', 'M304', 'Others'],
+        datasets: [
+          { label: 'Done', data: [45, 210, 180, 120, 95, 280], backgroundColor: PBI.green, stack: 's', borderRadius: 0 },
+          { label: 'On-track', data: [120, 180, 90, 85, 45, 130], backgroundColor: PBI.blue, stack: 's' },
+          { label: 'Quá hạn', data: [8, 4, 1, 2, 3, 10], backgroundColor: PBI.red, stack: 's' }
+        ]
+      }, { plugins: { legend: { position: 'top' } }, scales: { x: { stacked: true, grid: { display: false } }, y: { stacked: true, grid: { color: '#f0efee' } } } });
 
-      // Chart 9: Workload theo Nhân sự so TB
+      // Phần 3: Tasks velocity per month
+      mc('p2b-c2', 'bar', {
+        labels: ['T01', 'T02', 'T03', 'T04', 'T05', 'T06'],
+        datasets: [
+          { label: 'Tasks KH (tháng)', data: [80, 95, 120, 140, 160, 180], borderColor: PBI.orange, borderDash: [4, 4], type: 'line', fill: false, tension: 0.1, pointRadius: 4, order: 1 },
+          { label: 'Tasks Done (tháng)', data: [72, 98, 115, 130, null, null], backgroundColor: ctx => { const kh = [80,95,120,140,160,180][ctx.dataIndex]; return ctx.raw >= kh ? PBI.green : ctx.raw >= kh*0.85 ? PBI.orange : PBI.red; }, borderRadius: 3, order: 2 }
+        ]
+      }, { plugins: { legend: { position: 'top' } }, scales: { y: { grid: { color: '#f0efee' }, title: { display: true, text: 'Tasks' } }, x: { grid: { display: false } } } });
+
+      // Phần 4: Tasks quá hạn per DA (horizontal bar)
+      mc('p2b-task-overdue', 'bar', {
+        labels: ['Others', 'M291', 'V314', 'U285', 'M304', 'A290'],
+        datasets: [{ label: 'Tasks quá hạn', data: [10, 8, 5, 4, 3, 1], backgroundColor: ctx => { const v = ctx.raw; return v >= 8 ? PBI.red : v >= 4 ? PBI.orange : PBI.amber; }, borderRadius: 4 }]
+      }, { indexAxis: 'y', plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `${ctx.parsed.x} tasks` } } }, scales: { x: { grid: { color: '#f0efee' }, ticks: { precision: 0 } }, y: { grid: { display: false } } } });
+
+      // Phần 5: Performance per NS (T/ngày)
+      // Phần 5: Tasks/Ngày làm việc per NS (PR-03 logic, dùng Tasks thay KL)
+      // Công thức: Tasks Done / (số ngày làm việc trong tháng) — T3/2026: 26 ngày
       mc('p2b-c9', 'bar', {
         labels: ['Hoàng Long', 'Trần Phong', 'Bích Thủy', 'Tuấn Anh', 'Quốc Bảo'],
         datasets: [
-          { label: 'Mức Tung bình Nhóm', data: [3500, 3500, 3500, 3500, 3500], type: 'line', borderColor: PBI.red, borderDash: [5, 5], pointRadius: 0, tension: 0, fill: false, yAxisID: 'y' },
-          { label: 'KL Kế hoạch', data: [5400, 2150, 4200, 6800, 1100], backgroundColor: '#dcdcdc', borderRadius: 2, yAxisID: 'y' },
-          { label: 'KL Thực tế', data: [2650, 1850, 3150, 4080, 220], backgroundColor: PBI.teal, borderRadius: 2, yAxisID: 'y' }
+          { label: 'TB nhóm (3.8 tasks/ngày)', data: [3.8, 3.8, 3.8, 3.8, 3.8], type: 'line', borderColor: PBI.red, borderDash: [5, 5], pointRadius: 0, tension: 0, fill: false, order: 1 },
+          { label: 'Tasks KH/ngày', data: [6.2, 2.5, 4.8, 7.8, 1.3], backgroundColor: '#dcdcdc', borderRadius: 2, order: 2 },
+          { label: 'Tasks TT/ngày', data: [3.1, 2.2, 4.2, 5.1, 0.3], backgroundColor: ctx => { const kh = [6.2,2.5,4.8,7.8,1.3][ctx.dataIndex]; return ctx.raw >= kh*0.9 ? PBI.green : ctx.raw >= kh*0.7 ? PBI.orange : PBI.red; }, borderRadius: 2, order: 3 }
         ]
-      }, { plugins: { legend: { position: 'top' } }, scales: { x: { grid: { display: false } }, y: { grid: { color: '#f0efee' }, title: { display: true, text: 'Tấn' } } } });
+      }, { plugins: { legend: { position: 'top' } }, scales: { x: { grid: { display: false } }, y: { grid: { color: '#f0efee' }, title: { display: true, text: 'Tasks/Ngày' } } } });
     }
 
     // ── P3 ────────────────────────────────────────────────
