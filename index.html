@@ -1830,1709 +1830,1638 @@
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
             <div class="card">
               <div class="ct">Top vật tư nhập nhiều nhất</div>
-            <div class="tw-lg" style="max-height:280px;overflow-y:auto;border-bottom:none;">
+              <div class="tw-lg" style="max-height:280px;overflow-y:auto;border-bottom:none;">
+                <table>
+                  <thead style="position:sticky;top:0;z-index:2;background:#fff;">
+                    <tr>
+                      <th style="text-align:left">Loại vật tư</th>
+                      <th class="tr">KL Nhập (T)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="text-align:left">Thép hình W-shape</td>
+                      <td class="tr fw">4,500</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">Thép tấm mixed</td>
+                      <td class="tr fw">3,200</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">Bu-lông M24</td>
+                      <td class="tr fw">2,800</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">Thép hình IPE/HEA</td>
+                      <td class="tr fw">2,100</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">Sơn Epoxy finish</td>
+                      <td class="tr fw">890</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">Dây hàn CO2 ER70S</td>
+                      <td class="tr fw">680</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">Thép góc 75×75</td>
+                      <td class="tr fw">520</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">Thép ống tròn</td>
+                      <td class="tr fw">430</td>
+                    </tr>
+                  </tbody>
+                  <tfoot style="position:sticky;bottom:0;z-index:2;background:#fff;border-top:2px solid var(--border)">
+                    <tr style="font-weight:bold">
+                      <td style="text-align:left">Total</td>
+                      <td class="tr">15,120</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="ct">Top vật tư xuất nhiều nhất</div>
+              <div class="tw-lg" style="max-height:280px;overflow-y:auto;border-bottom:none;">
+                <table>
+                  <thead style="position:sticky;top:0;z-index:2;background:#fff;">
+                    <tr>
+                      <th style="text-align:left">Loại vật tư</th>
+                      <th class="tr">KL Xuất (T)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="text-align:left">Thép hình W-shape</td>
+                      <td class="tr fw">3,800</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">Thép tấm mixed</td>
+                      <td class="tr fw">2,900</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">Bu-lông M24</td>
+                      <td class="tr fw">2,400</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">Thép hình IPE/HEA</td>
+                      <td class="tr fw">1,900</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">Sơn Epoxy finish</td>
+                      <td class="tr fw">760</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">Dây hàn CO2 ER70S</td>
+                      <td class="tr fw">620</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">Thép góc 75×75</td>
+                      <td class="tr fw">490</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">Thép ống tròn</td>
+                      <td class="tr fw">380</td>
+                    </tr>
+                  </tbody>
+                  <tfoot style="position:sticky;bottom:0;z-index:2;background:#fff;border-top:2px solid var(--border)">
+                    <tr style="font-weight:bold">
+                      <td style="text-align:left">Total</td>
+                      <td class="tr">13,250</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="card">
+            <div class="ct">Tổng quan Vật tư theo Dự án</div>
+            <div class="tw-lg" style="max-height:340px;">
               <table>
-                <thead style="position:sticky;top:0;z-index:2;background:#fff;">
+                <thead>
                   <tr>
-                    <th style="text-align:left">Loại vật tư</th>
-                    <th class="tr">KL Nhập (T)</th>
+                    <th>#</th>
+                    <th>Dự án</th>
+                    <th class="tr">PO Weight (T)</th>
+                    <th class="tr">AMECC Supply (T)</th>
+                    <th class="tr">Design Weight (T)</th>
+                    <th class="tr">Tồn kho (T)</th>
+                    <th class="tr">Đã Nhập (T)</th>
+                    <th class="tr">Đã Đến (T)</th>
+                    <th>% Đã Đến</th>
+                    <th class="tr">Balance (T)</th>
+                    <th>% Balance</th>
+                    <th>Trạng thái</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="sub-row expanded"
+                    onclick="var p=this.nextElementSibling;while(p&&p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
+                    <td>1</td>
+                    <td class="fw" style="cursor:pointer;">⊟ V314</td>
+                    <td class="tr">8,500</td>
+                    <td class="tr">8,000</td>
+                    <td class="tr">8,200</td>
+                    <td class="tr">38</td>
+                    <td class="tr">4,500</td>
+                    <td class="tr fw" style="color:var(--teal)">8,100</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fg" style="width:95%"></div>
+                        </div><span class="bp" style="color:var(--green)">95%</span>
+                      </div>
+                    </td>
+                    <td class="tr">400</td>
+                    <td>5%</td>
+                    <td><span class="h hg">Hoàn thành</span></td>
+                  </tr>
+                  <tr class="stage-row">
+                    <td></td>
+                    <td style="padding-left:18px;font-size:.77rem;color:var(--dark);">↳ <span class="h hb"
+                        style="font-size:.67rem;">MMS</span> Thép hình/tấm</td>
+                    <td class="tr">6,000</td>
+                    <td class="tr">5,800</td>
+                    <td class="tr">5,900</td>
+                    <td class="tr">28</td>
+                    <td class="tr">3,200</td>
+                    <td class="tr" style="color:var(--teal)">5,900</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fg" style="width:98%"></div>
+                        </div><span class="bp" style="color:var(--green)">98%</span>
+                      </div>
+                    </td>
+                    <td class="tr">100</td>
+                    <td>2%</td>
+                    <td><span class="h hg">Tốt</span></td>
+                  </tr>
+                  <tr class="stage-row">
+                    <td></td>
+                    <td style="padding-left:18px;font-size:.77rem;color:var(--dark);">↳ <span class="h hg"
+                        style="font-size:.67rem;">ACS</span> Bu-lông/ốc vít</td>
+                    <td class="tr">1,200</td>
+                    <td class="tr">1,100</td>
+                    <td class="tr">1,150</td>
+                    <td class="tr">5</td>
+                    <td class="tr">700</td>
+                    <td class="tr" style="color:var(--teal)">1,100</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fg" style="width:96%"></div>
+                        </div><span class="bp" style="color:var(--green)">96%</span>
+                      </div>
+                    </td>
+                    <td class="tr">100</td>
+                    <td>4%</td>
+                    <td><span class="h hg">Tốt</span></td>
+                  </tr>
+                  <tr class="stage-row">
+                    <td></td>
+                    <td style="padding-left:18px;font-size:.77rem;color:var(--dark);">↳ <span class="h hy"
+                        style="font-size:.67rem;">WDM</span> Vật tư hàn</td>
+                    <td class="tr">800</td>
+                    <td class="tr">700</td>
+                    <td class="tr">750</td>
+                    <td class="tr">3</td>
+                    <td class="tr">400</td>
+                    <td class="tr" style="color:var(--teal)">700</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fa" style="width:88%"></div>
+                        </div><span class="bp" style="color:var(--orange)">88%</span>
+                      </div>
+                    </td>
+                    <td class="tr">100</td>
+                    <td>12%</td>
+                    <td><span class="h hy">Theo dõi</span></td>
+                  </tr>
+                  <tr class="stage-row">
+                    <td></td>
+                    <td style="padding-left:18px;font-size:.77rem;color:var(--dark);">↳ <span class="h hn"
+                        style="font-size:.67rem;">PFM</span> Sơn phủ</td>
+                    <td class="tr">500</td>
+                    <td class="tr">400</td>
+                    <td class="tr">400</td>
+                    <td class="tr">2</td>
+                    <td class="tr">200</td>
+                    <td class="tr" style="color:var(--teal)">400</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fg" style="width:80%"></div>
+                        </div><span class="bp">80%</span>
+                      </div>
+                    </td>
+                    <td class="tr">100</td>
+                    <td>20%</td>
+                    <td><span class="h hy">Chờ nhập</span></td>
+                  </tr>
+                  <tr class="sub-row expanded"
+                    onclick="var p=this.nextElementSibling;while(p&&p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
+                    <td>2</td>
+                    <td class="fw" style="cursor:pointer;">⊟ M304</td>
+                    <td class="tr">5,200</td>
+                    <td class="tr">5,000</td>
+                    <td class="tr">5,100</td>
+                    <td class="tr">125</td>
+                    <td class="tr">2,800</td>
+                    <td class="tr fw" style="color:var(--teal)">3,600</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fa" style="width:69%"></div>
+                        </div><span class="bp" style="color:var(--orange)">69%</span>
+                      </div>
+                    </td>
+                    <td class="tr">1,600</td>
+                    <td>31%</td>
+                    <td><span class="h hy">Đang nhập</span></td>
+                  </tr>
+                  <tr class="stage-row">
+                    <td></td>
+                    <td style="padding-left:18px;font-size:.77rem;color:var(--dark);">↳ <span class="h hb"
+                        style="font-size:.67rem;">MMS</span> Thép hình/tấm</td>
+                    <td class="tr">3,500</td>
+                    <td class="tr">3,300</td>
+                    <td class="tr">3,400</td>
+                    <td class="tr">90</td>
+                    <td class="tr">1,800</td>
+                    <td class="tr" style="color:var(--teal)">2,200</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fa" style="width:63%"></div>
+                        </div><span class="bp" style="color:var(--orange)">63%</span>
+                      </div>
+                    </td>
+                    <td class="tr">1,200</td>
+                    <td>37%</td>
+                    <td><span class="h hy">Đang nhập</span></td>
+                  </tr>
+                  <tr class="stage-row">
+                    <td></td>
+                    <td style="padding-left:18px;font-size:.77rem;color:var(--dark);">↳ <span class="h hg"
+                        style="font-size:.67rem;">ACS</span> Bu-lông/ốc vít</td>
+                    <td class="tr">800</td>
+                    <td class="tr">750</td>
+                    <td class="tr">780</td>
+                    <td class="tr">20</td>
+                    <td class="tr">500</td>
+                    <td class="tr" style="color:var(--teal)">650</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fa" style="width:81%"></div>
+                        </div><span class="bp" style="color:var(--orange)">81%</span>
+                      </div>
+                    </td>
+                    <td class="tr">200</td>
+                    <td>19%</td>
+                    <td><span class="h hy">Theo dõi</span></td>
+                  </tr>
+                  <tr class="sub-row expanded"
+                    onclick="var p=this.nextElementSibling;while(p&&p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
+                    <td>3</td>
+                    <td class="fw" style="cursor:pointer;">⊟ U285</td>
+                    <td class="tr">12,000</td>
+                    <td class="tr">11,500</td>
+                    <td class="tr">11,800</td>
+                    <td class="tr">13</td>
+                    <td class="tr">1,500</td>
+                    <td class="tr fw" style="color:var(--teal)">2,500</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fr" style="width:20%"></div>
+                        </div><span class="bp" style="color:var(--red)">20%</span>
+                      </div>
+                    </td>
+                    <td class="tr">9,500</td>
+                    <td>80%</td>
+                    <td><span class="h hr">Thiếu vật tư</span></td>
+                  </tr>
+                  <tr class="stage-row">
+                    <td></td>
+                    <td style="padding-left:18px;font-size:.77rem;color:var(--dark);">↳ <span class="h hb"
+                        style="font-size:.67rem;">MMS</span> Thép hình/tấm</td>
+                    <td class="tr">9,000</td>
+                    <td class="tr">8,600</td>
+                    <td class="tr">8,800</td>
+                    <td class="tr">8</td>
+                    <td class="tr">900</td>
+                    <td class="tr" style="color:var(--red)">1,600</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fr" style="width:18%"></div>
+                        </div><span class="bp" style="color:var(--red)">18%</span>
+                      </div>
+                    </td>
+                    <td class="tr">7,400</td>
+                    <td>82%</td>
+                    <td><span class="h hr">Thiếu</span></td>
+                  </tr>
+                  <tr class="stage-row">
+                    <td></td>
+                    <td style="padding-left:18px;font-size:.77rem;color:var(--dark);">↳ <span class="h hg"
+                        style="font-size:.67rem;">ACS</span> Bu-lông/ốc vít</td>
+                    <td class="tr">1,500</td>
+                    <td class="tr">1,400</td>
+                    <td class="tr">1,450</td>
+                    <td class="tr">3</td>
+                    <td class="tr">350</td>
+                    <td class="tr" style="color:var(--orange)">550</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fr" style="width:37%"></div>
+                        </div><span class="bp" style="color:var(--red)">37%</span>
+                      </div>
+                    </td>
+                    <td class="tr">900</td>
+                    <td>63%</td>
+                    <td><span class="h hr">Thiếu</span></td>
+                  </tr>
+                  <tr style="background:#fdf9f0">
+                    <td colspan="12" style="font-size:.7rem;color:var(--muted);font-style:italic;padding:6px 9px;">⬇ Dữ
+                      liệu mẫu — các dự án khác...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="card">
+            <div class="ct">Thông tin cơ bản Dự án</div>
+            <div class="tw">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Dự án</th>
+                    <th>Tên dự án</th>
+                    <th>Khách hàng</th>
+                    <th>Ngày ký PO</th>
+                    <th>Delivery Term</th>
+                    <th>Số Shipment</th>
+                    <th>ETA gần nhất</th>
+                    <th>Trạng thái VT</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td style="text-align:left">Thép hình W-shape</td>
-                    <td class="tr fw">4,500</td>
+                    <td class="fw">V314</td>
+                    <td>Nhà máy Thép Formosa Hà Tĩnh</td>
+                    <td>Formosa</td>
+                    <td>12/01/2025</td>
+                    <td>FOB</td>
+                    <td>8</td>
+                    <td>15/04/2026</td>
+                    <td><span class="dot dg"></span>Đang nhập ổn định</td>
                   </tr>
                   <tr>
-                    <td style="text-align:left">Thép tấm mixed</td>
-                    <td class="tr fw">3,200</td>
+                    <td class="fw">M304</td>
+                    <td>Mở rộng Casing Lò hơi U#3</td>
+                    <td>Doosan</td>
+                    <td>05/06/2025</td>
+                    <td>CIF</td>
+                    <td>4</td>
+                    <td>20/05/2026</td>
+                    <td><span class="dot da"></span>Chờ ETA cập nhật</td>
                   </tr>
                   <tr>
-                    <td style="text-align:left">Bu-lông M24</td>
-                    <td class="tr fw">2,800</td>
+                    <td class="fw">U285</td>
+                    <td>Hệ thống ống khói NMNĐ</td>
+                    <td>POSCO</td>
+                    <td>20/11/2025</td>
+                    <td>DAP</td>
+                    <td>12</td>
+                    <td>25/04/2026</td>
+                    <td><span class="dot dr"></span>Thiếu vật tư trầm trọng</td>
                   </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div><!-- /p3_overview -->
+
+      <!-- ══════════════════════════════════
+       P3 — NHẬP KHO
+  ══════════════════════════════════ -->
+      <div id="p3" class="page">
+        <!-- Row 1: 4 Vùng -->
+        <div class="row" style="grid-template-columns: 2.5fr 2fr 2fr 5.5fr; gap:15px;">
+          <!-- Vùng 1 -->
+          <div class="card" style="align-items:center;">
+            <div class="ct" style="justify-content:flex-start;width:100%;margin-bottom:-10px;">Trạng thái các đơn hàng
+            </div>
+            <div style="width:100%;max-width:140px;position:relative;margin-top:10px;">
+              <canvas id="c3-status-donut" height="120"></canvas>
+              <div
+                style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-weight:700;color:var(--dark);text-align:center;line-height:1.2;">
+                124<br><span style="font-size:.7rem;font-weight:400;color:var(--muted)">(40.79%)</span></div>
+            </div>
+            <div
+              style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;font-size:.72rem;color:var(--muted);margin-top:8px;">
+              <div style="display:flex;align-items:center;gap:3px;"><span
+                  style="color:var(--green);font-size:1.1rem;line-height:0">●</span> Đúng hạn</div>
+              <div style="display:flex;align-items:center;gap:3px;"><span
+                  style="color:var(--red);font-size:1.1rem;line-height:0">●</span> Chậm</div>
+              <div style="display:flex;align-items:center;gap:3px;"><span
+                  style="color:var(--amber);font-size:1.1rem;line-height:0">●</span> Chưa xác nhận</div>
+            </div>
+          </div>
+          <!-- Vùng 2 -->
+          <div style="display:flex;flex-direction:column;gap:15px;">
+            <div class="card kpi" style="flex:1;padding:12px 15px;">
+              <div class="kl">Thực tế nhập</div>
+              <div class="kv" style="color:var(--dark)">18,620 <span
+                  style="font-size:1.2rem;color:var(--dark)">94.50%</span></div>
+              <div class="ks">Tháng trước: N/A</div>
+            </div>
+            <div class="card kpi" style="flex:1;padding:12px 15px;">
+              <div class="kl">Số lượng hàng hủy</div>
+              <div class="kv" style="font-size:1.4rem;color:var(--dark)">802 <span
+                  style="font-size:1rem;font-weight:400;color:var(--muted)">|| 4.31% || 44.5M</span></div>
+            </div>
+          </div>
+          <!-- Vùng 3 -->
+          <div style="display:flex;flex-direction:column;gap:15px;">
+            <div class="card kpi" style="flex:1;padding:12px 15px;">
+              <div class="kl">Tổng giá trị nhập</div>
+              <div class="kv" style="color:var(--dark)">1.050bn</div>
+              <div class="ks">Tháng trước: N/A</div>
+            </div>
+            <div class="card kpi" style="flex:1;padding:12px 15px;">
+              <div class="kl">Giá trị hàng chưa về</div>
+              <div class="kv" style="font-size:1.4rem;color:var(--dark)">61.7M <span
+                  style="font-size:1rem;font-weight:400;color:var(--muted)">|| 5.55%</span></div>
+            </div>
+          </div>
+          <!-- Vùng 4 -->
+          <div class="card" style="padding:14px;display:flex;flex-direction:column;">
+            <div class="ct" style="font-size:.79rem;margin-bottom:6px;">Xu hướng Nhập kho T01–T04</div>
+            <div style="flex:1;min-height:0;position:relative;"><canvas id="c3-trend-mini"></canvas></div>
+          </div>
+        </div>
+
+        <!-- Row 2: 2 Cột 4fr 8fr -->
+        <div class="row" style="grid-template-columns: 4fr 8fr;">
+          <div class="card">
+            <div class="ct" style="justify-content:space-between;">
+              Tổng nhập theo Loại VT
+              <div class="view-toggle">
+                <button class="vt-btn active" onclick="swapByType('c3-by-type','sp',this)">Sản phẩm</button>
+                <button class="vt-btn" onclick="swapByType('c3-by-type','ncc',this)">NCC</button>
+              </div>
+            </div>
+            <div style="margin-bottom:8px;font-size:.75rem;"><span style="color:var(--teal);margin-right:10px;">● Nhập
+                thực tế</span> <span style="color:var(--red)">● Hoàn trả</span></div>
+            <div class="cw" style="height:300px;"><canvas id="c3-by-type"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="ct">Chi tiết nhập kho theo Nhóm</div>
+            <div class="tw-lg" style="max-height:340px;overflow-y:auto;border-bottom:none;">
+              <table>
+                <thead style="position:sticky;top:0;z-index:2;background:#fff;">
                   <tr>
-                    <td style="text-align:left">Thép hình IPE/HEA</td>
-                    <td class="tr fw">2,100</td>
+                    <th style="text-align:left">Nhóm sản phẩm / NCC</th>
+                    <th class="tr">Thực tế</th>
+                    <th class="tr">Tổng nhập</th>
+                    <th>Trạng thái</th>
+                    <th>Ngày KH</th>
+                    <th>Ngày TT</th>
+                    <th class="tr">Giá trị</th>
                   </tr>
-                  <tr>
-                    <td style="text-align:left">Sơn Epoxy finish</td>
-                    <td class="tr fw">890</td>
+                </thead>
+                <tbody>
+                  <tr class="sub-row expanded"
+                    onclick="var p=this.nextElementSibling; while(p && p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
+                    <td colspan="7" style="font-weight:700;background:#f8f9fa;cursor:pointer;">⊟ 1. MMS (Vật tư chính)
+                    </td>
                   </tr>
-                  <tr>
-                    <td style="text-align:left">Dây hàn CO2 ER70S</td>
-                    <td class="tr fw">680</td>
+                  <tr class="stage-row">
+                    <td style="padding-left:24px;font-weight:600;">↳ Thép hình W-shape</td>
+                    <td class="tr fw">735</td>
+                    <td class="tr">792</td>
+                    <td><span class="h hg">Đúng hạn</span></td>
+                    <td>14/03/2026</td>
+                    <td>14/03/2026</td>
+                    <td class="tr" style="color:var(--green)">24,201,440</td>
                   </tr>
-                  <tr>
-                    <td style="text-align:left">Thép góc 75×75</td>
-                    <td class="tr fw">520</td>
+                  <tr class="stage-row">
+                    <td style="padding-left:40px;color:var(--muted);font-size:.8rem;">POSCO VINA</td>
+                    <td class="tr">80</td>
+                    <td class="tr">82</td>
+                    <td><span class="h hg">Đúng hạn</span></td>
+                    <td>23/03/2026</td>
+                    <td>23/03/2026</td>
+                    <td class="tr" style="color:var(--green)">2,799,200</td>
                   </tr>
-                  <tr>
-                    <td style="text-align:left">Thép ống tròn</td>
-                    <td class="tr fw">430</td>
+                  <tr class="stage-row">
+                    <td style="padding-left:40px;color:var(--muted);font-size:.8rem;">JFE Japan</td>
+                    <td class="tr">80</td>
+                    <td class="tr">86</td>
+                    <td><span class="h hr">Chậm</span></td>
+                    <td>21/03/2026</td>
+                    <td>23/03/2026</td>
+                    <td class="tr" style="color:var(--green)">2,613,600</td>
+                  </tr>
+                  <tr class="sub-row expanded"
+                    onclick="var p=this.nextElementSibling; while(p && p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
+                    <td colspan="7" style="font-weight:700;background:#f8f9fa;cursor:pointer;">⊟ 2. ACS (Phụ kiện)</td>
+                  </tr>
+                  <tr class="stage-row">
+                    <td style="padding-left:24px;font-weight:600;">↳ Bulong M24</td>
+                    <td class="tr fw">441</td>
+                    <td class="tr">485</td>
+                    <td><span class="h hg">Đúng hạn</span></td>
+                    <td>14/03/2026</td>
+                    <td>14/03/2026</td>
+                    <td class="tr" style="color:var(--green)">29,718,570</td>
+                  </tr>
+                  <tr class="stage-row">
+                    <td style="padding-left:40px;color:var(--muted);font-size:.8rem;">Fastener VN</td>
+                    <td class="tr">98</td>
+                    <td class="tr">108</td>
+                    <td><span class="h hg">Đúng hạn</span></td>
+                    <td>23/03/2026</td>
+                    <td>20/03/2026</td>
+                    <td class="tr" style="color:var(--green)">6,860,980</td>
+                  </tr>
+                  <tr class="stage-row">
+                    <td style="padding-left:40px;color:var(--muted);font-size:.8rem;">Marubeni</td>
+                    <td class="tr">109</td>
+                    <td class="tr">119</td>
+                    <td><span class="h hg">Đúng hạn</span></td>
+                    <td>14/03/2026</td>
+                    <td>14/03/2026</td>
+                    <td class="tr" style="color:var(--green)">7,519,910</td>
                   </tr>
                 </tbody>
                 <tfoot style="position:sticky;bottom:0;z-index:2;background:#fff;border-top:2px solid var(--border)">
                   <tr style="font-weight:bold">
                     <td style="text-align:left">Total</td>
-                    <td class="tr">15,120</td>
+                    <td class="tr">18620</td>
+                    <td class="tr">19704</td>
+                    <td>Đúng hạn</td>
+                    <td>14/03/2026</td>
+                    <td>11/03/2026</td>
+                    <td class="tr">1,049,962,320</td>
                   </tr>
                 </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 3: KH vs TT và Đánh giá NCC -->
+        <div class="row c4-8">
+          <div class="card">
+            <div class="ct" style="margin-bottom:0;border-bottom:none;">Đánh giá Nhà cung cấp (QC &amp; Leadtime)</div>
+            <div class="tw-lg" style="height:280px; overflow-y:auto; border-bottom:none;">
+              <table>
+                <thead style="position:sticky;top:0;background:#fff;z-index:2;">
+                  <tr>
+                    <th>Nhà cung cấp</th>
+                    <th class="tr">Tỷ lệ Lỗi (QC)</th>
+                    <th class="tr">Leadtime hứa (Ng)</th>
+                    <th class="tr">Ng thực tế</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="fw">JFE Japan</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fg" style="width:2%"></div>
+                        </div><span class="bp">0.2%</span>
+                      </div>
+                    </td>
+                    <td class="tr">30</td>
+                    <td class="tr">31</td>
+                  </tr>
+                  <tr>
+                    <td class="fw">POSCO VINA</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fa" style="width:15%"></div>
+                        </div><span class="bp">1.5%</span>
+                      </div>
+                    </td>
+                    <td class="tr">14</td>
+                    <td class="tr">16</td>
+                  </tr>
+                  <tr>
+                    <td class="fw">Fastener VN</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fr" style="width:38%"></div>
+                        </div><span class="bp" style="color:var(--red)">3.8%</span>
+                      </div>
+                    </td>
+                    <td class="tr">7</td>
+                    <td class="tr fw" style="color:var(--red)">12</td>
+                  </tr>
+                  <tr>
+                    <td class="fw">Marubeni</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fg" style="width:5%"></div>
+                        </div><span class="bp">0.5%</span>
+                      </div>
+                    </td>
+                    <td class="tr">45</td>
+                    <td class="tr">42</td>
+                  </tr>
+                  <tr>
+                    <td class="fw">Welding VN</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fg" style="width:8%"></div>
+                        </div><span class="bp">0.8%</span>
+                      </div>
+                    </td>
+                    <td class="tr">10</td>
+                    <td class="tr">10</td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </div>
           <div class="card">
-            <div class="ct">Top vật tư xuất nhiều nhất</div>
-            <div class="tw-lg" style="max-height:280px;overflow-y:auto;border-bottom:none;">
+            <div class="ct">Kế hoạch vs Thực tế Nhập kho theo Tháng (Tấn)</div>
+            <div class="cw"><canvas id="c3-kh-tt-monthly"></canvas></div>
+          </div>
+        </div>
+
+        <!-- Transaction log table -->
+        <div class="card">
+          <div class="ct">
+            Nhật ký Nhập kho — Chi tiết từng Lần nhập
+            <span class="badge bg">28 lần nhập lũy kế</span>
+          </div>
+          <div class="tw-lg">
+            <table>
+              <thead>
+                <tr>
+                  <th>Ngày nhập</th>
+                  <th>Mã lô</th>
+                  <th>Dự án</th>
+                  <th>Loại VT</th>
+                  <th>Hạng mục / Chủng loại</th>
+                  <th class="tr">KL (Tấn)</th>
+                  <th>Nguồn cung cấp</th>
+                  <th>Trạng thái kiểm nhận</th>
+                  <th>Ghi chú</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>15/01/2026</td>
+                  <td class="fw">NK-001</td>
+                  <td>V314</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>Tấm thép 20mm</td>
+                  <td class="tr fw">320.5</td>
+                  <td>JFE Japan</td>
+                  <td><span class="h hg">✓ Đạt</span></td>
+                  <td>Lô 1 V314</td>
+                </tr>
+                <tr>
+                  <td>22/01/2026</td>
+                  <td class="fw">NK-002</td>
+                  <td>U285</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>Thép hình HEA300</td>
+                  <td class="tr fw">215.8</td>
+                  <td>POSCO VINA</td>
+                  <td><span class="h hg">✓ Đạt</span></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>05/02/2026</td>
+                  <td class="fw">NK-003</td>
+                  <td>E307</td>
+                  <td><span class="h hn">PFM</span></td>
+                  <td>Sơn epoxy primer</td>
+                  <td class="tr fw">45.2</td>
+                  <td>Supplier Local</td>
+                  <td><span class="h hg">✓ Đạt</span></td>
+                  <td>Lô sơn lót</td>
+                </tr>
+                <tr>
+                  <td>12/02/2026</td>
+                  <td class="fw">NK-004</td>
+                  <td>V314</td>
+                  <td><span class="h hg">ACS</span></td>
+                  <td>Bulông M24 x 100</td>
+                  <td class="tr fw">8.4</td>
+                  <td>Fastener VN</td>
+                  <td><span class="h hg">✓ Đạt</span></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>20/02/2026</td>
+                  <td class="fw">NK-005</td>
+                  <td>U308</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>Thép tấm 16mm</td>
+                  <td class="tr fw">180.6</td>
+                  <td>POSCO VINA</td>
+                  <td><span class="h hy">⚠ Kiểm tra lại</span></td>
+                  <td>Cần kiểm tra quy cách</td>
+                </tr>
+                <tr>
+                  <td>01/03/2026</td>
+                  <td class="fw">NK-006</td>
+                  <td>E307</td>
+                  <td><span class="h hn">PFM</span></td>
+                  <td>Sơn epoxy finish</td>
+                  <td class="tr fw">68.4</td>
+                  <td>Supplier Local</td>
+                  <td><span class="h hg">✓ Đạt</span></td>
+                  <td>Hoàn thành lô PFM E307</td>
+                </tr>
+                <tr>
+                  <td>08/03/2026</td>
+                  <td class="fw">NK-007</td>
+                  <td>V261</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>Thép tấm 25mm</td>
+                  <td class="tr fw">420.1</td>
+                  <td>Marubeni</td>
+                  <td><span class="h hg">✓ Đạt</span></td>
+                  <td>Lô chính V261</td>
+                </tr>
+                <tr>
+                  <td>15/03/2026</td>
+                  <td class="fw">NK-008</td>
+                  <td>U285</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>Thép hình IPE400</td>
+                  <td class="tr fw">390.2</td>
+                  <td>POSCO VINA</td>
+                  <td><span class="h hg">✓ Đạt</span></td>
+                  <td>POSCO — Lô 2</td>
+                </tr>
+                <tr>
+                  <td>22/03/2026</td>
+                  <td class="fw">NK-009</td>
+                  <td>U308</td>
+                  <td><span class="h hg">ACS</span></td>
+                  <td>Bộ bu-lông M20</td>
+                  <td class="tr fw">12.8</td>
+                  <td>Fastener VN</td>
+                  <td><span class="h hg">✓ Đạt</span></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>01/04/2026</td>
+                  <td class="fw">NK-010</td>
+                  <td>V261</td>
+                  <td><span class="h hy">WDM</span></td>
+                  <td>Dây hàn CO2 ER70S</td>
+                  <td class="tr fw">18.5</td>
+                  <td>Welding VN</td>
+                  <td><span class="h hg">✓ Đạt</span></td>
+                  <td>Bổ sung WDM V261</td>
+                </tr>
+                <tr style="background:#fdf9f0">
+                  <td colspan="9" style="font-size:.7rem;color:var(--muted);font-style:italic;padding:6px 9px;">⬇ 18 lô
+                    trước đó (năm 2025 & T1/2026) không hiển thị — dùng bộ lọc để xem</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Lô hàng dự kiến về -->
+        <div class="card">
+          <div class="ct">Lô Hàng đang trên đường — Dự kiến về kho theo Dự án<span class="badge ba">6 lô · ≈ 35,060
+              T</span></div>
+          <div class="tw">
+            <table>
+              <thead>
+                <tr>
+                  <th>Mã lô</th>
+                  <th>Dự án</th>
+                  <th>Loại VT</th>
+                  <th>Hạng mục</th>
+                  <th class="tr">KL dự kiến (T)</th>
+                  <th>Nhà cung cấp</th>
+                  <th>Hình thức VT</th>
+                  <th>ETA dự kiến</th>
+                  <th>Trạng thái vận chuyển</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="fw">DK-001</td>
+                  <td>V314</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>Tấm thép mixed 12–25mm</td>
+                  <td class="tr fw">1,131</td>
+                  <td>Marubeni</td>
+                  <td>Nhập khẩu / Tàu biển</td>
+                  <td><strong>15/04/2026</strong></td>
+                  <td><span class="dot da"></span>Đang vận chuyển</td>
+                </tr>
+                <tr>
+                  <td class="fw">DK-002</td>
+                  <td>V314</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>Thép hình W-shape</td>
+                  <td class="tr fw">53,922</td>
+                  <td>JFE Japan</td>
+                  <td>Nhập khẩu / Tàu biển</td>
+                  <td><strong>20/04/2026</strong></td>
+                  <td><span class="dot da"></span>Đang vận chuyển</td>
+                </tr>
+                <tr>
+                  <td class="fw">DK-003</td>
+                  <td>U285</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>Thép hình IPE / HEA</td>
+                  <td class="tr fw">31,125</td>
+                  <td>POSCO VINA</td>
+                  <td>Nội địa / Xe tải</td>
+                  <td><strong>25/04/2026</strong></td>
+                  <td><span class="dot dg"></span>Chuẩn bị xuất hàng</td>
+                </tr>
+                <tr>
+                  <td class="fw">DK-004</td>
+                  <td>U308</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>Thép tấm 12mm</td>
+                  <td class="tr fw">47.6</td>
+                  <td>POSCO VINA</td>
+                  <td>Nội địa / Xe tải</td>
+                  <td><strong>30/04/2026</strong></td>
+                  <td><span class="dot dg"></span>Đang vận chuyển</td>
+                </tr>
+                <tr>
+                  <td class="fw">DK-005</td>
+                  <td>V261</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>Thép tấm 20mm bổ sung</td>
+                  <td class="tr fw">30</td>
+                  <td>Marubeni</td>
+                  <td>Nhập khẩu / Tàu biển</td>
+                  <td><strong>10/05/2026</strong></td>
+                  <td><span class="dot db"></span>Chờ xuất cảng</td>
+                </tr>
+                <tr>
+                  <td class="fw">DK-006</td>
+                  <td>E307</td>
+                  <td><span class="h hn">PFM</span></td>
+                  <td>Sơn topcoat (lô cuối)</td>
+                  <td class="tr fw">143</td>
+                  <td>AkzoNobel</td>
+                  <td>Nội địa</td>
+                  <td><strong>12/04/2026</strong></td>
+                  <td><span class="dot dg"></span>Đang giao hàng</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+      </div><!-- /p3 -->
+
+
+      <!-- ══════════════════════════════════
+       P4 — XUẤT KHO
+  ══════════════════════════════════ -->
+      <div id="p4" class="page">
+        <!-- Row 1: 4 Vùng -->
+        <div class="row" style="grid-template-columns: 2.5fr 2fr 2fr 5.5fr; gap:15px;">
+          <!-- Vùng 1 -->
+          <div class="card" style="align-items:center;">
+            <div class="ct" style="justify-content:flex-start;width:100%;margin-bottom:-10px;">Trạng thái đợt xuất</div>
+            <div style="width:100%;max-width:140px;position:relative;margin-top:10px;">
+              <canvas id="c4-status-donut" height="120"></canvas>
+              <div
+                style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-weight:700;color:var(--dark);text-align:center;line-height:1.2;">
+                16.59K<br><span style="font-size:.7rem;font-weight:400;color:var(--muted)">(97.89%)</span></div>
+            </div>
+            <div
+              style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;font-size:.72rem;color:var(--muted);margin-top:8px;">
+              <div style="display:flex;align-items:center;gap:3px;"><span
+                  style="color:var(--green);font-size:1.1rem;line-height:0">●</span> Đúng hạn</div>
+              <div style="display:flex;align-items:center;gap:3px;"><span
+                  style="color:var(--red);font-size:1.1rem;line-height:0">●</span> Chậm</div>
+              <div style="display:flex;align-items:center;gap:3px;"><span
+                  style="color:var(--amber);font-size:1.1rem;line-height:0">●</span> Chưa xác nhận</div>
+            </div>
+          </div>
+          <!-- Vùng 2 -->
+          <div style="display:flex;flex-direction:column;gap:15px;">
+            <div class="card kpi" style="flex:1;padding:12px 15px;">
+              <div class="kl">Thực tế xuất</div>
+              <div class="kv" style="color:var(--dark)">16,594 <span
+                  style="font-size:1.2rem;color:var(--dark)">97.89%</span></div>
+              <div class="ks">Tháng trước: N/A</div>
+            </div>
+            <div class="card kpi" style="flex:1;padding:12px 15px;">
+              <div class="kl">Tỷ lệ hoàn hàng</div>
+              <div class="kv" style="font-size:1.4rem;color:var(--dark)">606 <span
+                  style="font-size:1rem;font-weight:400;color:var(--muted)">|| 3.65% || 34.4M</span></div>
+            </div>
+          </div>
+          <!-- Vùng 3 -->
+          <div style="display:flex;flex-direction:column;gap:15px;">
+            <div class="card kpi" style="flex:1;padding:12px 15px;">
+              <div class="kl">Tổng giá trị xuất</div>
+              <div class="kv" style="color:var(--dark)">980.9M</div>
+              <div class="ks">Tháng trước: N/A</div>
+            </div>
+            <div class="card kpi" style="flex:1;padding:12px 15px;">
+              <div class="kl">Giá trị hàng chưa xuất</div>
+              <div class="kv" style="font-size:1.4rem;color:var(--dark)">19.7M <span
+                  style="font-size:1rem;font-weight:400;color:var(--muted)">|| 2.09%</span></div>
+            </div>
+          </div>
+          <!-- Vùng 4 -->
+          <div class="card" style="padding:14px;display:flex;flex-direction:column;">
+            <div class="ct" style="font-size:.79rem;margin-bottom:6px;">Xu hướng Xuất kho T01–T04</div>
+            <div style="flex:1;min-height:0;position:relative;"><canvas id="c4-trend-mini"></canvas></div>
+          </div>
+        </div>
+
+        <!-- Row 2: 2 Cột 4fr 8fr -->
+        <div class="row" style="grid-template-columns: 4fr 8fr;">
+          <div class="card">
+            <div class="ct" style="justify-content:space-between;">
+              Tổng xuất theo Sản phẩm và trạng thái
+              <div class="view-toggle">
+                <button class="vt-btn active" onclick="swapByType('c4-by-type','sp',this)">Sản phẩm</button>
+                <button class="vt-btn" onclick="swapByType('c4-by-type','kho',this)">Kho</button>
+              </div>
+            </div>
+            <div style="margin-bottom:8px;font-size:.75rem;"><span style="color:var(--teal);margin-right:10px;">● Xuất
+                thực tế</span> <span style="color:var(--red)">● Hoàn trả</span></div>
+            <div class="cw" style="height:300px;"><canvas id="c4-by-type"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="ct">Chi tiết xuất kho theo Nhóm</div>
+            <div class="tw-lg" style="max-height:340px;overflow-y:auto;border-bottom:none;">
               <table>
                 <thead style="position:sticky;top:0;z-index:2;background:#fff;">
                   <tr>
-                    <th style="text-align:left">Loại vật tư</th>
-                    <th class="tr">KL Xuất (T)</th>
+                    <th style="text-align:left">Nhóm hạng mục</th>
+                    <th class="tr">Xuất TT</th>
+                    <th class="tr">Tổng xuất</th>
+                    <th>Trạng thái</th>
+                    <th>Ngày xuất KH</th>
+                    <th>Ngày TT</th>
+                    <th class="tr">Giá trị</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td style="text-align:left">Thép hình W-shape</td>
-                    <td class="tr fw">3,800</td>
+                  <tr class="sub-row expanded"
+                    onclick="var p=this.nextElementSibling; while(p && p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
+                    <td colspan="7" style="font-weight:700;background:#f8f9fa;cursor:pointer;">⊟ 1. MMS (Vật tư chính)
+                    </td>
                   </tr>
-                  <tr>
-                    <td style="text-align:left">Thép tấm mixed</td>
-                    <td class="tr fw">2,900</td>
+                  <tr class="stage-row">
+                    <td style="padding-left:24px;font-weight:600;">↳ Casing Shp2 — Lot#1</td>
+                    <td class="tr fw">1727</td>
+                    <td class="tr">1761</td>
+                    <td><span class="h hg">Đúng hạn</span></td>
+                    <td>3/10/2026</td>
+                    <td>3/10/2026</td>
+                    <td class="tr" style="color:var(--green)">103,153,000</td>
                   </tr>
-                  <tr>
-                    <td style="text-align:left">Bu-lông M24</td>
-                    <td class="tr fw">2,400</td>
+                  <tr class="stage-row">
+                    <td style="padding-left:40px;color:var(--muted);font-size:.8rem;">PX00077</td>
+                    <td class="tr">8</td>
+                    <td class="tr">8</td>
+                    <td><span class="h hr">Hoàn thành muộn</span></td>
+                    <td>3/13/2026</td>
+                    <td>3/15/2026</td>
+                    <td class="tr" style="color:var(--green)">181,000</td>
                   </tr>
-                  <tr>
-                    <td style="text-align:left">Thép hình IPE/HEA</td>
-                    <td class="tr fw">1,900</td>
+                  <tr class="stage-row">
+                    <td style="padding-left:40px;color:var(--muted);font-size:.8rem;">PX00231</td>
+                    <td class="tr">9</td>
+                    <td class="tr">9</td>
+                    <td><span class="h hg">Đúng hạn</span></td>
+                    <td>3/13/2026</td>
+                    <td>3/12/2026</td>
+                    <td class="tr" style="color:var(--green)">425,000</td>
                   </tr>
-                  <tr>
-                    <td style="text-align:left">Sơn Epoxy finish</td>
-                    <td class="tr fw">760</td>
+                  <tr class="stage-row">
+                    <td style="padding-left:40px;color:var(--muted);font-size:.8rem;">PX00856</td>
+                    <td class="tr">8</td>
+                    <td class="tr">8</td>
+                    <td><span class="h hg">Đúng hạn</span></td>
+                    <td>3/20/2026</td>
+                    <td>3/20/2026</td>
+                    <td class="tr" style="color:var(--green)">110,000</td>
                   </tr>
-                  <tr>
-                    <td style="text-align:left">Dây hàn CO2 ER70S</td>
-                    <td class="tr fw">620</td>
+                  <tr class="sub-row expanded"
+                    onclick="var p=this.nextElementSibling; while(p && p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
+                    <td colspan="7" style="font-weight:700;background:#f8f9fa;cursor:pointer;">⊟ Kho chi nhánh 2</td>
                   </tr>
-                  <tr>
-                    <td style="text-align:left">Thép góc 75×75</td>
-                    <td class="tr fw">490</td>
+                  <tr class="stage-row">
+                    <td style="padding-left:24px;font-weight:600;">↳ Stack Shp3</td>
+                    <td class="tr fw">119</td>
+                    <td class="tr">122</td>
+                    <td><span class="h hg">Đúng hạn</span></td>
+                    <td>3/13/2026</td>
+                    <td>3/13/2026</td>
+                    <td class="tr" style="color:var(--green)">6,866,000</td>
                   </tr>
-                  <tr>
-                    <td style="text-align:left">Thép ống tròn</td>
-                    <td class="tr fw">380</td>
+                  <tr class="stage-row">
+                    <td style="padding-left:40px;color:var(--muted);font-size:.8rem;">PX00047</td>
+                    <td class="tr">6</td>
+                    <td class="tr">6</td>
+                    <td><span class="h hr">Hoàn thành muộn</span></td>
+                    <td>3/14/2026</td>
+                    <td>3/16/2026</td>
+                    <td class="tr" style="color:var(--green)">477,000</td>
+                  </tr>
+                  <tr class="stage-row">
+                    <td style="padding-left:40px;color:var(--muted);font-size:.8rem;">PX00201</td>
+                    <td class="tr">8</td>
+                    <td class="tr">8</td>
+                    <td><span class="h hg">Đúng hạn</span></td>
+                    <td>3/13/2026</td>
+                    <td>3/10/2026</td>
+                    <td class="tr" style="color:var(--green)">399,000</td>
                   </tr>
                 </tbody>
                 <tfoot style="position:sticky;bottom:0;z-index:2;background:#fff;border-top:2px solid var(--border)">
                   <tr style="font-weight:bold">
                     <td style="text-align:left">Total</td>
-                    <td class="tr">13,250</td>
+                    <td class="tr">16524</td>
+                    <td class="tr">16880</td>
+                    <td>Đúng hạn</td>
+                    <td>3/10/2026</td>
+                    <td>3/10/2026</td>
+                    <td class="tr">977,142,000</td>
                   </tr>
                 </tfoot>
               </table>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="row">
+        <!-- Row 3: Xu hướng xuất kho c4-trend -->
+        <div class="row">
+          <div class="card">
+            <div class="ct">
+              Xu hướng Xuất kho — KH vs Thực tế + % Đạt (Tháng)
+              <div class="view-toggle" id="toggle-c4">
+                <button class="vt-btn active" onclick="setView('c4-trend','cumul',this)">Lũy kế</button>
+                <button class="vt-btn" onclick="setView('c4-trend','value',this)">Giá trị</button>
+              </div>
+            </div>
+            <div class="cw"><canvas id="c4-trend"></canvas></div>
+          </div>
+        </div>
+
+        <!-- Shipment progress bar + Transaction log -->
+        <div class="row c2">
+          <div class="card">
+            <div class="ct">% Hoàn thành từng Đợt Xuất (Shipment / Package)</div>
+            <div class="cw"><canvas id="c4-ship"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="ct">Tóm tắt KH vs TT — Chi tiết Đợt xuất</div>
+            <div class="tw">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Đợt</th>
+                    <th>Dự án</th>
+                    <th>Hạng mục</th>
+                    <th>Loại</th>
+                    <th class="tr">KH (T)</th>
+                    <th class="tr">Xuất (T)</th>
+                    <th>% HT</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Lot#1 Shp2</td>
+                    <td>F0243</td>
+                    <td>Casing</td>
+                    <td>MMS</td>
+                    <td class="tr">148</td>
+                    <td class="tr">148</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fg" style="width:100%"></div>
+                        </div><span class="bp">100%</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Shp3 P2B</td>
+                    <td>F0243</td>
+                    <td>Stack</td>
+                    <td>MMS</td>
+                    <td class="tr">61</td>
+                    <td class="tr">60</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fg" style="width:98%"></div>
+                        </div><span class="bp">98%</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Lot#1</td>
+                    <td>V314</td>
+                    <td>Structure</td>
+                    <td>MMS</td>
+                    <td class="tr">320</td>
+                    <td class="tr">288</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fg" style="width:90%"></div>
+                        </div><span class="bp">90%</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Pack 3BA</td>
+                    <td>F0243</td>
+                    <td>Conveyor</td>
+                    <td>MMS</td>
+                    <td class="tr">286</td>
+                    <td class="tr">200</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fa" style="width:70%"></div>
+                        </div><span class="bp" style="color:var(--orange)">70%</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Lot#2</td>
+                    <td>B272</td>
+                    <td>Beam Pkg</td>
+                    <td>MMS</td>
+                    <td class="tr">150</td>
+                    <td class="tr">90</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fr" style="width:60%"></div>
+                        </div><span class="bp" style="color:var(--red)">60%</span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Transaction log detail table -->
         <div class="card">
-          <div class="ct">Tổng quan Vật tư theo Dự án</div>
-          <div class="tw-lg" style="max-height:340px;">
+          <div class="ct">
+            Nhật ký Xuất kho — Chi tiết từng Lần xuất vật tư vào Sản xuất
+            <span class="badge bg">28 lần xuất lũy kế</span>
+          </div>
+          <div class="tw-lg">
             <table>
               <thead>
                 <tr>
-                  <th>#</th>
+                  <th>Ngày xuất</th>
+                  <th>Mã đợt</th>
                   <th>Dự án</th>
-                  <th class="tr">PO Weight (T)</th>
-                  <th class="tr">AMECC Supply (T)</th>
-                  <th class="tr">Design Weight (T)</th>
-                  <th class="tr">Tồn kho (T)</th>
-                  <th class="tr">Đã Nhập (T)</th>
-                  <th class="tr">Đã Đến (T)</th>
-                  <th>% Đã Đến</th>
-                  <th class="tr">Balance (T)</th>
-                  <th>% Balance</th>
-                  <th>Trạng thái</th>
+                  <th>Hạng mục sản xuất</th>
+                  <th>Loại VT</th>
+                  <th>Giai đoạn SX</th>
+                  <th class="tr">KL xuất (T)</th>
+                  <th>Người phê duyệt</th>
+                  <th>Tình trạng</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="sub-row expanded"
-                  onclick="var p=this.nextElementSibling;while(p&&p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
-                  <td>1</td>
-                  <td class="fw" style="cursor:pointer;">⊟ V314</td>
-                  <td class="tr">8,500</td>
-                  <td class="tr">8,000</td>
-                  <td class="tr">8,200</td>
-                  <td class="tr">38</td>
-                  <td class="tr">4,500</td>
-                  <td class="tr fw" style="color:var(--teal)">8,100</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fg" style="width:95%"></div>
-                      </div><span class="bp" style="color:var(--green)">95%</span>
-                    </div>
-                  </td>
-                  <td class="tr">400</td>
-                  <td>5%</td>
-                  <td><span class="h hg">Hoàn thành</span></td>
+                <tr>
+                  <td>18/01/2026</td>
+                  <td class="fw">XK-001</td>
+                  <td>V314</td>
+                  <td>Main Frame — Section A</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>CUT</td>
+                  <td class="tr fw">185.4</td>
+                  <td>Mr. Hùng</td>
+                  <td><span class="h hg">Đã sử dụng</span></td>
                 </tr>
-                <tr class="stage-row">
-                  <td></td>
-                  <td style="padding-left:18px;font-size:.77rem;color:var(--dark);">↳ <span class="h hb"
-                      style="font-size:.67rem;">MMS</span> Thép hình/tấm</td>
-                  <td class="tr">6,000</td>
-                  <td class="tr">5,800</td>
-                  <td class="tr">5,900</td>
-                  <td class="tr">28</td>
-                  <td class="tr">3,200</td>
-                  <td class="tr" style="color:var(--teal)">5,900</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fg" style="width:98%"></div>
-                      </div><span class="bp" style="color:var(--green)">98%</span>
-                    </div>
-                  </td>
-                  <td class="tr">100</td>
-                  <td>2%</td>
-                  <td><span class="h hg">Tốt</span></td>
+                <tr>
+                  <td>25/01/2026</td>
+                  <td class="fw">XK-002</td>
+                  <td>F0243</td>
+                  <td>Casing Shp2 — Lot#1</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>FAB</td>
+                  <td class="tr fw">148.0</td>
+                  <td>Mr. Tuấn</td>
+                  <td><span class="h hg">Đã sử dụng</span></td>
                 </tr>
-                <tr class="stage-row">
-                  <td></td>
-                  <td style="padding-left:18px;font-size:.77rem;color:var(--dark);">↳ <span class="h hg"
-                      style="font-size:.67rem;">ACS</span> Bu-lông/ốc vít</td>
-                  <td class="tr">1,200</td>
-                  <td class="tr">1,100</td>
-                  <td class="tr">1,150</td>
-                  <td class="tr">5</td>
-                  <td class="tr">700</td>
-                  <td class="tr" style="color:var(--teal)">1,100</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fg" style="width:96%"></div>
-                      </div><span class="bp" style="color:var(--green)">96%</span>
-                    </div>
-                  </td>
-                  <td class="tr">100</td>
-                  <td>4%</td>
-                  <td><span class="h hg">Tốt</span></td>
+                <tr>
+                  <td>03/02/2026</td>
+                  <td class="fw">XK-003</td>
+                  <td>F0243</td>
+                  <td>Stack Shp3 — Pack2B</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>FAB</td>
+                  <td class="tr fw">60.2</td>
+                  <td>Mr. Tuấn</td>
+                  <td><span class="h hg">Đã sử dụng</span></td>
                 </tr>
-                <tr class="stage-row">
-                  <td></td>
-                  <td style="padding-left:18px;font-size:.77rem;color:var(--dark);">↳ <span class="h hy"
-                      style="font-size:.67rem;">WDM</span> Vật tư hàn</td>
-                  <td class="tr">800</td>
-                  <td class="tr">700</td>
-                  <td class="tr">750</td>
-                  <td class="tr">3</td>
-                  <td class="tr">400</td>
-                  <td class="tr" style="color:var(--teal)">700</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fa" style="width:88%"></div>
-                      </div><span class="bp" style="color:var(--orange)">88%</span>
-                    </div>
-                  </td>
-                  <td class="tr">100</td>
-                  <td>12%</td>
-                  <td><span class="h hy">Theo dõi</span></td>
+                <tr>
+                  <td>10/02/2026</td>
+                  <td class="fw">XK-004</td>
+                  <td>V314</td>
+                  <td>Platform Extension</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>FAB</td>
+                  <td class="tr fw">102.6</td>
+                  <td>Mr. Hùng</td>
+                  <td><span class="h hg">Đã sử dụng</span></td>
                 </tr>
-                <tr class="stage-row">
-                  <td></td>
-                  <td style="padding-left:18px;font-size:.77rem;color:var(--dark);">↳ <span class="h hn"
-                      style="font-size:.67rem;">PFM</span> Sơn phủ</td>
-                  <td class="tr">500</td>
-                  <td class="tr">400</td>
-                  <td class="tr">400</td>
-                  <td class="tr">2</td>
-                  <td class="tr">200</td>
-                  <td class="tr" style="color:var(--teal)">400</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fg" style="width:80%"></div>
-                      </div><span class="bp">80%</span>
-                    </div>
-                  </td>
-                  <td class="tr">100</td>
-                  <td>20%</td>
-                  <td><span class="h hy">Chờ nhập</span></td>
+                <tr>
+                  <td>18/02/2026</td>
+                  <td class="fw">XK-005</td>
+                  <td>M304</td>
+                  <td>Casing U#3 — bổ sung</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>FAB</td>
+                  <td class="tr fw">125.0</td>
+                  <td>Mr. Nam</td>
+                  <td><span class="h hg">Đã sử dụng</span></td>
                 </tr>
-                <tr class="sub-row expanded"
-                  onclick="var p=this.nextElementSibling;while(p&&p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
-                  <td>2</td>
-                  <td class="fw" style="cursor:pointer;">⊟ M304</td>
-                  <td class="tr">5,200</td>
-                  <td class="tr">5,000</td>
-                  <td class="tr">5,100</td>
-                  <td class="tr">125</td>
-                  <td class="tr">2,800</td>
-                  <td class="tr fw" style="color:var(--teal)">3,600</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fa" style="width:69%"></div>
-                      </div><span class="bp" style="color:var(--orange)">69%</span>
-                    </div>
-                  </td>
-                  <td class="tr">1,600</td>
-                  <td>31%</td>
-                  <td><span class="h hy">Đang nhập</span></td>
+                <tr>
+                  <td>25/02/2026</td>
+                  <td class="fw">XK-006</td>
+                  <td>U308</td>
+                  <td>Pipe Rack — Section 1</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>CUT</td>
+                  <td class="tr fw">80.5</td>
+                  <td>Mr. Minh</td>
+                  <td><span class="h hg">Đã sử dụng</span></td>
                 </tr>
-                <tr class="stage-row">
-                  <td></td>
-                  <td style="padding-left:18px;font-size:.77rem;color:var(--dark);">↳ <span class="h hb"
-                      style="font-size:.67rem;">MMS</span> Thép hình/tấm</td>
-                  <td class="tr">3,500</td>
-                  <td class="tr">3,300</td>
-                  <td class="tr">3,400</td>
-                  <td class="tr">90</td>
-                  <td class="tr">1,800</td>
-                  <td class="tr" style="color:var(--teal)">2,200</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fa" style="width:63%"></div>
-                      </div><span class="bp" style="color:var(--orange)">63%</span>
-                    </div>
-                  </td>
-                  <td class="tr">1,200</td>
-                  <td>37%</td>
-                  <td><span class="h hy">Đang nhập</span></td>
+                <tr>
+                  <td>05/03/2026</td>
+                  <td class="fw">XK-007</td>
+                  <td>F0243</td>
+                  <td>Conveyor — Pack3BA</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>CUT</td>
+                  <td class="tr fw">200.0</td>
+                  <td>Mr. Tuấn</td>
+                  <td><span class="h hy">Đang sử dụng</span></td>
                 </tr>
-                <tr class="stage-row">
-                  <td></td>
-                  <td style="padding-left:18px;font-size:.77rem;color:var(--dark);">↳ <span class="h hg"
-                      style="font-size:.67rem;">ACS</span> Bu-lông/ốc vít</td>
-                  <td class="tr">800</td>
-                  <td class="tr">750</td>
-                  <td class="tr">780</td>
-                  <td class="tr">20</td>
-                  <td class="tr">500</td>
-                  <td class="tr" style="color:var(--teal)">650</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fa" style="width:81%"></div>
-                      </div><span class="bp" style="color:var(--orange)">81%</span>
-                    </div>
-                  </td>
-                  <td class="tr">200</td>
-                  <td>19%</td>
-                  <td><span class="h hy">Theo dõi</span></td>
+                <tr>
+                  <td>12/03/2026</td>
+                  <td class="fw">XK-008</td>
+                  <td>V314</td>
+                  <td>Conveyor Bridge</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>BH</td>
+                  <td class="tr fw">55.2</td>
+                  <td>Mr. Hùng</td>
+                  <td><span class="h hg">Đã sử dụng</span></td>
                 </tr>
-                <tr class="sub-row expanded"
-                  onclick="var p=this.nextElementSibling;while(p&&p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
-                  <td>3</td>
-                  <td class="fw" style="cursor:pointer;">⊟ U285</td>
-                  <td class="tr">12,000</td>
-                  <td class="tr">11,500</td>
-                  <td class="tr">11,800</td>
-                  <td class="tr">13</td>
-                  <td class="tr">1,500</td>
-                  <td class="tr fw" style="color:var(--teal)">2,500</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fr" style="width:20%"></div>
-                      </div><span class="bp" style="color:var(--red)">20%</span>
-                    </div>
-                  </td>
-                  <td class="tr">9,500</td>
-                  <td>80%</td>
-                  <td><span class="h hr">Thiếu vật tư</span></td>
+                <tr>
+                  <td>20/03/2026</td>
+                  <td class="fw">XK-009</td>
+                  <td>B272</td>
+                  <td>Beam Assembly — Lot2</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>BH</td>
+                  <td class="tr fw">90.0</td>
+                  <td>Mr. Đức</td>
+                  <td><span class="h hy">Đang sử dụng</span></td>
                 </tr>
-                <tr class="stage-row">
-                  <td></td>
-                  <td style="padding-left:18px;font-size:.77rem;color:var(--dark);">↳ <span class="h hb"
-                      style="font-size:.67rem;">MMS</span> Thép hình/tấm</td>
-                  <td class="tr">9,000</td>
-                  <td class="tr">8,600</td>
-                  <td class="tr">8,800</td>
-                  <td class="tr">8</td>
-                  <td class="tr">900</td>
-                  <td class="tr" style="color:var(--red)">1,600</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fr" style="width:18%"></div>
-                      </div><span class="bp" style="color:var(--red)">18%</span>
-                    </div>
-                  </td>
-                  <td class="tr">7,400</td>
-                  <td>82%</td>
-                  <td><span class="h hr">Thiếu</span></td>
-                </tr>
-                <tr class="stage-row">
-                  <td></td>
-                  <td style="padding-left:18px;font-size:.77rem;color:var(--dark);">↳ <span class="h hg"
-                      style="font-size:.67rem;">ACS</span> Bu-lông/ốc vít</td>
-                  <td class="tr">1,500</td>
-                  <td class="tr">1,400</td>
-                  <td class="tr">1,450</td>
-                  <td class="tr">3</td>
-                  <td class="tr">350</td>
-                  <td class="tr" style="color:var(--orange)">550</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fr" style="width:37%"></div>
-                      </div><span class="bp" style="color:var(--red)">37%</span>
-                    </div>
-                  </td>
-                  <td class="tr">900</td>
-                  <td>63%</td>
-                  <td><span class="h hr">Thiếu</span></td>
+                <tr>
+                  <td>28/03/2026</td>
+                  <td class="fw">XK-010</td>
+                  <td>U285</td>
+                  <td>Main Frame — Pack1</td>
+                  <td><span class="h hb">MMS</span></td>
+                  <td>CUT</td>
+                  <td class="tr fw">110.0</td>
+                  <td>Mr. Minh</td>
+                  <td><span class="h hy">Đang sử dụng</span></td>
                 </tr>
                 <tr style="background:#fdf9f0">
-                  <td colspan="12" style="font-size:.7rem;color:var(--muted);font-style:italic;padding:6px 9px;">⬇ Dữ
-                    liệu mẫu — các dự án khác...</td>
+                  <td colspan="9" style="font-size:.7rem;color:var(--muted);font-style:italic;padding:6px 9px;">⬇ 18 lần
+                    xuất trước đó không hiển thị — dùng bộ lọc để xem thêm</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-      </div>
-
-      <div class="row">
-        <div class="card">
-          <div class="ct">Thông tin cơ bản Dự án</div>
-          <div class="tw">
-            <table>
-              <thead>
-                <tr>
-                  <th>Dự án</th>
-                  <th>Tên dự án</th>
-                  <th>Khách hàng</th>
-                  <th>Ngày ký PO</th>
-                  <th>Delivery Term</th>
-                  <th>Số Shipment</th>
-                  <th>ETA gần nhất</th>
-                  <th>Trạng thái VT</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="fw">V314</td>
-                  <td>Nhà máy Thép Formosa Hà Tĩnh</td>
-                  <td>Formosa</td>
-                  <td>12/01/2025</td>
-                  <td>FOB</td>
-                  <td>8</td>
-                  <td>15/04/2026</td>
-                  <td><span class="dot dg"></span>Đang nhập ổn định</td>
-                </tr>
-                <tr>
-                  <td class="fw">M304</td>
-                  <td>Mở rộng Casing Lò hơi U#3</td>
-                  <td>Doosan</td>
-                  <td>05/06/2025</td>
-                  <td>CIF</td>
-                  <td>4</td>
-                  <td>20/05/2026</td>
-                  <td><span class="dot da"></span>Chờ ETA cập nhật</td>
-                </tr>
-                <tr>
-                  <td class="fw">U285</td>
-                  <td>Hệ thống ống khói NMNĐ</td>
-                  <td>POSCO</td>
-                  <td>20/11/2025</td>
-                  <td>DAP</td>
-                  <td>12</td>
-                  <td>25/04/2026</td>
-                  <td><span class="dot dr"></span>Thiếu vật tư trầm trọng</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div><!-- /p3_overview -->
-
-    <!-- ══════════════════════════════════
-       P3 — NHẬP KHO
-  ══════════════════════════════════ -->
-    <div id="p3" class="page">
-      <!-- Row 1: 4 Vùng -->
-      <div class="row" style="grid-template-columns: 2.5fr 2fr 2fr 5.5fr; gap:15px;">
-        <!-- Vùng 1 -->
-        <div class="card" style="align-items:center;">
-          <div class="ct" style="justify-content:flex-start;width:100%;margin-bottom:-10px;">Trạng thái các đơn hàng
-          </div>
-          <div style="width:100%;max-width:140px;position:relative;margin-top:10px;">
-            <canvas id="c3-status-donut" height="120"></canvas>
-            <div
-              style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-weight:700;color:var(--dark);text-align:center;line-height:1.2;">
-              124<br><span style="font-size:.7rem;font-weight:400;color:var(--muted)">(40.79%)</span></div>
-          </div>
-          <div
-            style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;font-size:.72rem;color:var(--muted);margin-top:8px;">
-            <div style="display:flex;align-items:center;gap:3px;"><span
-                style="color:var(--green);font-size:1.1rem;line-height:0">●</span> Đúng hạn</div>
-            <div style="display:flex;align-items:center;gap:3px;"><span
-                style="color:var(--red);font-size:1.1rem;line-height:0">●</span> Chậm</div>
-            <div style="display:flex;align-items:center;gap:3px;"><span
-                style="color:var(--amber);font-size:1.1rem;line-height:0">●</span> Chưa xác nhận</div>
-          </div>
-        </div>
-        <!-- Vùng 2 -->
-        <div style="display:flex;flex-direction:column;gap:15px;">
-          <div class="card kpi" style="flex:1;padding:12px 15px;">
-            <div class="kl">Thực tế nhập</div>
-            <div class="kv" style="color:var(--dark)">18,620 <span
-                style="font-size:1.2rem;color:var(--dark)">94.50%</span></div>
-            <div class="ks">Tháng trước: N/A</div>
-          </div>
-          <div class="card kpi" style="flex:1;padding:12px 15px;">
-            <div class="kl">Số lượng hàng hủy</div>
-            <div class="kv" style="font-size:1.4rem;color:var(--dark)">802 <span
-                style="font-size:1rem;font-weight:400;color:var(--muted)">|| 4.31% || 44.5M</span></div>
-          </div>
-        </div>
-        <!-- Vùng 3 -->
-        <div style="display:flex;flex-direction:column;gap:15px;">
-          <div class="card kpi" style="flex:1;padding:12px 15px;">
-            <div class="kl">Tổng giá trị nhập</div>
-            <div class="kv" style="color:var(--dark)">1.050bn</div>
-            <div class="ks">Tháng trước: N/A</div>
-          </div>
-          <div class="card kpi" style="flex:1;padding:12px 15px;">
-            <div class="kl">Giá trị hàng chưa về</div>
-            <div class="kv" style="font-size:1.4rem;color:var(--dark)">61.7M <span
-                style="font-size:1rem;font-weight:400;color:var(--muted)">|| 5.55%</span></div>
-          </div>
-        </div>
-        <!-- Vùng 4 -->
-        <div class="card" style="padding:14px;display:flex;flex-direction:column;">
-          <div class="ct" style="font-size:.79rem;margin-bottom:6px;">Xu hướng Nhập kho T01–T04</div>
-          <div style="flex:1;min-height:0;position:relative;"><canvas id="c3-trend-mini"></canvas></div>
-        </div>
-      </div>
-
-      <!-- Row 2: 2 Cột 4fr 8fr -->
-      <div class="row" style="grid-template-columns: 4fr 8fr;">
-        <div class="card">
-          <div class="ct" style="justify-content:space-between;">
-            Tổng nhập theo Loại VT
-            <div class="view-toggle">
-              <button class="vt-btn active" onclick="swapByType('c3-by-type','sp',this)">Sản phẩm</button>
-              <button class="vt-btn" onclick="swapByType('c3-by-type','ncc',this)">NCC</button>
-            </div>
-          </div>
-          <div style="margin-bottom:8px;font-size:.75rem;"><span style="color:var(--teal);margin-right:10px;">● Nhập
-              thực tế</span> <span style="color:var(--red)">● Hoàn trả</span></div>
-          <div class="cw" style="height:300px;"><canvas id="c3-by-type"></canvas></div>
-        </div>
-        <div class="card">
-          <div class="ct">Chi tiết nhập kho theo Nhóm</div>
-          <div class="tw-lg" style="max-height:340px;overflow-y:auto;border-bottom:none;">
-            <table>
-              <thead style="position:sticky;top:0;z-index:2;background:#fff;">
-                <tr>
-                  <th style="text-align:left">Nhóm sản phẩm / NCC</th>
-                  <th class="tr">Thực tế</th>
-                  <th class="tr">Tổng nhập</th>
-                  <th>Trạng thái</th>
-                  <th>Ngày KH</th>
-                  <th>Ngày TT</th>
-                  <th class="tr">Giá trị</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="sub-row expanded"
-                  onclick="var p=this.nextElementSibling; while(p && p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
-                  <td colspan="7" style="font-weight:700;background:#f8f9fa;cursor:pointer;">⊟ 1. MMS (Vật tư chính)
-                  </td>
-                </tr>
-                <tr class="stage-row">
-                  <td style="padding-left:24px;font-weight:600;">↳ Thép hình W-shape</td>
-                  <td class="tr fw">735</td>
-                  <td class="tr">792</td>
-                  <td><span class="h hg">Đúng hạn</span></td>
-                  <td>14/03/2026</td>
-                  <td>14/03/2026</td>
-                  <td class="tr" style="color:var(--green)">24,201,440</td>
-                </tr>
-                <tr class="stage-row">
-                  <td style="padding-left:40px;color:var(--muted);font-size:.8rem;">POSCO VINA</td>
-                  <td class="tr">80</td>
-                  <td class="tr">82</td>
-                  <td><span class="h hg">Đúng hạn</span></td>
-                  <td>23/03/2026</td>
-                  <td>23/03/2026</td>
-                  <td class="tr" style="color:var(--green)">2,799,200</td>
-                </tr>
-                <tr class="stage-row">
-                  <td style="padding-left:40px;color:var(--muted);font-size:.8rem;">JFE Japan</td>
-                  <td class="tr">80</td>
-                  <td class="tr">86</td>
-                  <td><span class="h hr">Chậm</span></td>
-                  <td>21/03/2026</td>
-                  <td>23/03/2026</td>
-                  <td class="tr" style="color:var(--green)">2,613,600</td>
-                </tr>
-                <tr class="sub-row expanded"
-                  onclick="var p=this.nextElementSibling; while(p && p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
-                  <td colspan="7" style="font-weight:700;background:#f8f9fa;cursor:pointer;">⊟ 2. ACS (Phụ kiện)</td>
-                </tr>
-                <tr class="stage-row">
-                  <td style="padding-left:24px;font-weight:600;">↳ Bulong M24</td>
-                  <td class="tr fw">441</td>
-                  <td class="tr">485</td>
-                  <td><span class="h hg">Đúng hạn</span></td>
-                  <td>14/03/2026</td>
-                  <td>14/03/2026</td>
-                  <td class="tr" style="color:var(--green)">29,718,570</td>
-                </tr>
-                <tr class="stage-row">
-                  <td style="padding-left:40px;color:var(--muted);font-size:.8rem;">Fastener VN</td>
-                  <td class="tr">98</td>
-                  <td class="tr">108</td>
-                  <td><span class="h hg">Đúng hạn</span></td>
-                  <td>23/03/2026</td>
-                  <td>20/03/2026</td>
-                  <td class="tr" style="color:var(--green)">6,860,980</td>
-                </tr>
-                <tr class="stage-row">
-                  <td style="padding-left:40px;color:var(--muted);font-size:.8rem;">Marubeni</td>
-                  <td class="tr">109</td>
-                  <td class="tr">119</td>
-                  <td><span class="h hg">Đúng hạn</span></td>
-                  <td>14/03/2026</td>
-                  <td>14/03/2026</td>
-                  <td class="tr" style="color:var(--green)">7,519,910</td>
-                </tr>
-              </tbody>
-              <tfoot style="position:sticky;bottom:0;z-index:2;background:#fff;border-top:2px solid var(--border)">
-                <tr style="font-weight:bold">
-                  <td style="text-align:left">Total</td>
-                  <td class="tr">18620</td>
-                  <td class="tr">19704</td>
-                  <td>Đúng hạn</td>
-                  <td>14/03/2026</td>
-                  <td>11/03/2026</td>
-                  <td class="tr">1,049,962,320</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- Row 3: KH vs TT và Đánh giá NCC -->
-      <div class="row c4-8">
-        <div class="card">
-          <div class="ct" style="margin-bottom:0;border-bottom:none;">Đánh giá Nhà cung cấp (QC &amp; Leadtime)</div>
-          <div class="tw-lg" style="height:280px; overflow-y:auto; border-bottom:none;">
-            <table>
-              <thead style="position:sticky;top:0;background:#fff;z-index:2;">
-                <tr>
-                  <th>Nhà cung cấp</th>
-                  <th class="tr">Tỷ lệ Lỗi (QC)</th>
-                  <th class="tr">Leadtime hứa (Ng)</th>
-                  <th class="tr">Ng thực tế</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="fw">JFE Japan</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fg" style="width:2%"></div>
-                      </div><span class="bp">0.2%</span>
-                    </div>
-                  </td>
-                  <td class="tr">30</td>
-                  <td class="tr">31</td>
-                </tr>
-                <tr>
-                  <td class="fw">POSCO VINA</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fa" style="width:15%"></div>
-                      </div><span class="bp">1.5%</span>
-                    </div>
-                  </td>
-                  <td class="tr">14</td>
-                  <td class="tr">16</td>
-                </tr>
-                <tr>
-                  <td class="fw">Fastener VN</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fr" style="width:38%"></div>
-                      </div><span class="bp" style="color:var(--red)">3.8%</span>
-                    </div>
-                  </td>
-                  <td class="tr">7</td>
-                  <td class="tr fw" style="color:var(--red)">12</td>
-                </tr>
-                <tr>
-                  <td class="fw">Marubeni</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fg" style="width:5%"></div>
-                      </div><span class="bp">0.5%</span>
-                    </div>
-                  </td>
-                  <td class="tr">45</td>
-                  <td class="tr">42</td>
-                </tr>
-                <tr>
-                  <td class="fw">Welding VN</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fg" style="width:8%"></div>
-                      </div><span class="bp">0.8%</span>
-                    </div>
-                  </td>
-                  <td class="tr">10</td>
-                  <td class="tr">10</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="card">
-          <div class="ct">Kế hoạch vs Thực tế Nhập kho theo Tháng (Tấn)</div>
-          <div class="cw"><canvas id="c3-kh-tt-monthly"></canvas></div>
-        </div>
-      </div>
-
-      <!-- Transaction log table -->
-      <div class="card">
-        <div class="ct">
-          Nhật ký Nhập kho — Chi tiết từng Lần nhập
-          <span class="badge bg">28 lần nhập lũy kế</span>
-        </div>
-        <div class="tw-lg">
-          <table>
-            <thead>
-              <tr>
-                <th>Ngày nhập</th>
-                <th>Mã lô</th>
-                <th>Dự án</th>
-                <th>Loại VT</th>
-                <th>Hạng mục / Chủng loại</th>
-                <th class="tr">KL (Tấn)</th>
-                <th>Nguồn cung cấp</th>
-                <th>Trạng thái kiểm nhận</th>
-                <th>Ghi chú</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>15/01/2026</td>
-                <td class="fw">NK-001</td>
-                <td>V314</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>Tấm thép 20mm</td>
-                <td class="tr fw">320.5</td>
-                <td>JFE Japan</td>
-                <td><span class="h hg">✓ Đạt</span></td>
-                <td>Lô 1 V314</td>
-              </tr>
-              <tr>
-                <td>22/01/2026</td>
-                <td class="fw">NK-002</td>
-                <td>U285</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>Thép hình HEA300</td>
-                <td class="tr fw">215.8</td>
-                <td>POSCO VINA</td>
-                <td><span class="h hg">✓ Đạt</span></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>05/02/2026</td>
-                <td class="fw">NK-003</td>
-                <td>E307</td>
-                <td><span class="h hn">PFM</span></td>
-                <td>Sơn epoxy primer</td>
-                <td class="tr fw">45.2</td>
-                <td>Supplier Local</td>
-                <td><span class="h hg">✓ Đạt</span></td>
-                <td>Lô sơn lót</td>
-              </tr>
-              <tr>
-                <td>12/02/2026</td>
-                <td class="fw">NK-004</td>
-                <td>V314</td>
-                <td><span class="h hg">ACS</span></td>
-                <td>Bulông M24 x 100</td>
-                <td class="tr fw">8.4</td>
-                <td>Fastener VN</td>
-                <td><span class="h hg">✓ Đạt</span></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>20/02/2026</td>
-                <td class="fw">NK-005</td>
-                <td>U308</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>Thép tấm 16mm</td>
-                <td class="tr fw">180.6</td>
-                <td>POSCO VINA</td>
-                <td><span class="h hy">⚠ Kiểm tra lại</span></td>
-                <td>Cần kiểm tra quy cách</td>
-              </tr>
-              <tr>
-                <td>01/03/2026</td>
-                <td class="fw">NK-006</td>
-                <td>E307</td>
-                <td><span class="h hn">PFM</span></td>
-                <td>Sơn epoxy finish</td>
-                <td class="tr fw">68.4</td>
-                <td>Supplier Local</td>
-                <td><span class="h hg">✓ Đạt</span></td>
-                <td>Hoàn thành lô PFM E307</td>
-              </tr>
-              <tr>
-                <td>08/03/2026</td>
-                <td class="fw">NK-007</td>
-                <td>V261</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>Thép tấm 25mm</td>
-                <td class="tr fw">420.1</td>
-                <td>Marubeni</td>
-                <td><span class="h hg">✓ Đạt</span></td>
-                <td>Lô chính V261</td>
-              </tr>
-              <tr>
-                <td>15/03/2026</td>
-                <td class="fw">NK-008</td>
-                <td>U285</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>Thép hình IPE400</td>
-                <td class="tr fw">390.2</td>
-                <td>POSCO VINA</td>
-                <td><span class="h hg">✓ Đạt</span></td>
-                <td>POSCO — Lô 2</td>
-              </tr>
-              <tr>
-                <td>22/03/2026</td>
-                <td class="fw">NK-009</td>
-                <td>U308</td>
-                <td><span class="h hg">ACS</span></td>
-                <td>Bộ bu-lông M20</td>
-                <td class="tr fw">12.8</td>
-                <td>Fastener VN</td>
-                <td><span class="h hg">✓ Đạt</span></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>01/04/2026</td>
-                <td class="fw">NK-010</td>
-                <td>V261</td>
-                <td><span class="h hy">WDM</span></td>
-                <td>Dây hàn CO2 ER70S</td>
-                <td class="tr fw">18.5</td>
-                <td>Welding VN</td>
-                <td><span class="h hg">✓ Đạt</span></td>
-                <td>Bổ sung WDM V261</td>
-              </tr>
-              <tr style="background:#fdf9f0">
-                <td colspan="9" style="font-size:.7rem;color:var(--muted);font-style:italic;padding:6px 9px;">⬇ 18 lô
-                  trước đó (năm 2025 & T1/2026) không hiển thị — dùng bộ lọc để xem</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Lô hàng dự kiến về -->
-      <div class="card">
-        <div class="ct">Lô Hàng đang trên đường — Dự kiến về kho theo Dự án<span class="badge ba">6 lô · ≈ 35,060
-            T</span></div>
-        <div class="tw">
-          <table>
-            <thead>
-              <tr>
-                <th>Mã lô</th>
-                <th>Dự án</th>
-                <th>Loại VT</th>
-                <th>Hạng mục</th>
-                <th class="tr">KL dự kiến (T)</th>
-                <th>Nhà cung cấp</th>
-                <th>Hình thức VT</th>
-                <th>ETA dự kiến</th>
-                <th>Trạng thái vận chuyển</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="fw">DK-001</td>
-                <td>V314</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>Tấm thép mixed 12–25mm</td>
-                <td class="tr fw">1,131</td>
-                <td>Marubeni</td>
-                <td>Nhập khẩu / Tàu biển</td>
-                <td><strong>15/04/2026</strong></td>
-                <td><span class="dot da"></span>Đang vận chuyển</td>
-              </tr>
-              <tr>
-                <td class="fw">DK-002</td>
-                <td>V314</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>Thép hình W-shape</td>
-                <td class="tr fw">53,922</td>
-                <td>JFE Japan</td>
-                <td>Nhập khẩu / Tàu biển</td>
-                <td><strong>20/04/2026</strong></td>
-                <td><span class="dot da"></span>Đang vận chuyển</td>
-              </tr>
-              <tr>
-                <td class="fw">DK-003</td>
-                <td>U285</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>Thép hình IPE / HEA</td>
-                <td class="tr fw">31,125</td>
-                <td>POSCO VINA</td>
-                <td>Nội địa / Xe tải</td>
-                <td><strong>25/04/2026</strong></td>
-                <td><span class="dot dg"></span>Chuẩn bị xuất hàng</td>
-              </tr>
-              <tr>
-                <td class="fw">DK-004</td>
-                <td>U308</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>Thép tấm 12mm</td>
-                <td class="tr fw">47.6</td>
-                <td>POSCO VINA</td>
-                <td>Nội địa / Xe tải</td>
-                <td><strong>30/04/2026</strong></td>
-                <td><span class="dot dg"></span>Đang vận chuyển</td>
-              </tr>
-              <tr>
-                <td class="fw">DK-005</td>
-                <td>V261</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>Thép tấm 20mm bổ sung</td>
-                <td class="tr fw">30</td>
-                <td>Marubeni</td>
-                <td>Nhập khẩu / Tàu biển</td>
-                <td><strong>10/05/2026</strong></td>
-                <td><span class="dot db"></span>Chờ xuất cảng</td>
-              </tr>
-              <tr>
-                <td class="fw">DK-006</td>
-                <td>E307</td>
-                <td><span class="h hn">PFM</span></td>
-                <td>Sơn topcoat (lô cuối)</td>
-                <td class="tr fw">143</td>
-                <td>AkzoNobel</td>
-                <td>Nội địa</td>
-                <td><strong>12/04/2026</strong></td>
-                <td><span class="dot dg"></span>Đang giao hàng</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="row c2">
-        <div class="card">
-          <div class="ct">
-            Kế hoạch vs Thực tế Nhập kho theo Tháng
-            <div class="view-toggle" id="toggle-c3-khtt">
-              <button class="vt-btn active" onclick="setView('c3-kh-tt','cumul',this)">Lũy kế</button>
-              <button class="vt-btn" onclick="setView('c3-kh-tt','value',this)">Giá trị</button>
-            </div>
-          </div>
-          <div class="cw"><canvas id="c3-kh-tt"></canvas></div>
-        </div>
-        <div class="card">
-          <div class="ct">Đánh giá Nhà cung cấp (QC & Lead time)</div>
-          <div class="tw-lg">
-            <table style="text-align:center;">
-              <thead>
-                <tr>
-                  <th style="text-align:left;">Nhà cung cấp</th>
-                  <th class="tc">Số lô</th>
-                  <th class="tc">Tỷ lệ QC</th>
-                  <th class="tc">Lead time TB (ngày)</th>
-                  <th>Đánh giá</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="fw" style="text-align:left;">JFE Japan</td>
-                  <td class="tc">3</td>
-                  <td class="tc" style="color:var(--green);font-weight:600">100%</td>
-                  <td class="tc">45</td>
-                  <td><span class="h hg">Tốt</span></td>
-                </tr>
-                <tr>
-                  <td class="fw" style="text-align:left;">POSCO VINA</td>
-                  <td class="tc">5</td>
-                  <td class="tc" style="color:var(--orange);font-weight:600">80%</td>
-                  <td class="tc">12</td>
-                  <td><span class="h hy">Khá</span></td>
-                </tr>
-                <tr>
-                  <td class="fw" style="text-align:left;">Marubeni</td>
-                  <td class="tc">2</td>
-                  <td class="tc" style="color:var(--green);font-weight:600">100%</td>
-                  <td class="tc">40</td>
-                  <td><span class="h hg">Tốt</span></td>
-                </tr>
-                <tr>
-                  <td class="fw" style="text-align:left;">Supplier Local</td>
-                  <td class="tc">2</td>
-                  <td class="tc" style="color:var(--green);font-weight:600">100%</td>
-                  <td class="tc">5</td>
-                  <td><span class="h hg">Tốt</span></td>
-                </tr>
-                <tr>
-                  <td class="fw" style="text-align:left;">Fastener VN</td>
-                  <td class="tc">2</td>
-                  <td class="tc" style="color:var(--green);font-weight:600">100%</td>
-                  <td class="tc">3</td>
-                  <td><span class="h hg">Tốt</span></td>
-                </tr>
-                <tr>
-                  <td class="fw" style="text-align:left;">Welding VN</td>
-                  <td class="tc">1</td>
-                  <td class="tc" style="color:var(--green);font-weight:600">100%</td>
-                  <td class="tc">2</td>
-                  <td><span class="h hg">Tốt</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div><!-- /p3 -->
+      </div><!-- /p4 -->
 
 
-    <!-- ══════════════════════════════════
-       P4 — XUẤT KHO
-  ══════════════════════════════════ -->
-    <div id="p4" class="page">
-      <!-- Row 1: 4 Vùng -->
-      <div class="row" style="grid-template-columns: 2.5fr 2fr 2fr 5.5fr; gap:15px;">
-        <!-- Vùng 1 -->
-        <div class="card" style="align-items:center;">
-          <div class="ct" style="justify-content:flex-start;width:100%;margin-bottom:-10px;">Trạng thái đợt xuất</div>
-          <div style="width:100%;max-width:140px;position:relative;margin-top:10px;">
-            <canvas id="c4-status-donut" height="120"></canvas>
-            <div
-              style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-weight:700;color:var(--dark);text-align:center;line-height:1.2;">
-              16.59K<br><span style="font-size:.7rem;font-weight:400;color:var(--muted)">(97.89%)</span></div>
-          </div>
-          <div
-            style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;font-size:.72rem;color:var(--muted);margin-top:8px;">
-            <div style="display:flex;align-items:center;gap:3px;"><span
-                style="color:var(--green);font-size:1.1rem;line-height:0">●</span> Đúng hạn</div>
-            <div style="display:flex;align-items:center;gap:3px;"><span
-                style="color:var(--red);font-size:1.1rem;line-height:0">●</span> Chậm</div>
-            <div style="display:flex;align-items:center;gap:3px;"><span
-                style="color:var(--amber);font-size:1.1rem;line-height:0">●</span> Chưa xác nhận</div>
-          </div>
-        </div>
-        <!-- Vùng 2 -->
-        <div style="display:flex;flex-direction:column;gap:15px;">
-          <div class="card kpi" style="flex:1;padding:12px 15px;">
-            <div class="kl">Thực tế xuất</div>
-            <div class="kv" style="color:var(--dark)">16,594 <span
-                style="font-size:1.2rem;color:var(--dark)">97.89%</span></div>
-            <div class="ks">Tháng trước: N/A</div>
-          </div>
-          <div class="card kpi" style="flex:1;padding:12px 15px;">
-            <div class="kl">Tỷ lệ hoàn hàng</div>
-            <div class="kv" style="font-size:1.4rem;color:var(--dark)">606 <span
-                style="font-size:1rem;font-weight:400;color:var(--muted)">|| 3.65% || 34.4M</span></div>
-          </div>
-        </div>
-        <!-- Vùng 3 -->
-        <div style="display:flex;flex-direction:column;gap:15px;">
-          <div class="card kpi" style="flex:1;padding:12px 15px;">
-            <div class="kl">Tổng giá trị xuất</div>
-            <div class="kv" style="color:var(--dark)">980.9M</div>
-            <div class="ks">Tháng trước: N/A</div>
-          </div>
-          <div class="card kpi" style="flex:1;padding:12px 15px;">
-            <div class="kl">Giá trị hàng chưa xuất</div>
-            <div class="kv" style="font-size:1.4rem;color:var(--dark)">19.7M <span
-                style="font-size:1rem;font-weight:400;color:var(--muted)">|| 2.09%</span></div>
-          </div>
-        </div>
-        <!-- Vùng 4 -->
-        <div class="card" style="padding:14px;display:flex;flex-direction:column;">
-          <div class="ct" style="font-size:.79rem;margin-bottom:6px;">Xu hướng Xuất kho T01–T04</div>
-          <div style="flex:1;min-height:0;position:relative;"><canvas id="c4-trend-mini"></canvas></div>
-        </div>
-      </div>
-
-      <!-- Row 2: 2 Cột 4fr 8fr -->
-      <div class="row" style="grid-template-columns: 4fr 8fr;">
-        <div class="card">
-          <div class="ct" style="justify-content:space-between;">
-            Tổng xuất theo Sản phẩm và trạng thái
-            <div class="view-toggle">
-              <button class="vt-btn active" onclick="swapByType('c4-by-type','sp',this)">Sản phẩm</button>
-              <button class="vt-btn" onclick="swapByType('c4-by-type','kho',this)">Kho</button>
-            </div>
-          </div>
-          <div style="margin-bottom:8px;font-size:.75rem;"><span style="color:var(--teal);margin-right:10px;">● Xuất
-              thực tế</span> <span style="color:var(--red)">● Hoàn trả</span></div>
-          <div class="cw" style="height:300px;"><canvas id="c4-by-type"></canvas></div>
-        </div>
-        <div class="card">
-          <div class="ct">Chi tiết xuất kho theo Nhóm</div>
-          <div class="tw-lg" style="max-height:340px;overflow-y:auto;border-bottom:none;">
-            <table>
-              <thead style="position:sticky;top:0;z-index:2;background:#fff;">
-                <tr>
-                  <th style="text-align:left">Nhóm hạng mục</th>
-                  <th class="tr">Xuất TT</th>
-                  <th class="tr">Tổng xuất</th>
-                  <th>Trạng thái</th>
-                  <th>Ngày xuất KH</th>
-                  <th>Ngày TT</th>
-                  <th class="tr">Giá trị</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="sub-row expanded"
-                  onclick="var p=this.nextElementSibling; while(p && p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
-                  <td colspan="7" style="font-weight:700;background:#f8f9fa;cursor:pointer;">⊟ 1. MMS (Vật tư chính)
-                  </td>
-                </tr>
-                <tr class="stage-row">
-                  <td style="padding-left:24px;font-weight:600;">↳ Casing Shp2 — Lot#1</td>
-                  <td class="tr fw">1727</td>
-                  <td class="tr">1761</td>
-                  <td><span class="h hg">Đúng hạn</span></td>
-                  <td>3/10/2026</td>
-                  <td>3/10/2026</td>
-                  <td class="tr" style="color:var(--green)">103,153,000</td>
-                </tr>
-                <tr class="stage-row">
-                  <td style="padding-left:40px;color:var(--muted);font-size:.8rem;">PX00077</td>
-                  <td class="tr">8</td>
-                  <td class="tr">8</td>
-                  <td><span class="h hr">Hoàn thành muộn</span></td>
-                  <td>3/13/2026</td>
-                  <td>3/15/2026</td>
-                  <td class="tr" style="color:var(--green)">181,000</td>
-                </tr>
-                <tr class="stage-row">
-                  <td style="padding-left:40px;color:var(--muted);font-size:.8rem;">PX00231</td>
-                  <td class="tr">9</td>
-                  <td class="tr">9</td>
-                  <td><span class="h hg">Đúng hạn</span></td>
-                  <td>3/13/2026</td>
-                  <td>3/12/2026</td>
-                  <td class="tr" style="color:var(--green)">425,000</td>
-                </tr>
-                <tr class="stage-row">
-                  <td style="padding-left:40px;color:var(--muted);font-size:.8rem;">PX00856</td>
-                  <td class="tr">8</td>
-                  <td class="tr">8</td>
-                  <td><span class="h hg">Đúng hạn</span></td>
-                  <td>3/20/2026</td>
-                  <td>3/20/2026</td>
-                  <td class="tr" style="color:var(--green)">110,000</td>
-                </tr>
-                <tr class="sub-row expanded"
-                  onclick="var p=this.nextElementSibling; while(p && p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
-                  <td colspan="7" style="font-weight:700;background:#f8f9fa;cursor:pointer;">⊟ Kho chi nhánh 2</td>
-                </tr>
-                <tr class="stage-row">
-                  <td style="padding-left:24px;font-weight:600;">↳ Stack Shp3</td>
-                  <td class="tr fw">119</td>
-                  <td class="tr">122</td>
-                  <td><span class="h hg">Đúng hạn</span></td>
-                  <td>3/13/2026</td>
-                  <td>3/13/2026</td>
-                  <td class="tr" style="color:var(--green)">6,866,000</td>
-                </tr>
-                <tr class="stage-row">
-                  <td style="padding-left:40px;color:var(--muted);font-size:.8rem;">PX00047</td>
-                  <td class="tr">6</td>
-                  <td class="tr">6</td>
-                  <td><span class="h hr">Hoàn thành muộn</span></td>
-                  <td>3/14/2026</td>
-                  <td>3/16/2026</td>
-                  <td class="tr" style="color:var(--green)">477,000</td>
-                </tr>
-                <tr class="stage-row">
-                  <td style="padding-left:40px;color:var(--muted);font-size:.8rem;">PX00201</td>
-                  <td class="tr">8</td>
-                  <td class="tr">8</td>
-                  <td><span class="h hg">Đúng hạn</span></td>
-                  <td>3/13/2026</td>
-                  <td>3/10/2026</td>
-                  <td class="tr" style="color:var(--green)">399,000</td>
-                </tr>
-              </tbody>
-              <tfoot style="position:sticky;bottom:0;z-index:2;background:#fff;border-top:2px solid var(--border)">
-                <tr style="font-weight:bold">
-                  <td style="text-align:left">Total</td>
-                  <td class="tr">16524</td>
-                  <td class="tr">16880</td>
-                  <td>Đúng hạn</td>
-                  <td>3/10/2026</td>
-                  <td>3/10/2026</td>
-                  <td class="tr">977,142,000</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- Row 3: Xu hướng xuất kho c4-trend -->
-      <div class="row">
-        <div class="card">
-          <div class="ct">
-            Xu hướng Xuất kho — KH vs Thực tế + % Đạt (Tháng)
-            <div class="view-toggle" id="toggle-c4">
-              <button class="vt-btn active" onclick="setView('c4-trend','cumul',this)">Lũy kế</button>
-              <button class="vt-btn" onclick="setView('c4-trend','value',this)">Giá trị</button>
-            </div>
-          </div>
-          <div class="cw"><canvas id="c4-trend"></canvas></div>
-        </div>
-      </div>
-
-      <!-- Shipment progress bar + Transaction log -->
-      <div class="row c2">
-        <div class="card">
-          <div class="ct">% Hoàn thành từng Đợt Xuất (Shipment / Package)</div>
-          <div class="cw"><canvas id="c4-ship"></canvas></div>
-        </div>
-        <div class="card">
-          <div class="ct">Tóm tắt KH vs TT — Chi tiết Đợt xuất</div>
-          <div class="tw">
-            <table>
-              <thead>
-                <tr>
-                  <th>Đợt</th>
-                  <th>Dự án</th>
-                  <th>Hạng mục</th>
-                  <th>Loại</th>
-                  <th class="tr">KH (T)</th>
-                  <th class="tr">Xuất (T)</th>
-                  <th>% HT</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Lot#1 Shp2</td>
-                  <td>F0243</td>
-                  <td>Casing</td>
-                  <td>MMS</td>
-                  <td class="tr">148</td>
-                  <td class="tr">148</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fg" style="width:100%"></div>
-                      </div><span class="bp">100%</span>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Shp3 P2B</td>
-                  <td>F0243</td>
-                  <td>Stack</td>
-                  <td>MMS</td>
-                  <td class="tr">61</td>
-                  <td class="tr">60</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fg" style="width:98%"></div>
-                      </div><span class="bp">98%</span>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Lot#1</td>
-                  <td>V314</td>
-                  <td>Structure</td>
-                  <td>MMS</td>
-                  <td class="tr">320</td>
-                  <td class="tr">288</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fg" style="width:90%"></div>
-                      </div><span class="bp">90%</span>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Pack 3BA</td>
-                  <td>F0243</td>
-                  <td>Conveyor</td>
-                  <td>MMS</td>
-                  <td class="tr">286</td>
-                  <td class="tr">200</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fa" style="width:70%"></div>
-                      </div><span class="bp" style="color:var(--orange)">70%</span>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Lot#2</td>
-                  <td>B272</td>
-                  <td>Beam Pkg</td>
-                  <td>MMS</td>
-                  <td class="tr">150</td>
-                  <td class="tr">90</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fr" style="width:60%"></div>
-                      </div><span class="bp" style="color:var(--red)">60%</span>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- Transaction log detail table -->
-      <div class="card">
-        <div class="ct">
-          Nhật ký Xuất kho — Chi tiết từng Lần xuất vật tư vào Sản xuất
-          <span class="badge bg">28 lần xuất lũy kế</span>
-        </div>
-        <div class="tw-lg">
-          <table>
-            <thead>
-              <tr>
-                <th>Ngày xuất</th>
-                <th>Mã đợt</th>
-                <th>Dự án</th>
-                <th>Hạng mục sản xuất</th>
-                <th>Loại VT</th>
-                <th>Giai đoạn SX</th>
-                <th class="tr">KL xuất (T)</th>
-                <th>Người phê duyệt</th>
-                <th>Tình trạng</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>18/01/2026</td>
-                <td class="fw">XK-001</td>
-                <td>V314</td>
-                <td>Main Frame — Section A</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>CUT</td>
-                <td class="tr fw">185.4</td>
-                <td>Mr. Hùng</td>
-                <td><span class="h hg">Đã sử dụng</span></td>
-              </tr>
-              <tr>
-                <td>25/01/2026</td>
-                <td class="fw">XK-002</td>
-                <td>F0243</td>
-                <td>Casing Shp2 — Lot#1</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>FAB</td>
-                <td class="tr fw">148.0</td>
-                <td>Mr. Tuấn</td>
-                <td><span class="h hg">Đã sử dụng</span></td>
-              </tr>
-              <tr>
-                <td>03/02/2026</td>
-                <td class="fw">XK-003</td>
-                <td>F0243</td>
-                <td>Stack Shp3 — Pack2B</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>FAB</td>
-                <td class="tr fw">60.2</td>
-                <td>Mr. Tuấn</td>
-                <td><span class="h hg">Đã sử dụng</span></td>
-              </tr>
-              <tr>
-                <td>10/02/2026</td>
-                <td class="fw">XK-004</td>
-                <td>V314</td>
-                <td>Platform Extension</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>FAB</td>
-                <td class="tr fw">102.6</td>
-                <td>Mr. Hùng</td>
-                <td><span class="h hg">Đã sử dụng</span></td>
-              </tr>
-              <tr>
-                <td>18/02/2026</td>
-                <td class="fw">XK-005</td>
-                <td>M304</td>
-                <td>Casing U#3 — bổ sung</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>FAB</td>
-                <td class="tr fw">125.0</td>
-                <td>Mr. Nam</td>
-                <td><span class="h hg">Đã sử dụng</span></td>
-              </tr>
-              <tr>
-                <td>25/02/2026</td>
-                <td class="fw">XK-006</td>
-                <td>U308</td>
-                <td>Pipe Rack — Section 1</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>CUT</td>
-                <td class="tr fw">80.5</td>
-                <td>Mr. Minh</td>
-                <td><span class="h hg">Đã sử dụng</span></td>
-              </tr>
-              <tr>
-                <td>05/03/2026</td>
-                <td class="fw">XK-007</td>
-                <td>F0243</td>
-                <td>Conveyor — Pack3BA</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>CUT</td>
-                <td class="tr fw">200.0</td>
-                <td>Mr. Tuấn</td>
-                <td><span class="h hy">Đang sử dụng</span></td>
-              </tr>
-              <tr>
-                <td>12/03/2026</td>
-                <td class="fw">XK-008</td>
-                <td>V314</td>
-                <td>Conveyor Bridge</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>BH</td>
-                <td class="tr fw">55.2</td>
-                <td>Mr. Hùng</td>
-                <td><span class="h hg">Đã sử dụng</span></td>
-              </tr>
-              <tr>
-                <td>20/03/2026</td>
-                <td class="fw">XK-009</td>
-                <td>B272</td>
-                <td>Beam Assembly — Lot2</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>BH</td>
-                <td class="tr fw">90.0</td>
-                <td>Mr. Đức</td>
-                <td><span class="h hy">Đang sử dụng</span></td>
-              </tr>
-              <tr>
-                <td>28/03/2026</td>
-                <td class="fw">XK-010</td>
-                <td>U285</td>
-                <td>Main Frame — Pack1</td>
-                <td><span class="h hb">MMS</span></td>
-                <td>CUT</td>
-                <td class="tr fw">110.0</td>
-                <td>Mr. Minh</td>
-                <td><span class="h hy">Đang sử dụng</span></td>
-              </tr>
-              <tr style="background:#fdf9f0">
-                <td colspan="9" style="font-size:.7rem;color:var(--muted);font-style:italic;padding:6px 9px;">⬇ 18 lần
-                  xuất trước đó không hiển thị — dùng bộ lọc để xem thêm</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div><!-- /p4 -->
-
-
-    <!-- ══════════════════════════════════
+      <!-- ══════════════════════════════════
        P5 — TỒN KHO & MỨC ĐÁP ỨNG
   ══════════════════════════════════ -->
-    <div id="p5" class="page">
+      <div id="p5" class="page">
 
-      <!-- ─── PHẦN 1: HIỆN TRẠNG TỒN KHO ─────────────── -->
-      <div><span class="sec-label">📦 Phần 1 — Hiện trạng Tồn kho cuối kỳ</span></div>
+        <!-- ─── PHẦN 1: HIỆN TRẠNG TỒN KHO ─────────────── -->
+        <div><span class="sec-label">📦 Phần 1 — Hiện trạng Tồn kho cuối kỳ</span></div>
 
-      <!-- Row 1: 3 Vùng -->
-      <div class="row" style="grid-template-columns: 3fr 2fr 7fr; gap:15px;">
-        <!-- Vùng 1 -->
-        <div class="card" style="align-items:center;">
-          <div class="ct" style="justify-content:flex-start;width:100%;font-size:.9rem;">Tổng tồn cuối kỳ</div>
-          <div style="width:100%;max-width:180px;position:relative;height:110px;">
-            <canvas id="c5-gauge" height="110"></canvas>
-            <div style="text-align:center;margin-top:-25px;">
-              <div style="font-size:1.6rem;font-weight:700;">15.02K</div>
-            </div>
-          </div>
-        </div>
-        <!-- Vùng 2 -->
-        <div style="display:flex;flex-direction:column;gap:15px;">
-          <div class="card kpi" style="flex:1;padding:12px 15px;">
-            <div class="kl">Giá trị tồn kho cuối kỳ</div>
-            <div class="kv" style="color:var(--dark)">875.80M</div>
-            <div class="ks">Tháng trước: ▲ 398.47% | 175.70M</div>
-          </div>
-          <div class="card kpi" style="flex:1;padding:12px 15px;">
-            <div class="kl">Vòng quay hàng tồn</div>
-            <div class="kv" style="font-size:1.4rem;color:var(--dark)">1.86 <span
-                style="font-size:1rem;color:var(--muted)">| 16.17ng</span></div>
-          </div>
-        </div>
-        <!-- Vùng 3 -->
-        <div class="card" style="padding:14px;display:flex;flex-direction:column;">
-          <div class="ct" style="margin-bottom:6px;font-size:.79rem;">
-            Xu hướng Tồn kho theo Tuần
-          </div>
-          <div style="flex:1;min-height:0;position:relative;"><canvas id="c5-weekly"></canvas></div>
-        </div>
-      </div>
-
-
-      <!-- Row 3: Heatmap và Bar Charts -->
-      <div class="row" style="grid-template-columns: 6fr 6fr; gap:15px;">
-        <!-- Cột trái Heatmap -->
-        <div class="card" style="padding:0;">
-          <div class="tw-lg" style="width:100%;max-height:360px;overflow-y:auto;border:none;">
-            <table style="text-align:center;">
-              <thead style="position:sticky;top:0;z-index:2;background:#fff;">
-                <tr>
-                  <th style="min-width:140px;text-align:left;">Nhóm sản phẩm</th>
-                  <th>Kho V314</th>
-                  <th>Kho U285</th>
-                  <th>Kho M304</th>
-                  <th>Kho E307</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="sub-row expanded"
-                  onclick="var p=this.nextElementSibling; while(p && p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
-                  <td colspan="5" style="font-weight:700;background:#f8f9fa;text-align:left;cursor:pointer;">⊟ 1. MMS
-                    (Vật tư chính)</td>
-                </tr>
-                <tr class="stage-row">
-                  <td style="padding-left:15px;color:var(--dark);font-size:.8rem;text-align:left;">Thép hình IPE/HEA
-                  </td>
-                  <td style="background:rgba(129,99,194,.5);color:#fff">29.6</td>
-                  <td style="background:rgba(129,99,194,.1)">13.0</td>
-                  <td style="background:rgba(129,99,194,.7);color:#fff">42.9</td>
-                  <td style="background:rgba(129,99,194,.2)">15.2</td>
-                </tr>
-                <tr class="stage-row">
-                  <td style="padding-left:15px;color:var(--dark);font-size:.8rem;text-align:left;">Thép tấm mixed</td>
-                  <td style="background:rgba(129,99,194,.3)">20.4</td>
-                  <td style="background:rgba(129,99,194,.6);color:#fff">38.0</td>
-                  <td style="background:rgba(129,99,194,.1)">10.5</td>
-                  <td style="background:rgba(129,99,194,.8);color:#fff">51.7</td>
-                </tr>
-                <tr class="sub-row expanded"
-                  onclick="var p=this.nextElementSibling; while(p && p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
-                  <td colspan="5" style="font-weight:700;background:#f8f9fa;text-align:left;cursor:pointer;">⊟ 2. ACS
-                    (Phụ kiện)</td>
-                </tr>
-                <tr class="stage-row">
-                  <td style="padding-left:15px;color:var(--dark);font-size:.8rem;text-align:left;">Bu-lông M24</td>
-                  <td style="background:rgba(129,99,194,.2)">15.1</td>
-                  <td style="background:rgba(129,99,194,.4)">25.2</td>
-                  <td style="background:rgba(129,99,194,.1)">8.4</td>
-                  <td style="background:rgba(129,99,194,.3)">18.5</td>
-                </tr>
-                <tr class="sub-row expanded"
-                  onclick="var p=this.nextElementSibling; while(p && p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
-                  <td colspan="5" style="font-weight:700;background:#f8f9fa;text-align:left;cursor:pointer;">⊟ 3.
-                    WDM/PFM</td>
-                </tr>
-                <tr class="stage-row">
-                  <td style="padding-left:15px;color:var(--dark);font-size:.8rem;text-align:left;">Sơn Epoxy</td>
-                  <td style="background:rgba(129,99,194,.1)">5.1</td>
-                  <td style="background:rgba(129,99,194,.2)">9.0</td>
-                  <td style="background:rgba(129,99,194,.5);color:#fff">30.0</td>
-                  <td style="background:rgba(129,99,194,.1)">4.2</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <!-- Cột phải 2 Bar -->
-        <div class="card" style="padding:14px;">
-          <div class="ct" style="margin-bottom:6px;">
-            Tồn kho theo nhóm &amp; Kho
-            <div class="view-toggle">
-              <button class="vt-btn" onclick="swapStockView('val',this)">Giá trị (M)</button>
-              <button class="vt-btn active" onclick="swapStockView('qty',this)">Số lượng (T)</button>
-            </div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-            <div>
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:6px;text-align:center;">Theo nhóm sản phẩm
+        <!-- Row 1: 3 Vùng -->
+        <div class="row" style="grid-template-columns: 3fr 2fr 7fr; gap:15px;">
+          <!-- Vùng 1 -->
+          <div class="card" style="align-items:center;">
+            <div class="ct" style="justify-content:flex-start;width:100%;font-size:.9rem;">Tổng tồn cuối kỳ</div>
+            <div style="width:100%;max-width:180px;position:relative;height:110px;">
+              <canvas id="c5-gauge" height="110"></canvas>
+              <div style="text-align:center;margin-top:-25px;">
+                <div style="font-size:1.6rem;font-weight:700;">15.02K</div>
               </div>
-              <div style="height:200px;position:relative;"><canvas id="c5-stock-type"></canvas></div>
             </div>
-            <div>
-              <div style="font-size:.72rem;color:var(--muted);margin-bottom:6px;text-align:center;">Theo Kho</div>
-              <div style="height:200px;position:relative;"><canvas id="c5-stock-proj"></canvas></div>
+          </div>
+          <!-- Vùng 2 -->
+          <div style="display:flex;flex-direction:column;gap:15px;">
+            <div class="card kpi" style="flex:1;padding:12px 15px;">
+              <div class="kl">Giá trị tồn kho cuối kỳ</div>
+              <div class="kv" style="color:var(--dark)">875.80M</div>
+              <div class="ks">Tháng trước: ▲ 398.47% | 175.70M</div>
+            </div>
+            <div class="card kpi" style="flex:1;padding:12px 15px;">
+              <div class="kl">Vòng quay hàng tồn</div>
+              <div class="kv" style="font-size:1.4rem;color:var(--dark)">1.86 <span
+                  style="font-size:1rem;color:var(--muted)">| 16.17ng</span></div>
+            </div>
+          </div>
+          <!-- Vùng 3 -->
+          <div class="card" style="padding:14px;display:flex;flex-direction:column;">
+            <div class="ct" style="margin-bottom:6px;font-size:.79rem;">
+              Xu hướng Tồn kho theo Tuần
+            </div>
+            <div style="flex:1;min-height:0;position:relative;"><canvas id="c5-weekly"></canvas></div>
+          </div>
+        </div>
+
+
+        <!-- Row 3: Heatmap và Bar Charts -->
+        <div class="row" style="grid-template-columns: 6fr 6fr; gap:15px;">
+          <!-- Cột trái Heatmap -->
+          <div class="card" style="padding:0;">
+            <div class="tw-lg" style="width:100%;max-height:360px;overflow-y:auto;border:none;">
+              <table style="text-align:center;">
+                <thead style="position:sticky;top:0;z-index:2;background:#fff;">
+                  <tr>
+                    <th style="min-width:140px;text-align:left;">Nhóm sản phẩm</th>
+                    <th>Kho V314</th>
+                    <th>Kho U285</th>
+                    <th>Kho M304</th>
+                    <th>Kho E307</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="sub-row expanded"
+                    onclick="var p=this.nextElementSibling; while(p && p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
+                    <td colspan="5" style="font-weight:700;background:#f8f9fa;text-align:left;cursor:pointer;">⊟ 1. MMS
+                      (Vật tư chính)</td>
+                  </tr>
+                  <tr class="stage-row">
+                    <td style="padding-left:15px;color:var(--dark);font-size:.8rem;text-align:left;">Thép hình IPE/HEA
+                    </td>
+                    <td style="background:rgba(129,99,194,.5);color:#fff">29.6</td>
+                    <td style="background:rgba(129,99,194,.1)">13.0</td>
+                    <td style="background:rgba(129,99,194,.7);color:#fff">42.9</td>
+                    <td style="background:rgba(129,99,194,.2)">15.2</td>
+                  </tr>
+                  <tr class="stage-row">
+                    <td style="padding-left:15px;color:var(--dark);font-size:.8rem;text-align:left;">Thép tấm mixed</td>
+                    <td style="background:rgba(129,99,194,.3)">20.4</td>
+                    <td style="background:rgba(129,99,194,.6);color:#fff">38.0</td>
+                    <td style="background:rgba(129,99,194,.1)">10.5</td>
+                    <td style="background:rgba(129,99,194,.8);color:#fff">51.7</td>
+                  </tr>
+                  <tr class="sub-row expanded"
+                    onclick="var p=this.nextElementSibling; while(p && p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
+                    <td colspan="5" style="font-weight:700;background:#f8f9fa;text-align:left;cursor:pointer;">⊟ 2. ACS
+                      (Phụ kiện)</td>
+                  </tr>
+                  <tr class="stage-row">
+                    <td style="padding-left:15px;color:var(--dark);font-size:.8rem;text-align:left;">Bu-lông M24</td>
+                    <td style="background:rgba(129,99,194,.2)">15.1</td>
+                    <td style="background:rgba(129,99,194,.4)">25.2</td>
+                    <td style="background:rgba(129,99,194,.1)">8.4</td>
+                    <td style="background:rgba(129,99,194,.3)">18.5</td>
+                  </tr>
+                  <tr class="sub-row expanded"
+                    onclick="var p=this.nextElementSibling; while(p && p.classList.contains('stage-row')){var v=p.style.display==='none'?'table-row':'none';p.style.display=v;p=p.nextElementSibling;}">
+                    <td colspan="5" style="font-weight:700;background:#f8f9fa;text-align:left;cursor:pointer;">⊟ 3.
+                      WDM/PFM</td>
+                  </tr>
+                  <tr class="stage-row">
+                    <td style="padding-left:15px;color:var(--dark);font-size:.8rem;text-align:left;">Sơn Epoxy</td>
+                    <td style="background:rgba(129,99,194,.1)">5.1</td>
+                    <td style="background:rgba(129,99,194,.2)">9.0</td>
+                    <td style="background:rgba(129,99,194,.5);color:#fff">30.0</td>
+                    <td style="background:rgba(129,99,194,.1)">4.2</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Cột phải 2 Bar -->
+          <div class="card" style="padding:14px;">
+            <div class="ct" style="margin-bottom:6px;">
+              Tồn kho theo nhóm &amp; Kho
+              <div class="view-toggle">
+                <button class="vt-btn" onclick="swapStockView('val',this)">Giá trị (M)</button>
+                <button class="vt-btn active" onclick="swapStockView('qty',this)">Số lượng (T)</button>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+              <div>
+                <div style="font-size:.72rem;color:var(--muted);margin-bottom:6px;text-align:center;">Theo nhóm sản phẩm
+                </div>
+                <div style="height:200px;position:relative;"><canvas id="c5-stock-type"></canvas></div>
+              </div>
+              <div>
+                <div style="font-size:.72rem;color:var(--muted);margin-bottom:6px;text-align:center;">Theo Kho</div>
+                <div style="height:200px;position:relative;"><canvas id="c5-stock-proj"></canvas></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- ─── PHẦN 2: MỨC ĐÁP ỨNG XUẤT ──────────────── -->
-      <div><span class="sec-label">📊 Phần 2 — Đánh giá Mức độ Đáp ứng Kế hoạch Xuất</span></div>
+        <!-- ─── PHẦN 2: MỨC ĐÁP ỨNG XUẤT ──────────────── -->
+        <div><span class="sec-label">📊 Phần 2 — Đánh giá Mức độ Đáp ứng Kế hoạch Xuất</span></div>
 
-      <!-- Coverage KPIs -->
-      <div class="row c4">
-        <div class="card kpi t">
-          <div class="kl">Tồn hiện tại (A)</div>
-          <div class="kv" style="color:var(--teal)">171.5 T</div>
-          <div class="ks">Đang có trong kho thực tế</div>
-        </div>
-        <div class="card kpi b">
-          <div class="kl">Lô hàng dự kiến về (B)</div>
-          <div class="kv" style="color:var(--blue)">≈ 35,060 T</div>
-          <div class="ks">6 lô xác nhận · ETA T4–T5/2026</div>
-        </div>
-        <div class="card kpi o">
-          <div class="kl">KH Xuất còn lại phải thực hiện (C)</div>
-          <div class="kv" style="color:var(--orange)">51,890 T</div>
-          <div class="ks">Theo kế hoạch sản xuất còn lại</div>
-        </div>
-        <div class="card kpi r">
-          <div class="kl">Mức đáp ứng (A+B) / C</div>
-          <div class="kv" style="color:var(--red)">67.8%</div>
-          <div class="ks dn">▼ Thiếu ≈ 16,660 T — cần bổ sung nhập</div>
-        </div>
-      </div>
-
-      <!-- Row A -->
-      <div class="row c7-5" style="grid-template-columns: 5fr 7fr;">
-        <div class="card">
-          <div class="ct">% Đáp ứng Nhu cầu theo Dự án (Tồn + Dự kiến về)</div>
-          <div class="cw-lg"><canvas id="c5-gap-bar"></canvas></div>
-        </div>
-        <div class="card">
-          <div class="ct">Phân tích Đáp ứng chi tiết theo Dự án<span class="badge bb">W14/2026</span></div>
-          <div class="tw-lg">
-            <table>
-              <thead>
-                <tr>
-                  <th style="text-align:left;">Dự án</th>
-                  <th class="tr">Tồn kho (T)</th>
-                  <th class="tr">Dự kiến về (T)</th>
-                  <th class="tr">Tổng sẵn có (T)</th>
-                  <th class="tr">KH Xuất còn (T)</th>
-                  <th style="min-width:120px;">% Đáp ứng</th>
-                  <th>Nhận định</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="fw">V314</td>
-                  <td class="tr">38.0</td>
-                  <td class="tr">55,053</td>
-                  <td class="tr fw" style="color:var(--teal)">55,091</td>
-                  <td class="tr">3,200</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fg" style="width:100%"></div>
-                      </div><span class="bp" style="color:var(--green)">100%</span>
-                    </div>
-                  </td>
-                  <td><span class="h hg" style="white-space:nowrap;">Đủ nếu về đúng hạn</span></td>
-                </tr>
-                <tr>
-                  <td class="fw">U285</td>
-                  <td class="tr">13.0</td>
-                  <td class="tr">31,125</td>
-                  <td class="tr fw" style="color:var(--teal)">31,138</td>
-                  <td class="tr">850</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fg" style="width:100%"></div>
-                      </div><span class="bp" style="color:var(--green)">100%</span>
-                    </div>
-                  </td>
-                  <td><span class="h hg" style="white-space:nowrap;">Đủ nếu về đúng hạn</span></td>
-                </tr>
-                <tr>
-                  <td class="fw">U308</td>
-                  <td class="tr">51.7</td>
-                  <td class="tr">47.6</td>
-                  <td class="tr fw" style="color:var(--orange)">99.3</td>
-                  <td class="tr">520</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fr" style="width:19%"></div>
-                      </div><span class="bp" style="color:var(--red)">19%</span>
-                    </div>
-                  </td>
-                  <td><span class="h hr" style="white-space:nowrap;">Cực thiếu — cần nhập thêm</span></td>
-                </tr>
-                <tr>
-                  <td class="fw">E307</td>
-                  <td class="tr">5.1</td>
-                  <td class="tr">143</td>
-                  <td class="tr fw" style="color:var(--teal)">148.1</td>
-                  <td class="tr">142</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fg" style="width:100%"></div>
-                      </div><span class="bp" style="color:var(--green)">104%</span>
-                    </div>
-                  </td>
-                  <td><span class="h hg">Đủ</span></td>
-                </tr>
-                <tr>
-                  <td class="fw">V261</td>
-                  <td class="tr">48.5</td>
-                  <td class="tr">30</td>
-                  <td class="tr fw" style="color:var(--teal)">78.5</td>
-                  <td class="tr">55</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fg" style="width:100%"></div>
-                      </div><span class="bp" style="color:var(--green)">143%</span>
-                    </div>
-                  </td>
-                  <td><span class="h hg">Dư · tốt</span></td>
-                </tr>
-                <tr>
-                  <td class="fw">M306</td>
-                  <td class="tr">15.2</td>
-                  <td class="tr">0</td>
-                  <td class="tr fw" style="color:var(--teal)">15.2</td>
-                  <td class="tr">12</td>
-                  <td>
-                    <div class="bl-row">
-                      <div class="bl-track">
-                        <div class="bl-fill fg" style="width:100%"></div>
-                      </div><span class="bp" style="color:var(--green)">127%</span>
-                    </div>
-                  </td>
-                  <td><span class="h hg">Đủ</span></td>
-                </tr>
-              </tbody>
-            </table>
+        <!-- Coverage KPIs -->
+        <div class="row c4">
+          <div class="card kpi t">
+            <div class="kl">Tồn hiện tại (A)</div>
+            <div class="kv" style="color:var(--teal)">171.5 T</div>
+            <div class="ks">Đang có trong kho thực tế</div>
+          </div>
+          <div class="card kpi b">
+            <div class="kl">Lô hàng dự kiến về (B)</div>
+            <div class="kv" style="color:var(--blue)">≈ 35,060 T</div>
+            <div class="ks">6 lô xác nhận · ETA T4–T5/2026</div>
+          </div>
+          <div class="card kpi o">
+            <div class="kl">KH Xuất còn lại phải thực hiện (C)</div>
+            <div class="kv" style="color:var(--orange)">51,890 T</div>
+            <div class="ks">Theo kế hoạch sản xuất còn lại</div>
+          </div>
+          <div class="card kpi r">
+            <div class="kl">Mức đáp ứng (A+B) / C</div>
+            <div class="kv" style="color:var(--red)">67.8%</div>
+            <div class="ks dn">▼ Thiếu ≈ 16,660 T — cần bổ sung nhập</div>
           </div>
         </div>
-      </div>
 
-    </div><!-- /p5 -->
+        <!-- Row A -->
+        <div class="row c7-5" style="grid-template-columns: 5fr 7fr;">
+          <div class="card">
+            <div class="ct">% Đáp ứng Nhu cầu theo Dự án (Tồn + Dự kiến về)</div>
+            <div class="cw-lg"><canvas id="c5-gap-bar"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="ct">Phân tích Đáp ứng chi tiết theo Dự án<span class="badge bb">W14/2026</span></div>
+            <div class="tw-lg">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="text-align:left;">Dự án</th>
+                    <th class="tr">Tồn kho (T)</th>
+                    <th class="tr">Dự kiến về (T)</th>
+                    <th class="tr">Tổng sẵn có (T)</th>
+                    <th class="tr">KH Xuất còn (T)</th>
+                    <th style="min-width:120px;">% Đáp ứng</th>
+                    <th>Nhận định</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="fw">V314</td>
+                    <td class="tr">38.0</td>
+                    <td class="tr">55,053</td>
+                    <td class="tr fw" style="color:var(--teal)">55,091</td>
+                    <td class="tr">3,200</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fg" style="width:100%"></div>
+                        </div><span class="bp" style="color:var(--green)">100%</span>
+                      </div>
+                    </td>
+                    <td><span class="h hg" style="white-space:nowrap;">Đủ nếu về đúng hạn</span></td>
+                  </tr>
+                  <tr>
+                    <td class="fw">U285</td>
+                    <td class="tr">13.0</td>
+                    <td class="tr">31,125</td>
+                    <td class="tr fw" style="color:var(--teal)">31,138</td>
+                    <td class="tr">850</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fg" style="width:100%"></div>
+                        </div><span class="bp" style="color:var(--green)">100%</span>
+                      </div>
+                    </td>
+                    <td><span class="h hg" style="white-space:nowrap;">Đủ nếu về đúng hạn</span></td>
+                  </tr>
+                  <tr>
+                    <td class="fw">U308</td>
+                    <td class="tr">51.7</td>
+                    <td class="tr">47.6</td>
+                    <td class="tr fw" style="color:var(--orange)">99.3</td>
+                    <td class="tr">520</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fr" style="width:19%"></div>
+                        </div><span class="bp" style="color:var(--red)">19%</span>
+                      </div>
+                    </td>
+                    <td><span class="h hr" style="white-space:nowrap;">Cực thiếu — cần nhập thêm</span></td>
+                  </tr>
+                  <tr>
+                    <td class="fw">E307</td>
+                    <td class="tr">5.1</td>
+                    <td class="tr">143</td>
+                    <td class="tr fw" style="color:var(--teal)">148.1</td>
+                    <td class="tr">142</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fg" style="width:100%"></div>
+                        </div><span class="bp" style="color:var(--green)">104%</span>
+                      </div>
+                    </td>
+                    <td><span class="h hg">Đủ</span></td>
+                  </tr>
+                  <tr>
+                    <td class="fw">V261</td>
+                    <td class="tr">48.5</td>
+                    <td class="tr">30</td>
+                    <td class="tr fw" style="color:var(--teal)">78.5</td>
+                    <td class="tr">55</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fg" style="width:100%"></div>
+                        </div><span class="bp" style="color:var(--green)">143%</span>
+                      </div>
+                    </td>
+                    <td><span class="h hg">Dư · tốt</span></td>
+                  </tr>
+                  <tr>
+                    <td class="fw">M306</td>
+                    <td class="tr">15.2</td>
+                    <td class="tr">0</td>
+                    <td class="tr fw" style="color:var(--teal)">15.2</td>
+                    <td class="tr">12</td>
+                    <td>
+                      <div class="bl-row">
+                        <div class="bl-track">
+                          <div class="bl-fill fg" style="width:100%"></div>
+                        </div><span class="bp" style="color:var(--green)">127%</span>
+                      </div>
+                    </td>
+                    <td><span class="h hg">Đủ</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
 
-  </div><!-- /canvas -->
+      </div><!-- /p5 -->
+
+    </div><!-- /canvas -->
   </div><!-- /main -->
 
   <script>
